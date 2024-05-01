@@ -1,0 +1,118 @@
+.header{
+    display: flex;
+    height: 55px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+
+
+}
+
+.left-section{
+    display: flex;
+    width: 150px;
+}
+
+.hamburger{
+    height: 25px;
+    margin-left: 24px;
+    margin-right: 24px;
+    cursor: pointer;
+
+}
+
+.logo{
+    height: 20px;
+    cursor: pointer;
+}
+
+.middle-section{
+    flex: 1;
+    max-width: 500px;
+    margin-left: 70px;
+    margin-right: 35px;
+    display: flex;
+}
+
+.search-bar{
+    height: 35px;
+    flex: 1;
+    border-style: solid;
+    border-color: rgb(198 198, 198);
+    border-width: 1px;
+    box-shadow: inset 1px 2px 5px 
+    rgba(0, 0, 0,0.05);
+    border-radius: 2px;
+    width: 0;
+}
+
+.search-bar::placeholder{
+    font-family: Roboto, arial;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.search-button{
+    height: 39px;
+    width: 66px;
+    background-color: rgb(243, 243, 243);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(198, 198, 198);
+    margin-left: -1px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.search-button-icon{
+    height: 25px;
+    margin-top: 4px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.voice-button{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+.voice-search-button{
+    height: 25px;
+}
+
+
+.right-section{
+    width : 200px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: space-between;
+}
+
+.upload{
+    height: 25px;
+}
+
+.apps{
+    height: 24px;
+    margin-left: 25px;
+}
+
+.notifications{
+    height: 24px;
+    margin-left: 25px;
+}
+
+.profile{
+    height: 32px;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-left: 25px;
+
+}
