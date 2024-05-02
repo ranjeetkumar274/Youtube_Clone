@@ -1,0 +1,8 @@
+.sidebar{
+    background-color: aquamarine;
+    position: fixed;
+    bottom: 0;
+    top: 55px;
+    width: 72px;
+    left: 0;
+}
