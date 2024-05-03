@@ -18,7 +18,7 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .video-author{
@@ -37,7 +37,7 @@
 }
 
 .channel-picture{
-    width: 40px;
+    width: 36px;
     vertical-align: top;
 }
 
@@ -47,7 +47,23 @@
 }
 
 .thumbnail-row{
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.time-stamp{
+    font-family: roboto, arial;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: black;
+    color : white;
+    position: absolute;
+    right: 5px;
+    bottom: 8px;
+    padding : 4px;
+    border-radius: 2px;
+    opacity: 0.8;
+
 }
 
 
@@ -56,4 +72,10 @@ display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 column-gap: 20px;
 row-gap: 40px;
+}
+
+@media (max-width : 750px){
+    .full-grid{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
