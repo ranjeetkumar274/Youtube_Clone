@@ -10,6 +10,7 @@ This project was created using HTML and CSS. The main focus was on replicating t
 - `styles/`: Directory containing CSS files for styling.
   - `general.css`: Styles for body and paragraphs.
   - `header.css`: Styles for the header.
+  - <img src="Screenshot 2024-05-04 104818">
   - `sidebar.css`: Styles for the sidebar.
   - `video.css`: Styles for video preview.
 ### Directory containing various images used in the project.
