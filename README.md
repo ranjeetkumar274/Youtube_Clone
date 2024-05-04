@@ -12,7 +12,7 @@ This project was created using HTML and CSS. The main focus was on replicating t
   - `header.css`: Styles for the header.
   - `sidebar.css`: Styles for the sidebar.
   - `video.css`: Styles for video preview.
-# Directory containing various images used in the project.
+### Directory containing various images used in the project.
   - `headers`: Images for headers.
   - `profile`: Profile pictures for channels.
   - `sidebar`: Icons for the sidebar.
