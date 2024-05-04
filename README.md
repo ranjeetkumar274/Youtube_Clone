@@ -1,7 +1,7 @@
 # Youtube_Clone
 A simple YouTube clone created using HTML and CSS.
 
-# How It Was Created
+## How It Was Created
 This project was created using HTML and CSS. The main focus was on replicating the user interface and basic functionality of YouTube.
 
 ## File Structure
@@ -18,7 +18,7 @@ This project was created using HTML and CSS. The main focus was on replicating t
   - `sidebar`: Icons for the sidebar.
   - `thumbnails`: Thumbnails for videos.
 
-Contributing
+##Contributing
 Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
