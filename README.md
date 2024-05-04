@@ -18,7 +18,8 @@ This project was created using HTML and CSS. The main focus was on replicating t
   - `sidebar`: Icons for the sidebar.
   - `thumbnails`: Thumbnails for videos.
 
-##Contributing
+## Contributing
+
 Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
