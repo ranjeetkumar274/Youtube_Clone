@@ -1,1 +1,969 @@
-<iframe src="https://boulder-parsnip-9ca.notion.site/ebd//35457aa3bf16804d8e4dd7c527c63ef5" width="100%" height="600" frameborder="0" allowfullscreen />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Training Curricula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0e0f11;
+  --bg2: #14161a;
+  --bg3: #1c1f26;
+  --bg4: #242830;
+  --line: rgba(255,255,255,0.07);
+  --line2: rgba(255,255,255,0.12);
+  --text: #edeef0;
+  --text2: #9ea3ad;
+  --text3: #636878;
+  --accent-ang: #6c8fff;
+  --accent-ang2: #3a5ce4;
+  --accent-sql: #34d9a0;
+  --accent-sql2: #1aab76;
+  --amber: #f5a623;
+  --coral: #ff6b6b;
+  --font: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'DM Serif Display', serif;
+  --r: 10px;
+  --r2: 16px;
+}
+
+body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+/* ─── PAGE HEADER ─── */
+.page-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.page-sub { font-size: 15px; color: var(--text2); margin-bottom: 3.5rem; line-height: 1.6; max-width: 540px; }
+
+.curr-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--line2);
+  padding-bottom: 0;
+}
+
+.curr-tab {
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text3);
+  font-family: var(--font);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.curr-tab:hover { color: var(--text2); }
+.curr-tab.active-ang { color: var(--accent-ang); border-bottom-color: var(--accent-ang); }
+.curr-tab.active-sql { color: var(--accent-sql); border-bottom-color: var(--accent-sql); }
+
+/* ─── CURRICULUM SECTION ─── */
+.curr-section { display: none; }
+.curr-section.visible { display: block; }
+
+/* ─── HERO BANNER ─── */
+.hero-banner {
+  border: 1px solid var(--line2);
+  border-radius: var(--r2);
+  padding: 2rem 2.25rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg2);
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 320px; height: 160px;
+  border-radius: 50%;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.ang-hero::before { background: radial-gradient(var(--accent-ang), transparent 70%); }
+.sql-hero::before { background: radial-gradient(var(--accent-sql), transparent 70%); }
+
+.hero-eyebrow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.pill {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid;
+}
+
+.pill-ang { color: var(--accent-ang); border-color: rgba(108,143,255,0.35); background: rgba(108,143,255,0.08); }
+.pill-sql { color: var(--accent-sql); border-color: rgba(52,217,160,0.35); background: rgba(52,217,160,0.08); }
+.pill-amber { color: var(--amber); border-color: rgba(245,166,35,0.35); background: rgba(245,166,35,0.08); }
+.pill-coral { color: var(--coral); border-color: rgba(255,107,107,0.35); background: rgba(255,107,107,0.08); }
+.pill-neutral { color: var(--text2); border-color: var(--line2); background: rgba(255,255,255,0.04); }
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.hero-sub { font-size: 13px; color: var(--text2); line-height: 1.7; max-width: 620px; margin-bottom: 1.5rem; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.stat-box {
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 0.9rem;
+  text-align: center;
+}
+
+.stat-n { display: block; font-size: 26px; font-weight: 300; color: var(--text); line-height: 1; margin-bottom: 4px; }
+.stat-l { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); }
+
+/* ─── FILTERS ─── */
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center; }
+.filter-label { font-size: 12px; color: var(--text3); margin-right: 4px; }
+
+.filt-btn {
+  font-size: 12px;
+  padding: 5px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--line2);
+  background: transparent;
+  color: var(--text2);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+
+.filt-btn:hover { background: var(--bg3); }
+
+.filt-btn.on-ang { background: rgba(108,143,255,0.12); border-color: rgba(108,143,255,0.4); color: var(--accent-ang); }
+.filt-btn.on-sql { background: rgba(52,217,160,0.12); border-color: rgba(52,217,160,0.4); color: var(--accent-sql); }
+
+/* ─── LEVEL LABELS ─── */
+.lvl-beginner { color: var(--accent-ang); }
+.lvl-intermediate { color: var(--accent-sql); }
+.lvl-advanced { color: var(--amber); }
+.lvl-enterprise { color: var(--coral); }
+
+/* ─── MODULE CARDS ─── */
+.module-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 2.5rem; }
+
+.mod-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+
+.mod-card:hover { border-color: var(--line2); }
+
+.mod-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mod-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.num-beg { background: rgba(108,143,255,0.12); color: var(--accent-ang); }
+.num-int { background: rgba(52,217,160,0.12); color: var(--accent-sql); }
+.num-adv { background: rgba(245,166,35,0.12); color: var(--amber); }
+.num-ent { background: rgba(255,107,107,0.12); color: var(--coral); }
+
+.mod-info { flex: 1; min-width: 0; }
+
+.mod-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 3px; }
+
+.mod-title { font-size: 14px; font-weight: 500; color: var(--text); }
+
+.lvl-pill {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lvl-pill-beg { background: rgba(108,143,255,0.1); color: var(--accent-ang); }
+.lvl-pill-int { background: rgba(52,217,160,0.1); color: var(--accent-sql); }
+.lvl-pill-adv { background: rgba(245,166,35,0.1); color: var(--amber); }
+.lvl-pill-ent { background: rgba(255,107,107,0.1); color: var(--coral); }
+
+.mod-tagline { font-size: 12px; color: var(--text3); line-height: 1.4; }
+
+.chev {
+  color: var(--text3);
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 5px;
+  transition: transform 0.2s;
+  line-height: 1;
+}
+.chev.open { transform: rotate(90deg); }
+
+.mod-body {
+  display: none;
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--line);
+}
+.mod-body.open { display: block; }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.detail-block {
+  background: var(--bg3);
+  border-radius: var(--r);
+  padding: 0.8rem 1rem;
+}
+
+.detail-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
+
+.topic-ul { list-style: none; }
+
+.topic-ul li {
+  font-size: 12px;
+  color: var(--text);
+  padding: 2px 0;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.topic-ul li::before {
+  content: '›';
+  color: var(--text3);
+  flex-shrink: 0;
+  font-size: 13px;
+  margin-top: 0px;
+}
+
+.tools-block {
+  grid-column: 1 / -1;
+  background: var(--bg3);
+  border-radius: var(--r);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tools-lbl {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+  white-space: nowrap;
+  padding-top: 1px;
+}
+
+.tool-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--bg4);
+  border: 1px solid var(--line2);
+  border-radius: 5px;
+  padding: 1px 8px;
+  color: var(--text2);
+}
+
+.relevance-block {
+  grid-column: 1 / -1;
+  background: var(--bg3);
+  border-left: 3px solid var(--accent-sql);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 0.7rem 1rem;
+}
+
+.relevance-block.ang-rel { border-left-color: var(--accent-ang); }
+
+.relevance-text { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.relevance-text strong { color: var(--text); font-weight: 500; }
+
+/* ─── DIVIDERS ─── */
+.sect-div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2.5rem 0 1.25rem;
+}
+
+.sect-div-lbl {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  white-space: nowrap;
+}
+
+.sect-div-line { flex: 1; height: 1px; background: var(--line); }
+
+/* ─── PROJECTS ─── */
+.proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+.proj-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: 1.1rem 1.25rem;
+  transition: border-color 0.15s;
+}
+
+.proj-card:hover { border-color: var(--line2); }
+
+.proj-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); margin-bottom: 7px; }
+.proj-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.proj-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* ─── TIMELINE ─── */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.tl-seg { padding: 0.9rem 0.75rem; text-align: center; border-right: 1px solid var(--line); }
+.tl-seg:last-child { border-right: none; }
+
+.tl-week { display: block; font-family: var(--mono); font-size: 10px; color: var(--text3); margin-bottom: 3px; }
+.tl-phase { display: block; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.tl-mods { display: block; font-size: 10px; color: var(--text3); }
+
+.tl-seg:nth-child(1) { background: rgba(108,143,255,0.06); }
+.tl-seg:nth-child(2) { background: rgba(52,217,160,0.06); }
+.tl-seg:nth-child(3) { background: rgba(245,166,35,0.06); }
+.tl-seg:nth-child(4) { background: rgba(255,107,107,0.06); }
+
+/* ─── OUTCOMES ─── */
+.outcomes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 1rem; }
+
+.outcome-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 0.6rem 0.9rem;
+}
+
+.outcome-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.dot-ang { background: var(--accent-ang); }
+.dot-sql { background: var(--accent-sql); }
+
+.outcome-text { font-size: 12px; color: var(--text2); line-height: 1.4; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .outcomes { grid-template-columns: 1fr; }
+  .timeline { grid-template-columns: 1fr 1fr; }
+  .tl-seg:nth-child(2) { border-right: none; }
+  .tl-seg:nth-child(3) { border-bottom: 1px solid var(--line); }
+  .tl-seg:nth-child(1), .tl-seg:nth-child(2) { border-bottom: 1px solid var(--line); }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <div class="curr-nav">
+    <button class="curr-tab active-ang" onclick="switchCurr('ang', this)">Angular + TypeScript</button>
+    <button class="curr-tab" onclick="switchCurr('sql', this)">SQL &amp; Databases</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ ANGULAR ═══ -->
+  <div class="curr-section visible" id="curr-ang">
+
+    <div class="hero-banner ang-hero">
+      <div class="hero-eyebrow">
+        <span class="pill pill-ang">Angular 17+</span>
+        <span class="pill pill-neutral">TypeScript 5</span>
+        <span class="pill pill-coral">Enterprise Ready</span>
+        <span class="pill pill-amber">18 Modules</span>
+      </div>
+      <h1 class="hero-title">Angular + TypeScript<br>Professional Training Curriculum</h1>
+      <p class="hero-sub">A structured, industry-aligned learning path from SPA fundamentals to enterprise-scale architecture — designed for job-ready frontend engineers.</p>
+      <div class="stats-grid">
+        <div class="stat-box"><span class="stat-n">18</span><span class="stat-l">Modules</span></div>
+        <div class="stat-box"><span class="stat-n">12</span><span class="stat-l">Weeks</span></div>
+        <div class="stat-box"><span class="stat-n">3</span><span class="stat-l">Projects</span></div>
+        <div class="stat-box"><span class="stat-n">4</span><span class="stat-l">Levels</span></div>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">Filter by level:</span>
+      <button class="filt-btn on-ang" onclick="filterAng('all',this)">All modules</button>
+      <button class="filt-btn" onclick="filterAng('beginner',this)">Beginner</button>
+      <button class="filt-btn" onclick="filterAng('intermediate',this)">Intermediate</button>
+      <button class="filt-btn" onclick="filterAng('advanced',this)">Advanced</button>
+      <button class="filt-btn" onclick="filterAng('enterprise',this)">Enterprise</button>
+    </div>
+
+    <div class="module-list" id="ang-modules"></div>
+
+    <div class="sect-div"><span class="sect-div-lbl">Real-World Projects</span><div class="sect-div-line"></div></div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <p class="proj-label">Project 1</p>
+        <p class="proj-title">E-Commerce Dashboard</p>
+        <p class="proj-desc">Full-stack storefront with product listing, cart, checkout, and admin panel. Covers routing, forms, HTTP, state management, and auth.</p>
+      </div>
+      <div class="proj-card">
+        <p class="proj-label">Project 2</p>
+        <p class="proj-title">Real-Time Task Manager</p>
+        <p class="proj-desc">Kanban board with WebSocket integration, drag-and-drop, NgRx state, user roles, JWT auth, and offline support with PWA.</p>
+      </div>
+      <div class="proj-card">
+        <p class="proj-label">Project 3</p>
+        <p class="proj-title">Enterprise HR Portal</p>
+        <p class="proj-desc">Micro-frontend SPA with SSR, multi-tenant auth, dynamic forms, role-based dashboards, CI/CD pipeline, and full test coverage.</p>
+      </div>
+    </div>
+
+    <div class="sect-div" style="margin-top:2rem;"><span class="sect-div-lbl">Learning Timeline — 12 Weeks</span><div class="sect-div-line"></div></div>
+    <div class="timeline">
+      <div class="tl-seg"><span class="tl-week">Weeks 1–3</span><span class="tl-phase">Foundation</span><span class="tl-mods">Modules 1–5</span></div>
+      <div class="tl-seg"><span class="tl-week">Weeks 4–6</span><span class="tl-phase">Core Angular</span><span class="tl-mods">Modules 6–9</span></div>
+      <div class="tl-seg"><span class="tl-week">Weeks 7–9</span><span class="tl-phase">Advanced Skills</span><span class="tl-mods">Modules 10–14</span></div>
+      <div class="tl-seg"><span class="tl-week">Weeks 10–12</span><span class="tl-phase">Enterprise</span><span class="tl-mods">Modules 15–18</span></div>
+    </div>
+
+    <div class="sect-div" style="margin-top:2rem;"><span class="sect-div-lbl">Skill Outcomes</span><div class="sect-div-line"></div></div>
+    <div class="outcomes">
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Build production-grade Angular SPAs from scratch</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Write strongly-typed, maintainable TypeScript at scale</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Design scalable component and module architecture</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Implement JWT auth, guards, and role-based access</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Manage complex state using NgRx or Angular Signals</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Write unit, integration, and E2E tests confidently</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Optimize performance with OnPush, lazy loading, SSR</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Deploy via CI/CD pipelines to production environments</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Architect micro-frontend enterprise applications</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-ang"></div><span class="outcome-text">Confidently pass frontend engineer technical interviews</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ SQL ═══ -->
+  <div class="curr-section" id="curr-sql">
+
+    <div class="hero-banner sql-hero">
+      <div class="hero-eyebrow">
+        <span class="pill pill-sql">SQL Core</span>
+        <span class="pill pill-neutral">PostgreSQL · MySQL · SQL Server</span>
+        <span class="pill pill-amber">17 Modules</span>
+        <span class="pill pill-coral">Enterprise Ready</span>
+      </div>
+      <h1 class="hero-title">SQL & Relational Databases<br>Professional Training Curriculum</h1>
+      <p class="hero-sub">A structured, industry-aligned learning path from relational theory to enterprise-grade database engineering — built for job-ready backend developers.</p>
+      <div class="stats-grid">
+        <div class="stat-box"><span class="stat-n">17</span><span class="stat-l">Modules</span></div>
+        <div class="stat-box"><span class="stat-n">10</span><span class="stat-l">Weeks</span></div>
+        <div class="stat-box"><span class="stat-n">3</span><span class="stat-l">Projects</span></div>
+        <div class="stat-box"><span class="stat-n">4</span><span class="stat-l">Levels</span></div>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">Filter by level:</span>
+      <button class="filt-btn on-sql" onclick="filterSql('all',this)">All modules</button>
+      <button class="filt-btn" onclick="filterSql('beginner',this)">Beginner</button>
+      <button class="filt-btn" onclick="filterSql('intermediate',this)">Intermediate</button>
+      <button class="filt-btn" onclick="filterSql('advanced',this)">Advanced</button>
+      <button class="filt-btn" onclick="filterSql('enterprise',this)">Enterprise</button>
+    </div>
+
+    <div class="module-list" id="sql-modules"></div>
+
+    <div class="sect-div"><span class="sect-div-lbl">Real-World Projects</span><div class="sect-div-line"></div></div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <p class="proj-label">Project 1</p>
+        <p class="proj-title">Hospital Management System</p>
+        <p class="proj-desc">Full schema design with patients, doctors, appointments, prescriptions. Covers normalization, joins, stored procedures, triggers, and role-based access.</p>
+      </div>
+      <div class="proj-card">
+        <p class="proj-label">Project 2</p>
+        <p class="proj-title">E-Commerce Analytics Platform</p>
+        <p class="proj-desc">Orders, inventory, customers, and sales. Covers complex queries, CTEs, window functions, indexes, views, and reporting dashboards.</p>
+      </div>
+      <div class="proj-card">
+        <p class="proj-label">Project 3</p>
+        <p class="proj-title">HR & Payroll Database</p>
+        <p class="proj-desc">Multi-department org with payroll runs, audit logs via triggers, scheduled jobs, ETL pipeline, backup strategy, and query optimization.</p>
+      </div>
+    </div>
+
+    <div class="sect-div" style="margin-top:2rem;"><span class="sect-div-lbl">Learning Timeline — 10 Weeks</span><div class="sect-div-line"></div></div>
+    <div class="timeline">
+      <div class="tl-seg"><span class="tl-week">Weeks 1–2</span><span class="tl-phase">Foundation</span><span class="tl-mods">Modules 1–4</span></div>
+      <div class="tl-seg"><span class="tl-week">Weeks 3–5</span><span class="tl-phase">Core SQL</span><span class="tl-mods">Modules 5–9</span></div>
+      <div class="tl-seg"><span class="tl-week">Weeks 6–8</span><span class="tl-phase">Advanced SQL</span><span class="tl-mods">Modules 10–13</span></div>
+      <div class="tl-seg"><span class="tl-week">Weeks 9–10</span><span class="tl-phase">Enterprise</span><span class="tl-mods">Modules 14–17</span></div>
+    </div>
+
+    <div class="sect-div" style="margin-top:2rem;"><span class="sect-div-lbl">Skill Outcomes</span><div class="sect-div-line"></div></div>
+    <div class="outcomes">
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Design normalized, production-grade relational schemas</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Write complex queries: CTEs, window functions, subqueries</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Build stored procedures, functions, and trigger-based automation</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Implement transactions with ACID-compliant error handling</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Tune query performance using execution plans and indexes</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Secure databases with roles, permissions, and injection prevention</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Plan and execute backup, restore, and maintenance strategies</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Architect and deploy ETL pipelines and scheduled jobs</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Confidently handle backend data engineering interview questions</span></div>
+      <div class="outcome-item"><div class="outcome-dot dot-sql"></div><span class="outcome-text">Contribute to enterprise database architecture decisions</span></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const angMods = [
+  { num:"01", level:"beginner", ll:"Beginner",
+    title:"Introduction to Angular & SPA Architecture",
+    tagline:"Understanding the modern web development landscape and where Angular fits",
+    concepts:["What is Angular and why it exists","Single Page Application (SPA) vs MPA","Angular version history and release cycle","Angular vs React vs Vue — tradeoffs","Key Angular features: DI, modules, CLI, RxJS"],
+    sub:["Component-based architecture overview","The Angular ecosystem and community","When to choose Angular for enterprise","Overview of Angular compilation (Ivy)"],
+    tools:["Angular Docs","angular.io","Node.js","Browser DevTools"],
+    rel:"Every enterprise Angular project starts with architectural decisions. Understanding SPA tradeoffs prevents costly rewrites later."
+  },
+  { num:"02", level:"beginner", ll:"Beginner",
+    title:"Environment Setup & Angular CLI",
+    tagline:"Configuring a professional development environment from scratch",
+    concepts:["Node.js, npm/yarn/pnpm setup","Angular CLI installation and usage","Generating projects, components, services","Project structure and file conventions","angular.json deep dive"],
+    sub:["Workspace vs single-project setups","Dev vs prod configuration","CLI schematics and code generation","Editor setup: VS Code extensions"],
+    tools:["@angular/cli","Node.js 18+","VS Code","Angular Language Service","nvm"],
+    rel:"Professional teams use CLI extensively — mastering it accelerates delivery and enforces consistency."
+  },
+  { num:"03", level:"beginner", ll:"Beginner",
+    title:"TypeScript Fundamentals",
+    tagline:"The language backbone of Angular — mastered from the ground up",
+    concepts:["Types: primitives, arrays, tuples, enums","Interfaces vs Type aliases","Classes, access modifiers, abstract classes","Functions: overloads, optional/rest params","Union, intersection, and literal types"],
+    sub:["Type narrowing and type guards","Utility types: Partial, Required, Pick, Omit, Record","Mapped and conditional types","Template literal types","tsconfig.json configuration"],
+    tools:["TypeScript Playground","tsc compiler","ts-node","ESLint + typescript-eslint"],
+    rel:"Angular is TypeScript-first. Strong typing eliminates entire classes of runtime bugs in large codebases."
+  },
+  { num:"04", level:"beginner", ll:"Beginner",
+    title:"TypeScript Advanced: Generics & Decorators",
+    tagline:"Advanced TypeScript patterns used throughout Angular source code",
+    concepts:["Generic functions, classes, and interfaces","Generic constraints and default types","Infer keyword and conditional generics","Decorators: class, method, property, parameter","Decorator factories and composition"],
+    sub:["Angular-style decorator patterns (@Component, @Injectable)","Declaration merging and module augmentation","Ambient types and .d.ts files","Strict mode and exactOptionalPropertyTypes"],
+    tools:["TypeScript 5.x","reflect-metadata","tsconfig strict flags"],
+    rel:"Angular's entire DI system and component model is built on decorators. Understanding them unlocks Angular internals."
+  },
+  { num:"05", level:"beginner", ll:"Beginner",
+    title:"Angular Components & Templates",
+    tagline:"The fundamental building block of every Angular application",
+    concepts:["Component anatomy: @Component decorator","Template syntax: interpolation, expressions","Property binding, event binding, two-way binding","Template reference variables","ng-content and content projection"],
+    sub:["Smart vs presentational components","Component encapsulation modes (ViewEncapsulation)","Dynamic components and ViewContainerRef","Host element binding with @HostBinding / @HostListener","@ViewChild and @ContentChild"],
+    tools:["@angular/core","Angular DevTools","Angular templates"],
+    rel:"Components are the primary unit of UI in Angular. Mastery here directly impacts code reuse and maintainability."
+  },
+  { num:"06", level:"intermediate", ll:"Intermediate",
+    title:"Angular Modules & Dependency Injection",
+    tagline:"Managing application scale through modules and Angular's powerful DI system",
+    concepts:["NgModule: declarations, imports, exports, providers","Root module vs feature modules","Shared modules pattern","DI fundamentals: providers, tokens, injectors","Hierarchical injector tree"],
+    sub:["InjectionToken for non-class dependencies","useClass, useValue, useFactory, useExisting","providedIn: 'root' vs module-level","Standalone components (Angular 14+)","Migrating to standalone APIs"],
+    tools:["@angular/core","Angular DI","Angular Standalone APIs"],
+    rel:"DI is core to Angular's testability and scalability. Feature modules enforce code boundaries in large teams."
+  },
+  { num:"07", level:"intermediate", ll:"Intermediate",
+    title:"Directives & Pipes",
+    tagline:"Extending HTML behavior and transforming displayed data",
+    concepts:["Structural directives: *ngIf, *ngFor, *ngSwitch","Custom structural directive with TemplateRef","Attribute directives: ngClass, ngStyle","Custom attribute directives","Built-in pipes: date, currency, async, json"],
+    sub:["Creating custom pure and impure pipes","Pipe chaining and parameterization","Performance impact of impure pipes","New @if, @for, @switch control flow (Angular 17)","Microsyntax desugaring"],
+    tools:["@angular/common","@Pipe decorator","@Directive decorator"],
+    rel:"Directives and pipes enforce DRY principles in templates and are essential for reusable UI libraries."
+  },
+  { num:"08", level:"intermediate", ll:"Intermediate",
+    title:"Component Lifecycle Hooks",
+    tagline:"Precise control over component creation, update, and destruction phases",
+    concepts:["ngOnInit, ngOnDestroy — most critical hooks","ngOnChanges and SimpleChanges","ngAfterViewInit / ngAfterContentInit","ngDoCheck and custom change detection","Hook execution order and gotchas"],
+    sub:["Avoiding memory leaks with takeUntil / DestroyRef","Initializing async data on init","Interacting with child views after render","Using inject() in functional style","Angular 16+ DestroyRef"],
+    tools:["@angular/core lifecycle interfaces","RxJS takeUntil","DestroyRef"],
+    rel:"Incorrect lifecycle use is the #1 cause of Angular memory leaks and stale data bugs in production."
+  },
+  { num:"09", level:"intermediate", ll:"Intermediate",
+    title:"Services, RxJS & Reactive Programming",
+    tagline:"The engine powering async data flow in every Angular application",
+    concepts:["Creating and injecting services","Observable vs Promise — when to use each","RxJS core operators: map, filter, switchMap, mergeMap, concatMap","Subjects: BehaviorSubject, ReplaySubject, Subject","Error handling: catchError, retry, retryWhen"],
+    sub:["Cold vs hot observables","Multicasting with share and shareReplay","combineLatest, forkJoin, zip","debounceTime, distinctUntilChanged for search","Unsubscription patterns and memory safety"],
+    tools:["RxJS 7+","@angular/core Injectable","rxjs/operators","rxjs/ajax"],
+    rel:"RxJS is Angular's core async abstraction. Mastery separates junior from senior Angular engineers."
+  },
+  { num:"10", level:"intermediate", ll:"Intermediate",
+    title:"Routing & Navigation",
+    tagline:"Building seamless multi-view SPAs with Angular's powerful router",
+    concepts:["RouterModule configuration and RouterLink","Route parameters and query params","Nested and child routes","Lazy loading feature modules","Route guards: CanActivate, CanDeactivate, Resolve"],
+    sub:["Functional guards (Angular 15+)","Router events and navigation lifecycle","Preloading strategies (PreloadAllModules, custom)","Dynamic routing with route data","Auxiliary/secondary router outlets"],
+    tools:["@angular/router","Router","ActivatedRoute","RouterLink","RouterOutlet"],
+    rel:"Well-architected routing is the backbone of SPAs. Lazy loading directly reduces initial bundle size and load time."
+  },
+  { num:"11", level:"intermediate", ll:"Intermediate",
+    title:"HTTP Client & API Integration",
+    tagline:"Connecting Angular to real-world backends and external APIs",
+    concepts:["HttpClient setup and configuration","GET, POST, PUT, PATCH, DELETE requests","Typed HTTP responses with generics","HTTP Interceptors for headers and auth","Error handling and retry strategies"],
+    sub:["Centralized API service patterns","Environment-based base URL configuration","Loading state management","HTTP caching strategies","CORS understanding and local proxy setup"],
+    tools:["@angular/common/http","HttpClient","HttpInterceptor","environment.ts"],
+    rel:"Every production Angular app consumes REST APIs. Interceptors enable DRY auth token injection across all requests."
+  },
+  { num:"12", level:"advanced", ll:"Advanced",
+    title:"Angular Forms — Template-Driven & Reactive",
+    tagline:"From simple controls to complex dynamic form architectures",
+    concepts:["Template-driven: ngModel, ngForm","Reactive forms: FormControl, FormGroup, FormArray","Form validation: built-in and custom validators","Cross-field validation and async validators","Dynamic form generation from config"],
+    sub:["FormBuilder service for cleaner code","ControlValueAccessor for custom form controls","Displaying validation errors elegantly","Nested form groups and arrays","Resetting and patching form values"],
+    tools:["@angular/forms","ReactiveFormsModule","FormsModule","Validators"],
+    rel:"Forms are central to every business app. Reactive forms are the industry standard for complex, testable form logic."
+  },
+  { num:"13", level:"advanced", ll:"Advanced",
+    title:"State Management — NgRx & Angular Signals",
+    tagline:"Managing complex application state at enterprise scale",
+    concepts:["Redux pattern: actions, reducers, selectors","NgRx Store setup and feature stores","Effects for side effects and async operations","NgRx Signals Store (modern approach)","Angular Signals: signal(), computed(), effect()"],
+    sub:["Component store for local state","Memoized selectors with createSelector","Entity adapter for collections","DevTools integration for state inspection","When NOT to use NgRx — signals-first approach"],
+    tools:["@ngrx/store","@ngrx/effects","@ngrx/signals","Angular Signals API","Redux DevTools"],
+    rel:"State bugs account for a large percentage of production issues. Structured state management prevents entire categories of defects."
+  },
+  { num:"14", level:"advanced", ll:"Advanced",
+    title:"UI, Styling & Angular Material",
+    tagline:"Building beautiful, accessible, responsive Angular UIs at scale",
+    concepts:["Angular Material component library","Material theming system (M3)","CDK: overlays, virtual scrolling, drag-drop","CSS encapsulation in Angular","Responsive layouts with Angular Flex / CSS Grid"],
+    sub:["Custom theme creation with design tokens","Global styles vs component styles","Dynamic theming at runtime","Accessibility (a11y) with ARIA","Bootstrap integration alternative"],
+    tools:["@angular/material","@angular/cdk","Angular Flex Layout","SASS/SCSS","Tailwind CSS"],
+    rel:"UI consistency and accessibility are non-negotiable in enterprise products. Angular Material accelerates delivery."
+  },
+  { num:"15", level:"advanced", ll:"Advanced",
+    title:"Performance Optimization",
+    tagline:"Making Angular applications fast, efficient, and scalable",
+    concepts:["Change detection: Default vs OnPush strategy","Zone.js and zoneless Angular","TrackBy in *ngFor / @for","Lazy loading modules and components","Bundle analysis and tree shaking"],
+    sub:["Memoization with pure pipes","Virtual scrolling for large lists","Image optimization with NgOptimizedImage","Preloading strategies","Web Vitals (LCP, CLS, FID) for Angular"],
+    tools:["Angular DevTools","webpack-bundle-analyzer","source-map-explorer","NgOptimizedImage","Lighthouse"],
+    rel:"Performance is a feature. OnPush alone can improve rendering speed by 30–50% in data-heavy dashboards."
+  },
+  { num:"16", level:"advanced", ll:"Advanced",
+    title:"Security, Authentication & Authorization",
+    tagline:"Protecting Angular applications at every layer of the stack",
+    concepts:["XSS prevention and Angular's built-in sanitization","CSRF protection strategies","JWT authentication flow (access + refresh tokens)","HTTP Interceptor for token attachment","Route guards for authorization"],
+    sub:["Role-based access control (RBAC) in Angular","Storing tokens securely (httpOnly cookies vs localStorage)","Angular DomSanitizer API","OAuth2 / OIDC integration (Auth0, Keycloak)","Content Security Policy (CSP) headers"],
+    tools:["@angular/platform-browser DomSanitizer","HttpInterceptor","CanActivate","JWT","Auth0 Angular SDK"],
+    rel:"Security vulnerabilities in frontend apps are exploited daily. Angular engineers must own security, not defer to backend."
+  },
+  { num:"17", level:"enterprise", ll:"Enterprise",
+    title:"Testing — Unit, Integration & E2E",
+    tagline:"Building confidence through comprehensive, maintainable test suites",
+    concepts:["Unit testing with Jasmine and TestBed","Component testing with fixture and queries","Service and pipe testing","Mocking dependencies and HTTP requests","E2E testing with Cypress / Playwright"],
+    sub:["Testing reactive forms","Async testing with fakeAsync and tick","NgMock and HttpClientTestingModule","Component harnesses from Angular CDK","Code coverage reporting"],
+    tools:["Jasmine","Karma","TestBed","HttpClientTestingModule","Cypress","Playwright","jest (optional)"],
+    rel:"Untested Angular apps accumulate technical debt exponentially. Testable code signals senior engineering maturity."
+  },
+  { num:"18", level:"enterprise", ll:"Enterprise",
+    title:"Architecture, SSR, Micro-Frontends & Deployment",
+    tagline:"Enterprise-scale architecture patterns and production deployment strategies",
+    concepts:["Scalable folder structure: feature-first architecture","Angular Universal — Server-Side Rendering","Standalone component-first architecture","Micro-frontends with Module Federation (Webpack 5)","Monorepo management with Nx"],
+    sub:["Build optimization: production flags, differential loading","Docker containerization of Angular apps","CI/CD with GitHub Actions / GitLab CI","Environment-specific builds and secrets","Deploying to Nginx, Firebase, Vercel, AWS S3"],
+    tools:["Angular Universal","Nx","Webpack Module Federation","GitHub Actions","Docker","Firebase Hosting"],
+    rel:"Senior engineers own deployment and architecture decisions. SSR and micro-frontends are standard in enterprise Angular portfolios."
+  }
+];
+
+const sqlMods = [
+  { num:"01", level:"beginner", ll:"Beginner",
+    title:"Introduction to Databases & RDBMS",
+    tagline:"Understanding the relational model and where SQL fits in modern software",
+    concepts:["Data vs information — definitions and distinctions","DBMS vs RDBMS — key differences","Types of databases: relational, NoSQL, NewSQL","Database architecture: 1-tier, 2-tier, 3-tier","Client-server model overview"],
+    sub:["Real-world use cases for relational databases","Popular RDBMS: SQL Server, PostgreSQL, MySQL, Oracle","ANSI SQL standard and vendor extensions","Database objects overview: tables, views, indexes, procedures"],
+    tools:["SQL Server","PostgreSQL","MySQL","Oracle DB"],
+    rel:"Every backend system stores data. Understanding the relational model prevents the most common schema anti-patterns from day one."
+  },
+  { num:"02", level:"beginner", ll:"Beginner",
+    title:"Installation, Tools & Environment Setup",
+    tagline:"Setting up a professional SQL development workspace",
+    concepts:["Installing SQL Server / PostgreSQL / MySQL","GUI tools: SSMS, pgAdmin, MySQL Workbench","Connecting to local and remote database servers","Creating your first database and schemas","Understanding SQL execution environments"],
+    sub:["SSMS interface walkthrough — Object Explorer, Query Editor","pgAdmin dashboard and query tool","MySQL Workbench schema designer","Using DBeaver as a universal SQL client","VS Code SQL extensions for developers"],
+    tools:["SSMS","pgAdmin 4","MySQL Workbench","DBeaver","VS Code SQL Tools"],
+    rel:"Tool fluency multiplies productivity. Engineers who master their SQL client discover and fix data issues 3x faster."
+  },
+  { num:"03", level:"beginner", ll:"Beginner",
+    title:"SQL Language Categories & Data Types",
+    tagline:"The five pillars of SQL and how data is stored at the type level",
+    concepts:["DDL — Data Definition Language: CREATE, ALTER, DROP","DML — Data Manipulation Language: INSERT, UPDATE, DELETE","DQL — Data Query Language: SELECT","TCL — Transaction Control: COMMIT, ROLLBACK, SAVEPOINT","DCL — Data Control: GRANT, REVOKE"],
+    sub:["Numeric types: INT, BIGINT, DECIMAL, FLOAT","String types: CHAR, VARCHAR, TEXT, NVARCHAR","Date/time types: DATE, TIME, DATETIME, TIMESTAMP","Boolean and binary types","NULL semantics and storage implications"],
+    tools:["SQL Server T-SQL","PostgreSQL PL/pgSQL","MySQL SQL"],
+    rel:"Choosing the wrong data type causes silent data loss and performance degradation at scale. Engineers must own these decisions."
+  },
+  { num:"04", level:"beginner", ll:"Beginner",
+    title:"Tables, Schemas & CRUD Operations",
+    tagline:"Creating database objects and performing fundamental data operations",
+    concepts:["CREATE TABLE syntax and column definitions","Schemas as namespace containers","INSERT — single and multi-row inserts","UPDATE with WHERE clause and safe practices","DELETE vs TRUNCATE vs DROP"],
+    sub:["ALTER TABLE — adding, modifying, dropping columns","Table naming conventions and best practices","Bulk INSERT from CSV / external file","Upsert patterns: MERGE / INSERT ON CONFLICT","Soft delete pattern vs hard delete"],
+    tools:["CREATE TABLE","ALTER TABLE","INSERT INTO","UPDATE","DELETE","TRUNCATE"],
+    rel:"CRUD is the DNA of every application. Safe UPDATE and DELETE practices prevent catastrophic data loss in production."
+  },
+  { num:"05", level:"beginner", ll:"Beginner",
+    title:"Constraints & Keys",
+    tagline:"Enforcing data integrity at the database layer",
+    concepts:["PRIMARY KEY — single column and composite","FOREIGN KEY and referential integrity","UNIQUE constraint — column and multi-column","CHECK constraint for business rules","DEFAULT constraint and NULL vs NOT NULL"],
+    sub:["Composite primary keys — when and why","ON DELETE CASCADE / SET NULL / RESTRICT","Constraint naming conventions","Deferrable constraints in PostgreSQL","Adding constraints to existing tables"],
+    tools:["PRIMARY KEY","FOREIGN KEY","UNIQUE","CHECK","DEFAULT","NOT NULL"],
+    rel:"Constraints are the last line of defence before corrupt data enters the database. Removing them for 'performance' is a classic enterprise mistake."
+  },
+  { num:"06", level:"intermediate", ll:"Intermediate",
+    title:"Querying Data — SELECT Deep Dive",
+    tagline:"Mastering the SELECT statement from basic retrieval to complex filtering",
+    concepts:["SELECT, FROM, WHERE — the core trio","DISTINCT and duplicate elimination","ORDER BY — ASC/DESC, multi-column sorting","LIMIT / TOP / FETCH NEXT — pagination","Column aliases and expression columns"],
+    sub:["LIKE — wildcard patterns: %, _","IN and NOT IN — list filtering","BETWEEN — range filtering","IS NULL / IS NOT NULL — null handling","CASE WHEN — inline conditional logic"],
+    tools:["SELECT","WHERE","ORDER BY","LIKE","IN","BETWEEN","CASE WHEN"],
+    rel:"95% of database work is reading data. A developer who writes efficient SELECT queries reduces application response time measurably."
+  },
+  { num:"07", level:"intermediate", ll:"Intermediate",
+    title:"Aggregate Functions, GROUP BY & HAVING",
+    tagline:"Summarising and analysing data across groups",
+    concepts:["COUNT, SUM, AVG, MIN, MAX","GROUP BY — grouping rows into sets","HAVING — filtering aggregated groups","Difference between WHERE and HAVING","Aggregate with NULL values — behaviour"],
+    sub:["GROUP BY multiple columns","COUNT(*) vs COUNT(column)","Rollup and CUBE for multi-level aggregation","GROUPING SETS","Aggregate expressions in SELECT"],
+    tools:["GROUP BY","HAVING","COUNT","SUM","AVG","MIN","MAX","ROLLUP","CUBE"],
+    rel:"Reporting, dashboards, and analytics all run on aggregate queries. These are the most common SQL questions in data engineering interviews."
+  },
+  { num:"08", level:"intermediate", ll:"Intermediate",
+    title:"Built-in Functions — String, Numeric & Date",
+    tagline:"Transforming and manipulating data values inside SQL",
+    concepts:["String: LEN/LENGTH, UPPER, LOWER, TRIM, REPLACE, CONCAT, SUBSTRING","Numeric: ROUND, FLOOR, CEILING, ABS, POWER, MODULO","Date/time: GETDATE/NOW, DATEADD, DATEDIFF, FORMAT, EXTRACT","Conversion: CAST, CONVERT, TRY_CAST","NULL handling: ISNULL, COALESCE, NULLIF"],
+    sub:["String padding: LPAD, RPAD, REPLICATE","CHARINDEX / POSITION for string search","Date truncation strategies","Working with time zones","FORMAT function for display formatting"],
+    tools:["SUBSTRING","COALESCE","DATEADD","DATEDIFF","CAST","CONVERT","FORMAT"],
+    rel:"Real-world data is messy. These functions are used in virtually every ETL pipeline and report query."
+  },
+  { num:"09", level:"intermediate", ll:"Intermediate",
+    title:"Joins & Subqueries",
+    tagline:"Combining data across multiple tables — the heart of relational SQL",
+    concepts:["INNER JOIN — matching rows only","LEFT JOIN / RIGHT JOIN — including unmatched rows","FULL OUTER JOIN — all rows from both sides","CROSS JOIN — cartesian products","SELF JOIN — joining a table to itself"],
+    sub:["Multi-table joins (3+ tables)","Subqueries in WHERE, FROM, and SELECT clauses","Correlated subqueries and performance implications","EXISTS vs IN — semantic and performance differences","ANTI JOIN pattern with LEFT JOIN + IS NULL"],
+    tools:["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL JOIN","CROSS JOIN","EXISTS","IN"],
+    rel:"Joins are the #1 SQL concept tested in backend and data engineering interviews. Every production query involves at least two tables."
+  },
+  { num:"10", level:"intermediate", ll:"Intermediate",
+    title:"Views & Indexes",
+    tagline:"Abstracting queries and accelerating read performance",
+    concepts:["Creating and querying views","Updatable vs read-only views","Materialised views and refresh strategies","Clustered vs non-clustered indexes","Composite indexes and column order rules"],
+    sub:["Covering indexes and included columns","Filtered indexes for partial data","Index selectivity and cardinality","When NOT to add indexes","Rebuilding and reorganising fragmented indexes"],
+    tools:["CREATE VIEW","CREATE INDEX","sys.indexes","EXPLAIN / EXECUTION PLAN","pg_stat_user_indexes"],
+    rel:"A missing index on a 10M-row table can turn a 10ms query into a 30-second timeout. Views enforce security and simplify application code."
+  },
+  { num:"11", level:"advanced", ll:"Advanced",
+    title:"Stored Procedures & User-Defined Functions",
+    tagline:"Encapsulating business logic inside the database engine",
+    concepts:["Creating and executing stored procedures","INPUT and OUTPUT parameters","Error handling inside procedures","Scalar UDFs — returning a single value","Table-valued functions — returning result sets"],
+    sub:["SP vs function — when to use each","Inline vs multi-statement table-valued functions","Dynamic SQL with EXEC / sp_executesql","Recompilation and parameter sniffing","Procedure ownership chaining for security"],
+    tools:["CREATE PROCEDURE","CREATE FUNCTION","EXEC","sp_executesql","OUTPUT parameter"],
+    rel:"Stored procedures are standard in enterprise systems for performance, security, and code reuse. Every DBA role requires fluency."
+  },
+  { num:"12", level:"advanced", ll:"Advanced",
+    title:"Triggers",
+    tagline:"Automating database actions in response to data events",
+    concepts:["DML triggers — AFTER INSERT, UPDATE, DELETE","INSTEAD OF triggers — overriding default behaviour","Accessing inserted and deleted virtual tables","DDL triggers — tracking schema changes","Logon triggers — session-level control"],
+    sub:["Audit log pattern using triggers","Preventing invalid data changes with INSTEAD OF","Recursive trigger behaviour and prevention","Performance impact of triggers","Disabling and enabling triggers"],
+    tools:["CREATE TRIGGER","INSERTED table","DELETED table","AFTER","INSTEAD OF"],
+    rel:"Audit trails, data change logging, and enforcing cross-table rules are real enterprise requirements solved cleanly with triggers."
+  },
+  { num:"13", level:"advanced", ll:"Advanced",
+    title:"Transactions, ACID & Error Handling",
+    tagline:"Guaranteeing data consistency under concurrent and failure conditions",
+    concepts:["ACID properties: Atomicity, Consistency, Isolation, Durability","BEGIN TRANSACTION, COMMIT, ROLLBACK","Implicit vs explicit transactions","SAVEPOINT and nested transactions","TRY-CATCH / EXCEPTION blocks"],
+    sub:["Transaction isolation levels: READ UNCOMMITTED → SERIALIZABLE","Dirty reads, phantom reads, non-repeatable reads","Deadlock causes, detection, and prevention","XACT_ABORT and error propagation","Raising custom errors: RAISERROR / THROW"],
+    tools:["BEGIN TRAN","COMMIT","ROLLBACK","TRY...CATCH","SET ISOLATION LEVEL","THROW"],
+    rel:"Financial systems, order processing, and inventory management require transactions. Incorrect isolation causes real monetary loss."
+  },
+  { num:"14", level:"advanced", ll:"Advanced",
+    title:"Database Design & Normalization",
+    tagline:"Designing schemas that scale, perform, and survive requirement changes",
+    concepts:["First Normal Form (1NF) — atomicity and uniqueness","Second Normal Form (2NF) — full functional dependency","Third Normal Form (3NF) — transitive dependency removal","Boyce-Codd Normal Form (BCNF)","Denormalization — when and why to break rules"],
+    sub:["Entity-Relationship (ER) diagram notation","Identifying entities, attributes, and relationships","One-to-one, one-to-many, many-to-many modelling","Junction/bridge tables for M:N relationships","Real-world schema design walkthrough: e-commerce"],
+    tools:["ER diagram tools","draw.io","Lucidchart","dbdiagram.io","MySQL Workbench EER"],
+    rel:"Poor schema design is the root cause of the majority of performance and data quality problems in production systems."
+  },
+  { num:"15", level:"enterprise", ll:"Enterprise",
+    title:"Advanced Query Techniques — CTEs, Window Functions & Temp Tables",
+    tagline:"Enterprise-grade querying patterns for complex analytical and hierarchical data",
+    concepts:["Common Table Expressions (CTEs) — WITH clause","Recursive CTEs for hierarchical data","Window functions: ROW_NUMBER, RANK, DENSE_RANK","Analytic functions: LAG, LEAD, FIRST_VALUE, LAST_VALUE","PARTITION BY and OVER clause deep dive"],
+    sub:["Running totals and moving averages","NTILE for data bucketing","Temporary tables: local (#) vs global (##)","Table variables — scope and performance","PIVOT and UNPIVOT for data reshaping"],
+    tools:["WITH (CTE)","ROW_NUMBER()","RANK()","LAG()","LEAD()","#TempTable","@TableVar"],
+    rel:"CTEs and window functions are standard in data engineering, business intelligence, and senior backend roles. They replace subquery spaghetti."
+  },
+  { num:"16", level:"enterprise", ll:"Enterprise",
+    title:"Security, Permissions & SQL Injection",
+    tagline:"Protecting database assets from both internal misuse and external attack",
+    concepts:["Authentication: Windows vs SQL Server authentication","Users, logins, and schemas","Roles: fixed server roles, fixed database roles","GRANT, DENY, REVOKE — permission layering","Row-Level Security (RLS)"],
+    sub:["Principle of least privilege in practice","SQL injection mechanics — UNION, blind, time-based","Parameterised queries and prepared statements","Dynamic SQL safety with sp_executesql","Auditing with SQL Server Audit / pgAudit"],
+    tools:["GRANT","DENY","REVOKE","sp_executesql","RLS","SQL Server Audit","pgAudit"],
+    rel:"SQL injection remains in OWASP Top 10. Backend engineers are responsible for parameterising every query — not just the ORM."
+  },
+  { num:"17", level:"enterprise", ll:"Enterprise",
+    title:"Performance Tuning, Backup & Enterprise Operations",
+    tagline:"Keeping production databases fast, available, and recoverable",
+    concepts:["Reading and interpreting execution plans","Index tuning — identifying missing and unused indexes","Statistics and cardinality estimation","Query rewriting for performance","Backup types: full, differential, transaction log"],
+    sub:["Restore strategies: point-in-time recovery","SQL Server Agent / pg_cron for scheduled jobs","ETL basics: Extract, Transform, Load","SSIS overview / pgloader / custom ETL scripts","Maintenance plans: index rebuild, stats update, integrity check"],
+    tools:["Execution Plan viewer","Query Store","Database Engine Tuning Advisor","SQL Server Agent","SSIS","pg_cron","pgBadger"],
+    rel:"Production DBA and senior backend roles require ownership of performance and uptime. A slow query or failed backup is a business-critical incident."
+  }
+];
+
+const lvlMap = {
+  beginner:  { numCls:'num-beg', pillCls:'lvl-pill-beg' },
+  intermediate: { numCls:'num-int', pillCls:'lvl-pill-int' },
+  advanced:  { numCls:'num-adv', pillCls:'lvl-pill-adv' },
+  enterprise: { numCls:'num-ent', pillCls:'lvl-pill-ent' }
+};
+
+function buildCards(mods, filter, containerId, relClass) {
+  const list = filter === 'all' ? mods : mods.filter(m => m.level === filter);
+  document.getElementById(containerId).innerHTML = list.map(m => {
+    const lv = lvlMap[m.level];
+    return `<div class="mod-card" id="${containerId}-${m.num}">
+      <div class="mod-head" onclick="togMod('${containerId}-${m.num}')">
+        <div class="mod-num ${lv.numCls}">${m.num}</div>
+        <div class="mod-info">
+          <div class="mod-title-row">
+            <span class="mod-title">${m.title}</span>
+            <span class="lvl-pill ${lv.pillCls}">${m.ll}</span>
+          </div>
+          <div class="mod-tagline">${m.tagline}</div>
+        </div>
+        <div class="chev" id="chev-${containerId}-${m.num}">›</div>
+      </div>
+      <div class="mod-body" id="body-${containerId}-${m.num}">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <div class="detail-label">Core concepts</div>
+            <ul class="topic-ul">${m.concepts.map(c=>`<li>${c}</li>`).join('')}</ul>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Subtopics</div>
+            <ul class="topic-ul">${m.sub.map(s=>`<li>${s}</li>`).join('')}</ul>
+          </div>
+          <div class="tools-block">
+            <span class="tools-lbl">Tools & APIs</span>
+            ${m.tools.map(t=>`<span class="tool-chip">${t}</span>`).join('')}
+          </div>
+          <div class="relevance-block ${relClass}">
+            <div class="relevance-text"><strong>Real-world relevance:</strong> ${m.rel}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function togMod(id) {
+  document.getElementById('body-'+id).classList.toggle('open');
+  document.getElementById('chev-'+id).classList.toggle('open');
+}
+
+function filterAng(f, btn) {
+  document.querySelectorAll('#curr-ang .filt-btn').forEach(b => b.classList.remove('on-ang'));
+  btn.classList.add('on-ang');
+  buildCards(angMods, f, 'ang-modules', 'ang-rel');
+}
+
+function filterSql(f, btn) {
+  document.querySelectorAll('#curr-sql .filt-btn').forEach(b => b.classList.remove('on-sql'));
+  btn.classList.add('on-sql');
+  buildCards(sqlMods, f, 'sql-modules', '');
+}
+
+function switchCurr(which, btn) {
+  document.querySelectorAll('.curr-tab').forEach(b => b.className = 'curr-tab');
+  document.querySelectorAll('.curr-section').forEach(s => s.classList.remove('visible'));
+  if (which === 'ang') {
+    btn.classList.add('active-ang');
+    document.getElementById('curr-ang').classList.add('visible');
+  } else {
+    btn.classList.add('active-sql');
+    document.getElementById('curr-sql').classList.add('visible');
+  }
+}
+
+buildCards(angMods, 'all', 'ang-modules', 'ang-rel');
+buildCards(sqlMods, 'all', 'sql-modules', '');
+</script>
+</body>
+</html>
