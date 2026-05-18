@@ -1,704 +1,408 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Professional Training Curricula</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-
-:root{
-  --bg:#0c0d0f;
-  --bg2:#121416;
-  --bg3:#191c20;
-  --bg4:#21252c;
-  --line:rgba(255,255,255,0.06);
-  --line2:rgba(255,255,255,0.11);
-  --text:#e8eaed;
-  --text2:#9298a4;
-  --text3:#555d6b;
-  --font:'DM Sans',sans-serif;
-  --mono:'IBM Plex Mono',monospace;
-  --serif:'Fraunces',serif;
-
-  /* track colors per curriculum */
-  --c-ang:#7b9cff;
-  --c-ang2:rgba(123,156,255,0.12);
-  --c-ang3:rgba(123,156,255,0.28);
-  --c-sql:#3dd9a4;
-  --c-sql2:rgba(61,217,164,0.12);
-  --c-sql3:rgba(61,217,164,0.28);
-  --c-dsa:#f5a623;
-  --c-dsa2:rgba(245,166,35,0.12);
-  --c-dsa3:rgba(245,166,35,0.28);
-  --c-net:#c17bff;
-  --c-net2:rgba(193,123,255,0.12);
-  --c-net3:rgba(193,123,255,0.28);
-
-  --amber:#f5a623;
-  --coral:#ff6b5a;
-  --r:8px;
-  --r2:14px;
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:transparent}
+.wrap{padding:1rem 0}
+.hero{text-align:center;padding:1.5rem 1rem 1.2rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.5rem}
+.hero h1{font-size:24px;font-weight:500;color:var(--color-text-primary)}
+.hero p{font-size:13px;color:var(--color-text-secondary);margin-top:5px}
+.prog-wrap{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px;margin-bottom:1.4rem;display:flex;align-items:center;gap:14px}
+.prog-bar{flex:1;background:var(--color-border-tertiary);border-radius:99px;height:7px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;background:#4f46e5;transition:width 0.4s}
+.prog-txt{font-size:13px;font-weight:500;color:var(--color-text-primary);white-space:nowrap}
+.cat-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.2rem}
+.cat-tab{padding:5px 13px;border-radius:99px;border:0.5px solid var(--color-border-secondary);font-size:12px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s}
+.cat-tab.on{background:#4f46e5;color:#fff;border-color:transparent}
+.cat-tab:hover:not(.on){background:var(--color-background-secondary)}
+.panel{display:none}.panel.on{display:block}
+.module{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:1rem;overflow:hidden}
+.mod-head{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--color-background-secondary);user-select:none}
+.mod-title{font-size:14px;font-weight:500;color:var(--color-text-primary);flex:1}
+.mod-badge{font-size:11px;padding:2px 9px;border-radius:99px}
+.badge-must{background:#fee2e2;color:#991b1b}
+.badge-core{background:#dbeafe;color:#1d4ed8}
+.badge-deep{background:#ede9fe;color:#5b21b6}
+@media(prefers-color-scheme:dark){
+.badge-must{background:#450a0a;color:#fca5a5}
+.badge-core{background:#1e3a8a;color:#93c5fd}
+.badge-deep{background:#2e1065;color:#c4b5fd}
 }
-
-body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;line-height:1.5;}
-
-/* ── TOP NAV ── */
-.top-nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(12,13,15,0.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--line2);
-  padding:0 2rem;
-  display:flex;align-items:center;gap:0;
-  height:52px;
-}
-.nav-logo{
-  font-family:var(--serif);font-size:16px;font-weight:400;
-  color:var(--text);margin-right:2.5rem;white-space:nowrap;font-style:italic;
-}
-.nav-tabs{display:flex;gap:0;flex:1;overflow-x:auto;scrollbar-width:none;}
-.nav-tabs::-webkit-scrollbar{display:none;}
-.nav-tab{
-  display:flex;align-items:center;gap:7px;
-  padding:0 18px;height:52px;
-  font-size:13px;font-weight:400;letter-spacing:0.01em;
-  border:none;background:none;color:var(--text3);
-  cursor:pointer;font-family:var(--font);white-space:nowrap;
-  border-bottom:2px solid transparent;margin-bottom:-1px;
-  transition:color .2s,border-color .2s;
-}
-.nav-tab:hover{color:var(--text2);}
-.nav-tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.7;}
-.nav-tab.t-ang{--tc:var(--c-ang);}
-.nav-tab.t-sql{--tc:var(--c-sql);}
-.nav-tab.t-dsa{--tc:var(--c-dsa);}
-.nav-tab.t-net{--tc:var(--c-net);}
-.nav-tab.active{color:var(--tc);border-bottom-color:var(--tc);}
-
-/* ── SECTIONS ── */
-.page-wrap{max-width:940px;margin:0 auto;padding:2.5rem 1.5rem 6rem;}
-.curr-section{display:none;}
-.curr-section.visible{display:block;}
-
-/* ── HERO ── */
-.hero{
-  border:1px solid var(--line2);border-radius:var(--r2);
-  padding:2rem 2.25rem;margin-bottom:2rem;
-  background:var(--bg2);position:relative;overflow:hidden;
-}
-.hero::after{
-  content:'';position:absolute;top:-60px;right:-60px;
-  width:320px;height:240px;border-radius:50%;
-  pointer-events:none;opacity:.05;
-}
-.hero-ang::after{background:radial-gradient(var(--c-ang),transparent 65%);}
-.hero-sql::after{background:radial-gradient(var(--c-sql),transparent 65%);}
-.hero-dsa::after{background:radial-gradient(var(--c-dsa),transparent 65%);}
-.hero-net::after{background:radial-gradient(var(--c-net),transparent 65%);}
-
-.eyebrow{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.25rem;}
-.pill{
-  font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
-  padding:3px 10px;border-radius:100px;border:1px solid;
-}
-.pill-ang{color:var(--c-ang);border-color:var(--c-ang3);background:var(--c-ang2);}
-.pill-sql{color:var(--c-sql);border-color:var(--c-sql3);background:var(--c-sql2);}
-.pill-dsa{color:var(--c-dsa);border-color:var(--c-dsa3);background:var(--c-dsa2);}
-.pill-net{color:var(--c-net);border-color:var(--c-net3);background:var(--c-net2);}
-.pill-nu{color:var(--text2);border-color:var(--line2);background:rgba(255,255,255,0.04);}
-.pill-am{color:var(--amber);border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.08);}
-.pill-co{color:var(--coral);border-color:rgba(255,107,90,.3);background:rgba(255,107,90,.08);}
-
-.hero-title{
-  font-family:var(--serif);font-size:clamp(22px,3.5vw,32px);
-  font-weight:400;font-style:italic;line-height:1.15;
-  color:var(--text);margin-bottom:.45rem;
-}
-.hero-sub{font-size:13px;color:var(--text2);line-height:1.7;max-width:600px;margin-bottom:1.5rem;}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-.stat{background:var(--bg3);border:1px solid var(--line);border-radius:var(--r);padding:.8rem;text-align:center;}
-.stat-n{display:block;font-size:24px;font-weight:300;color:var(--text);line-height:1;margin-bottom:3px;}
-.stat-l{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);}
-
-/* ── FILTER BAR ── */
-.fbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center;}
-.fbar-lbl{font-size:11px;color:var(--text3);margin-right:3px;}
-.fb{
-  font-size:12px;padding:4px 14px;border-radius:100px;
-  border:1px solid var(--line2);background:transparent;
-  color:var(--text2);cursor:pointer;font-family:var(--font);
-  transition:all .15s;
-}
-.fb:hover{background:var(--bg3);}
-.fb.on-ang{background:var(--c-ang2);border-color:var(--c-ang3);color:var(--c-ang);}
-.fb.on-sql{background:var(--c-sql2);border-color:var(--c-sql3);color:var(--c-sql);}
-.fb.on-dsa{background:var(--c-dsa2);border-color:var(--c-dsa3);color:var(--c-dsa);}
-.fb.on-net{background:var(--c-net2);border-color:var(--c-net3);color:var(--c-net);}
-
-/* ── MODULE CARDS ── */
-.mlist{display:flex;flex-direction:column;gap:5px;margin-bottom:2.5rem;}
-.mc{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:border-color .15s;}
-.mc:hover{border-color:var(--line2);}
-.mh{display:flex;align-items:flex-start;gap:12px;padding:.9rem 1.15rem;cursor:pointer;user-select:none;}
-.mn{
-  font-family:var(--mono);font-size:10px;font-weight:500;
-  min-width:30px;height:30px;border-radius:7px;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:1px;
-}
-/* level colors by curriculum */
-.mn-beg-ang,.mn-beg{background:var(--c-ang2);color:var(--c-ang);}
-.mn-int-ang,.mn-int{background:rgba(61,217,164,.1);color:var(--c-sql);}
-.mn-adv-ang,.mn-adv{background:rgba(245,166,35,.1);color:var(--amber);}
-.mn-ent-ang,.mn-ent{background:rgba(255,107,90,.1);color:var(--coral);}
-
-.mn-beg-sql{background:var(--c-sql2);color:var(--c-sql);}
-.mn-int-sql{background:var(--c-ang2);color:var(--c-ang);}
-.mn-adv-sql{background:rgba(245,166,35,.1);color:var(--amber);}
-.mn-ent-sql{background:rgba(255,107,90,.1);color:var(--coral);}
-
-.mn-beg-dsa{background:var(--c-dsa2);color:var(--c-dsa);}
-.mn-int-dsa{background:var(--c-ang2);color:var(--c-ang);}
-.mn-adv-dsa{background:rgba(255,107,90,.1);color:var(--coral);}
-.mn-ent-dsa{background:var(--c-net2);color:var(--c-net);}
-
-.mn-beg-net{background:var(--c-net2);color:var(--c-net);}
-.mn-int-net{background:var(--c-sql2);color:var(--c-sql);}
-.mn-adv-net{background:rgba(245,166,35,.1);color:var(--amber);}
-.mn-ent-net{background:rgba(255,107,90,.1);color:var(--coral);}
-
-.mi{flex:1;min-width:0;}
-.mtr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px;}
-.mt{font-size:13.5px;font-weight:500;color:var(--text);}
-.mlp{
-  font-size:10px;font-weight:500;padding:2px 8px;
-  border-radius:100px;text-transform:uppercase;letter-spacing:.04em;
-}
-.mlp-beg{background:var(--c-ang2);color:var(--c-ang);}
-.mlp-int{background:var(--c-sql2);color:var(--c-sql);}
-.mlp-adv{background:rgba(245,166,35,.1);color:var(--amber);}
-.mlp-ent{background:rgba(255,107,90,.1);color:var(--coral);}
-.mlp-easy{background:var(--c-sql2);color:var(--c-sql);}
-.mlp-med{background:rgba(245,166,35,.1);color:var(--amber);}
-.mlp-hard{background:rgba(255,107,90,.1);color:var(--coral);}
-
-.mg{font-size:11.5px;color:var(--text3);line-height:1.4;}
-.cv{color:var(--text3);font-size:16px;flex-shrink:0;margin-top:6px;transition:transform .2s;line-height:1;}
-.cv.open{transform:rotate(90deg);}
-.mb{display:none;padding:0 1.15rem 1.15rem;border-top:1px solid var(--line);}
-.mb.open{display:block;}
-
-.dg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:.9rem;}
-.db{background:var(--bg3);border-radius:var(--r);padding:.75rem 1rem;}
-.dlb{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:7px;}
-.tul{list-style:none;}
-.tul li{
-  font-size:11.5px;color:var(--text);padding:1.5px 0;
-  line-height:1.5;display:flex;align-items:flex-start;gap:6px;
-}
-.tul li::before{content:'›';color:var(--text3);flex-shrink:0;font-size:12px;margin-top:0px;}
-.tb{
-  grid-column:1/-1;background:var(--bg3);border-radius:var(--r);
-  padding:.6rem 1rem;display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;
-}
-.tblb{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);white-space:nowrap;padding-top:1px;}
-.tc{font-family:var(--mono);font-size:10px;background:var(--bg4);border:1px solid var(--line2);border-radius:4px;padding:1px 7px;color:var(--text2);}
-.relb{
-  grid-column:1/-1;border-radius:var(--r);
-  padding:.65rem 1rem;border-left:3px solid var(--line2);
-}
-.relb.r-ang{border-left-color:var(--c-ang);}
-.relb.r-sql{border-left-color:var(--c-sql);}
-.relb.r-dsa{border-left-color:var(--c-dsa);}
-.relb.r-net{border-left-color:var(--c-net);}
-.relt{font-size:11.5px;color:var(--text2);line-height:1.5;}
-.relt strong{color:var(--text);font-weight:500;}
-
-/* DSA problem grid */
-.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:7px;margin-top:7px;}
-.pc{border:1px solid var(--line);border-radius:var(--r);padding:7px 9px;font-size:11px;line-height:1.4;}
-.pc .pn{font-weight:500;color:var(--text);display:block;margin-bottom:4px;}
-.ptags{display:flex;gap:4px;flex-wrap:wrap;}
-.tag-lc{background:#2a1e00;color:#f5a623;font-size:10px;padding:1px 7px;border-radius:10px;}
-.tag-gfg{background:#0e2a1a;color:#3dd9a4;font-size:10px;padding:1px 7px;border-radius:10px;}
-.tag-easy{background:rgba(61,217,164,.1);color:var(--c-sql);font-size:10px;padding:1px 7px;border-radius:10px;}
-.tag-med{background:rgba(245,166,35,.1);color:var(--amber);font-size:10px;padding:1px 7px;border-radius:10px;}
-.tag-hard{background:rgba(255,107,90,.1);color:var(--coral);font-size:10px;padding:1px 7px;border-radius:10px;}
-
-/* ── DIVIDERS ── */
-.div{display:flex;align-items:center;gap:11px;margin:2rem 0 1.1rem;}
-.div-lbl{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);white-space:nowrap;}
-.div-line{flex:1;height:1px;background:var(--line);}
-
-/* ── PROJECT GRID ── */
-.pjg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.pjc{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r2);padding:1rem 1.15rem;transition:border-color .15s;}
-.pjc:hover{border-color:var(--line2);}
-.pjl{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:6px;}
-.pjt{font-size:13px;font-weight:500;color:var(--text);margin-bottom:5px;}
-.pjd{font-size:11.5px;color:var(--text2);line-height:1.6;}
-.pji{font-size:18px;margin-bottom:7px;display:block;}
-
-/* ── TIMELINE ── */
-.tl{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:.9rem;}
-.tls{padding:.8rem .6rem;text-align:center;border-right:1px solid var(--line);}
-.tls:last-child{border-right:none;}
-.tw{display:block;font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:3px;}
-.tp{display:block;font-size:12px;font-weight:500;color:var(--text);margin-bottom:1px;}
-.tm{display:block;font-size:10px;color:var(--text3);}
-
-/* ── OUTCOMES ── */
-.og{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:.9rem;}
-.oi{display:flex;align-items:flex-start;gap:8px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:.55rem .9rem;}
-.od{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;}
-.ot{font-size:11.5px;color:var(--text2);line-height:1.4;}
-
-/* ── WEEK GRID (DSA) ── */
-.wg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
-.wc{background:var(--bg3);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;}
-.wkn{font-family:var(--mono);font-size:10px;color:var(--c-dsa);font-weight:500;display:block;margin-bottom:4px;}
-.wkt{font-size:11.5px;font-weight:500;color:var(--text);line-height:1.4;}
-
-/* ── TOC STRIP ── */
-.toc-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem;}
-.toc-btn{
-  font-size:11px;padding:4px 11px;border-radius:100px;
-  border:1px solid var(--line2);background:transparent;
-  color:var(--text2);cursor:pointer;font-family:var(--font);transition:all .15s;
-}
-.toc-btn:hover{background:var(--bg3);color:var(--text);}
-
-/* ── RESPONSIVE ── */
-@media(max-width:600px){
-  .stats,.dg,.og,.pjg,.tl,.og{grid-template-columns:1fr 1fr;}
-  .pjg{grid-template-columns:1fr;}
-  .og{grid-template-columns:1fr;}
-}
+.mod-chev{font-size:13px;color:var(--color-text-secondary);transition:transform 0.2s}
+.mod-chev.open{transform:rotate(180deg)}
+.mod-done{font-size:11px;color:var(--color-text-secondary);white-space:nowrap}
+.mod-body{padding:0;border-top:0.5px solid var(--color-border-tertiary);display:none}
+.mod-body.open{display:block}
+.note{font-size:12px;color:var(--color-text-secondary);padding:10px 14px 12px;line-height:1.6;border-bottom:0.5px solid var(--color-border-tertiary)}
+.kw-list{list-style:none}
+.kw-item{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:0.5px solid var(--color-border-tertiary);cursor:pointer;transition:background 0.1s}
+.kw-item:last-child{border-bottom:none}
+.kw-item:hover{background:var(--color-background-secondary)}
+.kw-num{font-size:11px;font-weight:500;color:var(--color-text-tertiary);width:24px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
+.kw-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--color-border-secondary);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.kw-check.done{background:#16a34a;border-color:#16a34a}
+.kw-check.done::after{content:'✓';color:#fff;font-size:10px;font-weight:700}
+.kw-text{font-size:13px;color:var(--color-text-primary);flex:1;line-height:1.4}
+.kw-text.done{color:var(--color-text-secondary);text-decoration:line-through;text-decoration-color:var(--color-border-secondary)}
 </style>
-</head>
-<body>
 
-<!-- TOP NAV -->
-<nav class="top-nav">
-  <div class="nav-logo">curricula</div>
-  <div class="nav-tabs">
-    <button class="nav-tab t-ang active" onclick="switchTab('ang',this)">
-      <span class="dot"></span>Angular + TypeScript
-    </button>
-    <button class="nav-tab t-sql" onclick="switchTab('sql',this)">
-      <span class="dot"></span>SQL &amp; Databases
-    </button>
-    <button class="nav-tab t-dsa" onclick="switchTab('dsa',this)">
-      <span class="dot"></span>DSA with Java
-    </button>
-    <button class="nav-tab t-net" onclick="switchTab('net',this)">
-      <span class="dot"></span>.NET &amp; C#
-    </button>
-  </div>
-</nav>
-
-<div class="page-wrap">
-
-<!-- ═══════════════════ ANGULAR ═══════════════════ -->
-<div class="curr-section visible" id="curr-ang">
-  <div class="hero hero-ang">
-    <div class="eyebrow">
-      <span class="pill pill-ang">Angular 17+</span>
-      <span class="pill pill-nu">TypeScript 5</span>
-      <span class="pill pill-co">Enterprise Ready</span>
-      <span class="pill pill-am">18 Modules</span>
-    </div>
-    <h1 class="hero-title">Angular + TypeScript<br>Professional Training Curriculum</h1>
-    <p class="hero-sub">A structured, industry-aligned learning path from SPA fundamentals to enterprise-scale architecture — designed for job-ready frontend engineers.</p>
-    <div class="stats">
-      <div class="stat"><span class="stat-n">18</span><span class="stat-l">Modules</span></div>
-      <div class="stat"><span class="stat-n">12</span><span class="stat-l">Weeks</span></div>
-      <div class="stat"><span class="stat-n">3</span><span class="stat-l">Projects</span></div>
-      <div class="stat"><span class="stat-n">4</span><span class="stat-l">Levels</span></div>
-    </div>
-  </div>
-  <div class="fbar">
-    <span class="fbar-lbl">Filter:</span>
-    <button class="fb on-ang" onclick="flt('ang','all',this)">All</button>
-    <button class="fb" onclick="flt('ang','beginner',this)">Beginner</button>
-    <button class="fb" onclick="flt('ang','intermediate',this)">Intermediate</button>
-    <button class="fb" onclick="flt('ang','advanced',this)">Advanced</button>
-    <button class="fb" onclick="flt('ang','enterprise',this)">Enterprise</button>
-  </div>
-  <div class="mlist" id="ang-mlist"></div>
-  <div class="div"><span class="div-lbl">Real-World Projects</span><div class="div-line"></div></div>
-  <div class="pjg">
-    <div class="pjc"><p class="pjl">Project 1</p><p class="pjt">E-Commerce Dashboard</p><p class="pjd">Full-stack storefront with product listing, cart, checkout, and admin panel. Covers routing, forms, HTTP, state management, and auth.</p></div>
-    <div class="pjc"><p class="pjl">Project 2</p><p class="pjt">Real-Time Task Manager</p><p class="pjd">Kanban board with WebSocket integration, drag-and-drop, NgRx state, user roles, JWT auth, and offline support with PWA.</p></div>
-    <div class="pjc"><p class="pjl">Project 3</p><p class="pjt">Enterprise HR Portal</p><p class="pjd">Micro-frontend SPA with SSR, multi-tenant auth, dynamic forms, role-based dashboards, CI/CD pipeline, and full test coverage.</p></div>
-  </div>
-  <div class="div" style="margin-top:1.75rem;"><span class="div-lbl">Learning Timeline — 12 Weeks</span><div class="div-line"></div></div>
-  <div class="tl">
-    <div class="tls" style="background:rgba(123,156,255,.05);"><span class="tw">Weeks 1–3</span><span class="tp">Foundation</span><span class="tm">Modules 1–5</span></div>
-    <div class="tls" style="background:rgba(61,217,164,.05);"><span class="tw">Weeks 4–6</span><span class="tp">Core Angular</span><span class="tm">Modules 6–9</span></div>
-    <div class="tls" style="background:rgba(245,166,35,.05);"><span class="tw">Weeks 7–9</span><span class="tp">Advanced Skills</span><span class="tm">Modules 10–14</span></div>
-    <div class="tls" style="background:rgba(255,107,90,.05);"><span class="tw">Weeks 10–12</span><span class="tp">Enterprise</span><span class="tm">Modules 15–18</span></div>
-  </div>
-  <div class="div" style="margin-top:1.75rem;"><span class="div-lbl">Skill Outcomes</span><div class="div-line"></div></div>
-  <div class="og" id="ang-outcomes"></div>
+<div class="wrap">
+<h2 class="sr-only">DSA prerequisites — every keyword sequenced in study order</h2>
+<div class="hero">
+  <h1>DSA prerequisites</h1>
+  <p>Every keyword numbered in study order · click to mark done</p>
 </div>
-
-<!-- ═══════════════════ SQL ═══════════════════ -->
-<div class="curr-section" id="curr-sql">
-  <div class="hero hero-sql">
-    <div class="eyebrow">
-      <span class="pill pill-sql">SQL Core</span>
-      <span class="pill pill-nu">PostgreSQL · MySQL · SQL Server</span>
-      <span class="pill pill-am">17 Modules</span>
-      <span class="pill pill-co">Enterprise Ready</span>
-    </div>
-    <h1 class="hero-title">SQL &amp; Relational Databases<br>Professional Training Curriculum</h1>
-    <p class="hero-sub">A structured, industry-aligned learning path from relational theory to enterprise-grade database engineering — built for job-ready backend developers.</p>
-    <div class="stats">
-      <div class="stat"><span class="stat-n">17</span><span class="stat-l">Modules</span></div>
-      <div class="stat"><span class="stat-n">10</span><span class="stat-l">Weeks</span></div>
-      <div class="stat"><span class="stat-n">3</span><span class="stat-l">Projects</span></div>
-      <div class="stat"><span class="stat-n">4</span><span class="stat-l">Levels</span></div>
-    </div>
-  </div>
-  <div class="fbar">
-    <span class="fbar-lbl">Filter:</span>
-    <button class="fb on-sql" onclick="flt('sql','all',this)">All</button>
-    <button class="fb" onclick="flt('sql','beginner',this)">Beginner</button>
-    <button class="fb" onclick="flt('sql','intermediate',this)">Intermediate</button>
-    <button class="fb" onclick="flt('sql','advanced',this)">Advanced</button>
-    <button class="fb" onclick="flt('sql','enterprise',this)">Enterprise</button>
-  </div>
-  <div class="mlist" id="sql-mlist"></div>
-  <div class="div"><span class="div-lbl">Real-World Projects</span><div class="div-line"></div></div>
-  <div class="pjg">
-    <div class="pjc"><p class="pjl">Project 1</p><p class="pjt">Hospital Management System</p><p class="pjd">Full schema design with patients, doctors, appointments, prescriptions. Covers normalization, joins, stored procedures, triggers, and role-based access.</p></div>
-    <div class="pjc"><p class="pjl">Project 2</p><p class="pjt">E-Commerce Analytics Platform</p><p class="pjd">Orders, inventory, customers, and sales. Covers complex queries, CTEs, window functions, indexes, views, and reporting dashboards.</p></div>
-    <div class="pjc"><p class="pjl">Project 3</p><p class="pjt">HR &amp; Payroll Database</p><p class="pjd">Multi-department org with payroll runs, audit logs via triggers, scheduled jobs, ETL pipeline, backup strategy, and query optimization.</p></div>
-  </div>
-  <div class="div" style="margin-top:1.75rem;"><span class="div-lbl">Learning Timeline — 10 Weeks</span><div class="div-line"></div></div>
-  <div class="tl">
-    <div class="tls" style="background:rgba(61,217,164,.05);"><span class="tw">Weeks 1–2</span><span class="tp">Foundation</span><span class="tm">Modules 1–4</span></div>
-    <div class="tls" style="background:rgba(123,156,255,.05);"><span class="tw">Weeks 3–5</span><span class="tp">Core SQL</span><span class="tm">Modules 5–9</span></div>
-    <div class="tls" style="background:rgba(245,166,35,.05);"><span class="tw">Weeks 6–8</span><span class="tp">Advanced SQL</span><span class="tm">Modules 10–13</span></div>
-    <div class="tls" style="background:rgba(255,107,90,.05);"><span class="tw">Weeks 9–10</span><span class="tp">Enterprise</span><span class="tm">Modules 14–17</span></div>
-  </div>
-  <div class="div" style="margin-top:1.75rem;"><span class="div-lbl">Skill Outcomes</span><div class="div-line"></div></div>
-  <div class="og" id="sql-outcomes"></div>
+<div class="prog-wrap">
+  <div class="prog-bar"><div class="prog-fill" id="pf" style="width:0%"></div></div>
+  <div class="prog-txt" id="pt">0 / 0 studied</div>
 </div>
-
-<!-- ═══════════════════ DSA ═══════════════════ -->
-<div class="curr-section" id="curr-dsa">
-  <div class="hero hero-dsa">
-    <div class="eyebrow">
-      <span class="pill pill-dsa">Java Core</span>
-      <span class="pill pill-nu">LeetCode · GFG</span>
-      <span class="pill pill-am">20 Modules</span>
-      <span class="pill pill-co">Placement Ready</span>
-    </div>
-    <h1 class="hero-title">DSA with Java<br>Complete Training Syllabus</h1>
-    <p class="hero-sub">From Java fundamentals to competitive programming — structured for placement interviews, LeetCode mastery, and product engineering.</p>
-    <div class="stats">
-      <div class="stat"><span class="stat-n">20</span><span class="stat-l">Modules</span></div>
-      <div class="stat"><span class="stat-n">20</span><span class="stat-l">Weeks</span></div>
-      <div class="stat"><span class="stat-n">3</span><span class="stat-l">Projects</span></div>
-      <div class="stat"><span class="stat-n">300+</span><span class="stat-l">Problems</span></div>
-    </div>
-  </div>
-  <div class="toc-strip" id="dsa-toc"></div>
-  <div class="mlist" id="dsa-mlist"></div>
-  <div class="div"><span class="div-lbl">Learning Timeline — 20 Weeks</span><div class="div-line"></div></div>
-  <div class="wg" id="dsa-timeline"></div>
-  <div class="div" style="margin-top:1.75rem;"><span class="div-lbl">Capstone Projects</span><div class="div-line"></div></div>
-  <div class="pjg" id="dsa-projects"></div>
-  <div class="div" style="margin-top:1.75rem;"><span class="div-lbl">Skill Outcomes</span><div class="div-line"></div></div>
-  <div class="og" id="dsa-outcomes"></div>
+<div class="cat-tabs" id="ctabs"></div>
+<div id="panels"></div>
 </div>
-
-<!-- ═══════════════════ .NET ═══════════════════ -->
-<div class="curr-section" id="curr-net">
-  <div class="hero hero-net">
-    <div class="eyebrow">
-      <span class="pill pill-net">.NET 8 / 9</span>
-      <span class="pill pill-nu">C# 12+</span>
-      <span class="pill pill-am">18 Modules</span>
-      <span class="pill pill-co">Enterprise Ready</span>
-    </div>
-    <h1 class="hero-title">.NET &amp; C# Professional<br>Training Curriculum</h1>
-    <p class="hero-sub">A structured, industry-aligned path from C# language fundamentals to enterprise ASP.NET Core APIs, microservices, and cloud-native deployment — built for job-ready backend engineers.</p>
-    <div class="stats">
-      <div class="stat"><span class="stat-n">18</span><span class="stat-l">Modules</span></div>
-      <div class="stat"><span class="stat-n">14</span><span class="stat-l">Weeks</span></div>
-      <div class="stat"><span class="stat-n">3</span><span class="stat-l">Projects</span></div>
-      <div class="stat"><span class="stat-n">4</span><span class="stat-l">Levels</span></div>
-    </div>
-  </div>
-  <div class="fbar">
-    <span class="fbar-lbl">Filter:</span>
-    <button class="fb on-net" onclick="flt('net','all',this)">All</button>
-    <button class="fb" onclick="flt('net','beginner',this)">Beginner</button>
-    <button class="fb" onclick="flt('net','intermediate',this)">Intermediate</button>
-    <button class="fb" onclick="flt('net','advanced',this)">Advanced</button>
-    <button class="fb" onclick="flt('net','enterprise',this)">Enterprise</button>
-  </div>
-  <div class="mlist" id="net-mlist"></div>
-  <div class="div"><span class="div-lbl">Real-World Projects</span><div class="div-line"></div></div>
-  <div class="pjg">
-    <div class="pjc"><p class="pjl">Project 1</p><p class="pjt">REST API — Library Management System</p><p class="pjd">Full CRUD API with ASP.NET Core, Entity Framework, SQL Server, JWT auth, role-based access, and Swagger docs.</p></div>
-    <div class="pjc"><p class="pjl">Project 2</p><p class="pjt">E-Commerce Backend Platform</p><p class="pjd">Multi-layered architecture with repositories, services, SignalR notifications, background jobs, caching, and payment integration.</p></div>
-    <div class="pjc"><p class="pjl">Project 3</p><p class="pjt">Microservices Order System</p><p class="pjd">Decomposed services with Ocelot gateway, RabbitMQ messaging, Docker containers, CI/CD pipeline, and Azure deployment.</p></div>
-  </div>
-  <div class="div" style="margin-top:1.75rem;"><span class="div-lbl">Learning Timeline — 14 Weeks</span><div class="div-line"></div></div>
-  <div class="tl">
-    <div class="tls" style="background:rgba(193,123,255,.05);"><span class="tw">Weeks 1–3</span><span class="tp">C# Foundations</span><span class="tm">Modules 1–4</span></div>
-    <div class="tls" style="background:rgba(61,217,164,.05);"><span class="tw">Weeks 4–7</span><span class="tp">OOP &amp; Core .NET</span><span class="tm">Modules 5–9</span></div>
-    <div class="tls" style="background:rgba(245,166,35,.05);"><span class="tw">Weeks 8–11</span><span class="tp">ASP.NET &amp; Data</span><span class="tm">Modules 10–14</span></div>
-    <div class="tls" style="background:rgba(255,107,90,.05);"><span class="tw">Weeks 12–14</span><span class="tp">Enterprise &amp; Cloud</span><span class="tm">Modules 15–18</span></div>
-  </div>
-  <div class="div" style="margin-top:1.75rem;"><span class="div-lbl">Skill Outcomes</span><div class="div-line"></div></div>
-  <div class="og" id="net-outcomes"></div>
-</div>
-
-</div><!-- end page-wrap -->
 
 <script>
-/* ════════════════ DATA ════════════════ */
-const angMods=[
-  {num:"01",lv:"beginner",ll:"Beginner",title:"Introduction to Angular & SPA Architecture",tag:"Understanding the modern web development landscape and where Angular fits",c:["What is Angular and why it exists","SPA vs MPA architecture","Angular version history and release cycle","Angular vs React vs Vue — tradeoffs","Key features: DI, modules, CLI, RxJS"],s:["Component-based architecture overview","The Angular ecosystem and community","When to choose Angular for enterprise","Overview of Angular compilation (Ivy)"],t:["Angular Docs","angular.io","Node.js","Browser DevTools"],r:"Every enterprise Angular project starts with architectural decisions. Understanding SPA tradeoffs prevents costly rewrites later."},
-  {num:"02",lv:"beginner",ll:"Beginner",title:"Environment Setup & Angular CLI",tag:"Configuring a professional development environment from scratch",c:["Node.js, npm/yarn/pnpm setup","Angular CLI installation and usage","Generating projects, components, services","Project structure and file conventions","angular.json deep dive"],s:["Workspace vs single-project setups","Dev vs prod configuration","CLI schematics and code generation","Editor setup: VS Code extensions"],t:["@angular/cli","Node.js 18+","VS Code","Angular Language Service","nvm"],r:"Professional teams use CLI extensively — mastering it accelerates delivery and enforces consistency."},
-  {num:"03",lv:"beginner",ll:"Beginner",title:"TypeScript Fundamentals",tag:"The language backbone of Angular — mastered from the ground up",c:["Types: primitives, arrays, tuples, enums","Interfaces vs Type aliases","Classes, access modifiers, abstract classes","Functions: overloads, optional/rest params","Union, intersection, and literal types"],s:["Type narrowing and type guards","Utility types: Partial, Required, Pick, Omit, Record","Mapped and conditional types","Template literal types","tsconfig.json configuration"],t:["TypeScript Playground","tsc compiler","ts-node","ESLint + typescript-eslint"],r:"Angular is TypeScript-first. Strong typing eliminates entire classes of runtime bugs in large codebases."},
-  {num:"04",lv:"beginner",ll:"Beginner",title:"TypeScript Advanced: Generics & Decorators",tag:"Advanced TypeScript patterns used throughout Angular source code",c:["Generic functions, classes, and interfaces","Generic constraints and default types","Infer keyword and conditional generics","Decorators: class, method, property, parameter","Decorator factories and composition"],s:["Angular-style decorator patterns","Declaration merging and module augmentation","Ambient types and .d.ts files","Strict mode and exactOptionalPropertyTypes"],t:["TypeScript 5.x","reflect-metadata","tsconfig strict flags"],r:"Angular's entire DI system and component model is built on decorators. Understanding them unlocks Angular internals."},
-  {num:"05",lv:"beginner",ll:"Beginner",title:"Angular Components & Templates",tag:"The fundamental building block of every Angular application",c:["Component anatomy: @Component decorator","Template syntax: interpolation, expressions","Property binding, event binding, two-way binding","Template reference variables","ng-content and content projection"],s:["Smart vs presentational components","Component encapsulation modes","Dynamic components and ViewContainerRef","Host element binding","@ViewChild and @ContentChild"],t:["@angular/core","Angular DevTools","Angular templates"],r:"Components are the primary unit of UI in Angular. Mastery here directly impacts code reuse and maintainability."},
-  {num:"06",lv:"intermediate",ll:"Intermediate",title:"Angular Modules & Dependency Injection",tag:"Managing application scale through modules and Angular's powerful DI system",c:["NgModule: declarations, imports, exports, providers","Root module vs feature modules","Shared modules pattern","DI fundamentals: providers, tokens, injectors","Hierarchical injector tree"],s:["InjectionToken for non-class dependencies","useClass, useValue, useFactory, useExisting","providedIn: 'root' vs module-level","Standalone components (Angular 14+)","Migrating to standalone APIs"],t:["@angular/core","Angular DI","Angular Standalone APIs"],r:"DI is core to Angular's testability and scalability. Feature modules enforce code boundaries in large teams."},
-  {num:"07",lv:"intermediate",ll:"Intermediate",title:"Directives & Pipes",tag:"Extending HTML behavior and transforming displayed data",c:["Structural directives: *ngIf, *ngFor, *ngSwitch","Custom structural directive with TemplateRef","Attribute directives: ngClass, ngStyle","Custom attribute directives","Built-in pipes: date, currency, async, json"],s:["Creating custom pure and impure pipes","Pipe chaining and parameterization","Performance impact of impure pipes","New @if, @for, @switch control flow (Angular 17)","Microsyntax desugaring"],t:["@angular/common","@Pipe decorator","@Directive decorator"],r:"Directives and pipes enforce DRY principles in templates and are essential for reusable UI libraries."},
-  {num:"08",lv:"intermediate",ll:"Intermediate",title:"Component Lifecycle Hooks",tag:"Precise control over component creation, update, and destruction phases",c:["ngOnInit, ngOnDestroy — most critical hooks","ngOnChanges and SimpleChanges","ngAfterViewInit / ngAfterContentInit","ngDoCheck and custom change detection","Hook execution order and gotchas"],s:["Avoiding memory leaks with takeUntil / DestroyRef","Initializing async data on init","Interacting with child views after render","Using inject() in functional style","Angular 16+ DestroyRef"],t:["@angular/core lifecycle interfaces","RxJS takeUntil","DestroyRef"],r:"Incorrect lifecycle use is the #1 cause of Angular memory leaks and stale data bugs in production."},
-  {num:"09",lv:"intermediate",ll:"Intermediate",title:"Services, RxJS & Reactive Programming",tag:"The engine powering async data flow in every Angular application",c:["Creating and injecting services","Observable vs Promise — when to use each","RxJS core operators: map, filter, switchMap, mergeMap","Subjects: BehaviorSubject, ReplaySubject, Subject","Error handling: catchError, retry, retryWhen"],s:["Cold vs hot observables","Multicasting with share and shareReplay","combineLatest, forkJoin, zip","debounceTime, distinctUntilChanged for search","Unsubscription patterns and memory safety"],t:["RxJS 7+","@angular/core Injectable","rxjs/operators","rxjs/ajax"],r:"RxJS is Angular's core async abstraction. Mastery separates junior from senior Angular engineers."},
-  {num:"10",lv:"intermediate",ll:"Intermediate",title:"Routing & Navigation",tag:"Building seamless multi-view SPAs with Angular's powerful router",c:["RouterModule configuration and RouterLink","Route parameters and query params","Nested and child routes","Lazy loading feature modules","Route guards: CanActivate, CanDeactivate, Resolve"],s:["Functional guards (Angular 15+)","Router events and navigation lifecycle","Preloading strategies","Dynamic routing with route data","Auxiliary/secondary router outlets"],t:["@angular/router","Router","ActivatedRoute","RouterLink","RouterOutlet"],r:"Well-architected routing is the backbone of SPAs. Lazy loading directly reduces initial bundle size and load time."},
-  {num:"11",lv:"intermediate",ll:"Intermediate",title:"HTTP Client & API Integration",tag:"Connecting Angular to real-world backends and external APIs",c:["HttpClient setup and configuration","GET, POST, PUT, PATCH, DELETE requests","Typed HTTP responses with generics","HTTP Interceptors for headers and auth","Error handling and retry strategies"],s:["Centralized API service patterns","Environment-based base URL configuration","Loading state management","HTTP caching strategies","CORS understanding and local proxy setup"],t:["@angular/common/http","HttpClient","HttpInterceptor","environment.ts"],r:"Every production Angular app consumes REST APIs. Interceptors enable DRY auth token injection across all requests."},
-  {num:"12",lv:"advanced",ll:"Advanced",title:"Angular Forms — Template-Driven & Reactive",tag:"From simple controls to complex dynamic form architectures",c:["Template-driven: ngModel, ngForm","Reactive forms: FormControl, FormGroup, FormArray","Form validation: built-in and custom validators","Cross-field validation and async validators","Dynamic form generation from config"],s:["FormBuilder service for cleaner code","ControlValueAccessor for custom form controls","Displaying validation errors elegantly","Nested form groups and arrays","Resetting and patching form values"],t:["@angular/forms","ReactiveFormsModule","FormsModule","Validators"],r:"Forms are central to every business app. Reactive forms are the industry standard for complex, testable form logic."},
-  {num:"13",lv:"advanced",ll:"Advanced",title:"State Management — NgRx & Angular Signals",tag:"Managing complex application state at enterprise scale",c:["Redux pattern: actions, reducers, selectors","NgRx Store setup and feature stores","Effects for side effects and async operations","NgRx Signals Store (modern approach)","Angular Signals: signal(), computed(), effect()"],s:["Component store for local state","Memoized selectors with createSelector","Entity adapter for collections","DevTools integration for state inspection","When NOT to use NgRx"],t:["@ngrx/store","@ngrx/effects","@ngrx/signals","Angular Signals API","Redux DevTools"],r:"State bugs account for a large percentage of production issues. Structured state management prevents entire categories of defects."},
-  {num:"14",lv:"advanced",ll:"Advanced",title:"UI, Styling & Angular Material",tag:"Building beautiful, accessible, responsive Angular UIs at scale",c:["Angular Material component library","Material theming system (M3)","CDK: overlays, virtual scrolling, drag-drop","CSS encapsulation in Angular","Responsive layouts with Angular Flex / CSS Grid"],s:["Custom theme creation with design tokens","Global styles vs component styles","Dynamic theming at runtime","Accessibility (a11y) with ARIA","Bootstrap integration alternative"],t:["@angular/material","@angular/cdk","SASS/SCSS","Tailwind CSS"],r:"UI consistency and accessibility are non-negotiable in enterprise products. Angular Material accelerates delivery."},
-  {num:"15",lv:"advanced",ll:"Advanced",title:"Performance Optimization",tag:"Making Angular applications fast, efficient, and scalable",c:["Change detection: Default vs OnPush strategy","Zone.js and zoneless Angular","TrackBy in *ngFor / @for","Lazy loading modules and components","Bundle analysis and tree shaking"],s:["Memoization with pure pipes","Virtual scrolling for large lists","Image optimization with NgOptimizedImage","Preloading strategies","Web Vitals (LCP, CLS, FID) for Angular"],t:["Angular DevTools","webpack-bundle-analyzer","NgOptimizedImage","Lighthouse"],r:"Performance is a feature. OnPush alone can improve rendering speed by 30–50% in data-heavy dashboards."},
-  {num:"16",lv:"advanced",ll:"Advanced",title:"Security, Authentication & Authorization",tag:"Protecting Angular applications at every layer of the stack",c:["XSS prevention and Angular's built-in sanitization","CSRF protection strategies","JWT authentication flow (access + refresh tokens)","HTTP Interceptor for token attachment","Route guards for authorization"],s:["Role-based access control (RBAC) in Angular","Storing tokens securely (httpOnly cookies vs localStorage)","Angular DomSanitizer API","OAuth2 / OIDC integration (Auth0, Keycloak)","Content Security Policy (CSP) headers"],t:["DomSanitizer","HttpInterceptor","CanActivate","JWT","Auth0 Angular SDK"],r:"Security vulnerabilities in frontend apps are exploited daily. Angular engineers must own security, not defer to backend."},
-  {num:"17",lv:"enterprise",ll:"Enterprise",title:"Testing — Unit, Integration & E2E",tag:"Building confidence through comprehensive, maintainable test suites",c:["Unit testing with Jasmine and TestBed","Component testing with fixture and queries","Service and pipe testing","Mocking dependencies and HTTP requests","E2E testing with Cypress / Playwright"],s:["Testing reactive forms","Async testing with fakeAsync and tick","NgMock and HttpClientTestingModule","Component harnesses from Angular CDK","Code coverage reporting"],t:["Jasmine","Karma","TestBed","Cypress","Playwright"],r:"Untested Angular apps accumulate technical debt exponentially. Testable code signals senior engineering maturity."},
-  {num:"18",lv:"enterprise",ll:"Enterprise",title:"Architecture, SSR, Micro-Frontends & Deployment",tag:"Enterprise-scale architecture patterns and production deployment strategies",c:["Scalable folder structure: feature-first architecture","Angular Universal — Server-Side Rendering","Standalone component-first architecture","Micro-frontends with Module Federation (Webpack 5)","Monorepo management with Nx"],s:["Build optimization: production flags, differential loading","Docker containerization of Angular apps","CI/CD with GitHub Actions / GitLab CI","Environment-specific builds and secrets","Deploying to Nginx, Firebase, Vercel, AWS S3"],t:["Angular Universal","Nx","Webpack Module Federation","GitHub Actions","Docker","Firebase Hosting"],r:"Senior engineers own deployment and architecture decisions. SSR and micro-frontends are standard in enterprise Angular portfolios."}
+const CATS=[
+{id:'math',label:'Maths & Logic',modules:[
+{title:'Number theory essentials',badge:'must',note:'Start here — these are the atomic vocabulary of all algorithm analysis and proofs.',keywords:[
+'Integer','Prime number','Composite number','Divisor','Divisibility',
+'GCD (Greatest Common Divisor)','LCM (Least Common Multiple)','Euclidean algorithm','Extended Euclidean algorithm',
+'Modular arithmetic','Modulo operator','Modular inverse',
+'Fermat\'s little theorem','Chinese Remainder Theorem',
+'Sieve of Eratosthenes','Sieve of Sundaram','Euler\'s totient function',
+'Coprime numbers','Perfect number','Abundant number','Deficient number']},
+{title:'Powers, logs & series',badge:'core',note:'Study after number theory — logs are needed to interpret O(log n) and understand divide-and-conquer.',keywords:[
+'Exponentiation','Fast exponentiation (binary exponentiation)',
+'Logarithm','Log base 2','Natural logarithm',
+'Ceiling function','Floor function','Factorial','Fibonacci sequence',
+'Arithmetic progression (AP)','Geometric progression (GP)','Harmonic series',
+'Stirling\'s approximation','Pascal\'s triangle',
+'Binomial coefficient','Combination (nCr)','Permutation (nPr)']},
+{title:'Bit manipulation',badge:'must',note:'Study after basic integers — build on your number-system knowledge before applying bitwise tricks.',keywords:[
+'Binary number system','Bit','Byte',
+'Bitwise AND','Bitwise OR','Bitwise XOR','Bitwise NOT',
+'Left shift (<<)','Right shift (>>)','Arithmetic right shift','Logical right shift',
+'Set bit','Clear bit','Toggle bit','Check bit',
+'LSB (Least Significant Bit)','MSB (Most Significant Bit)',
+'Population count (popcount)','Brian Kernighan\'s algorithm',
+'Two\'s complement','Ones\' complement',
+'Bitmask','Bitmask DP','Power of two check','Counting set bits']},
+{title:'Combinatorics & probability',badge:'deep',note:'Study after permutations and combinations — these build on those foundations.',keywords:[
+'Pigeonhole principle','Inclusion-exclusion principle','Stars and bars',
+'Catalan numbers','Bell numbers','Derangement','Birthday paradox',
+'Expected value','Random variable','Uniform distribution',
+'Probability of collision (hashing)',
+'Randomised algorithm','Las Vegas algorithm','Monte Carlo algorithm']}
+]},
+
+{id:'complexity',label:'Complexity',modules:[
+{title:'Asymptotic notation',badge:'must',note:'Study this before writing any code — you need notation to describe what you are about to build.',keywords:[
+'Time complexity','Space complexity','Asymptotic analysis',
+'Big-O notation','Big-Omega notation','Big-Theta notation','Little-o notation',
+'Worst case','Best case','Average case',
+'Amortized analysis','Tight bound','Upper bound','Lower bound']},
+{title:'Complexity classes & recurrences',badge:'must',note:'Study after notation — you now need classes to label algorithms and recurrences to analyse recursive ones.',keywords:[
+'O(1) constant','O(log n) logarithmic','O(n) linear',
+'O(n log n) linearithmic','O(n²) quadratic','O(n³) cubic',
+'O(2^n) exponential','O(n!) factorial',
+'Recurrence relation','Substitution method','Recursion tree method',
+'Master theorem','Akra-Bazzi method',
+'Auxiliary space','In-place algorithm','Space-time tradeoff']},
+{title:'Algorithm design paradigms',badge:'must',note:'Study last in this tab — every paradigm here is a category label you will apply once you start solving problems.',keywords:[
+'Brute force','Greedy algorithm','Divide and conquer',
+'Dynamic programming (DP)','Backtracking','Branch and bound',
+'Randomised algorithm','Approximation algorithm',
+'Two pointer technique','Sliding window technique',
+'Prefix sum technique','Difference array technique',
+'Offline algorithm','Online algorithm','Amortized complexity','Reduction']}
+]},
+
+{id:'prog',label:'Programming',modules:[
+{title:'Programming language fundamentals',badge:'must',note:'Step 1 of programming — types and memory before anything else.',keywords:[
+'Variable','Data type','Primitive type','Reference type',
+'Integer overflow','Integer underflow','Signed integer','Unsigned integer',
+'Floating point','Double precision','Type casting','Type conversion',
+'Scope','Lifetime',
+'Stack memory','Heap memory','Static memory','Memory layout',
+'Pointer','Pointer arithmetic','Null pointer','Dangling pointer',
+'Pass by value','Pass by reference','Pass by pointer']},
+{title:'Control flow & functions',badge:'must',note:'Study after language fundamentals — control flow is what turns types into logic.',keywords:[
+'Conditional statement','Ternary operator',
+'Loop (for / while / do-while)','Break','Continue','Nested loop',
+'Function','Return value',
+'Recursion','Base case','Recursive case',
+'Call stack','Stack overflow (recursion)',
+'Tail recursion','Tail call optimization',
+'Higher-order function','Lambda function','Closure','Inline function']},
+{title:'Object-oriented concepts',badge:'core',note:'Study after control flow — OOP lets you package data structures cleanly.',keywords:[
+'Class','Object','Encapsulation','Abstraction',
+'Inheritance','Polymorphism','Interface','Abstract class',
+'Constructor','Destructor','Static method','Instance method',
+'Overloading','Overriding','Access modifiers',
+'Generic (template)','Comparable interface','Comparator interface','Iterator pattern']},
+{title:'Memory & pointers',badge:'must',note:'Study after OOP — this deepens your understanding of what happens under the hood when data structures allocate nodes.',keywords:[
+'Stack allocation','Heap allocation','Dynamic memory allocation',
+'malloc / free (C)','new / delete (C++)','Garbage collection','Reference counting',
+'Smart pointer','Unique pointer','Shared pointer',
+'Memory leak','Shallow copy','Deep copy',
+'Contiguous memory','Non-contiguous memory','Virtual memory',
+'Cache locality','Cache hit','Cache miss','Spatial locality','Temporal locality']}
+]},
+
+{id:'discrete',label:'Discrete Math',modules:[
+{title:'Logic & proofs',badge:'core',note:'Start here — logic is the language of correctness proofs and loop invariants.',keywords:[
+'Proposition','Predicate','Boolean logic','Truth table',
+'Logical AND / OR / NOT','Implication','Biconditional',
+'Contrapositive','Converse','Inverse','De Morgan\'s laws',
+'Proof by induction','Strong induction',
+'Proof by contradiction','Proof by contrapositive','Direct proof','Loop invariant']},
+{title:'Set theory',badge:'core',note:'Study after logic — sets give you the vocabulary for union-find, hash sets, and graph partitions.',keywords:[
+'Set','Subset','Superset','Intersection','Union','Difference','Complement',
+'Cartesian product','Power set','Disjoint sets','Multiset (bag)',
+'Partition','Equivalence relation','Equivalence class',
+'Partial order','Total order','Lattice']},
+{title:'Graph theory basics',badge:'must',note:'Study after sets — graphs are sets of vertices and edges, so set vocabulary comes first.',keywords:[
+'Vertex (node)','Edge (arc)',
+'Directed graph (digraph)','Undirected graph','Weighted graph','Unweighted graph',
+'Simple graph','Multigraph','Pseudograph',
+'Adjacent vertices','Degree','In-degree','Out-degree',
+'Path','Simple path','Cycle','Simple cycle','Walk','Trail',
+'Connected graph','Strongly connected','Weakly connected',
+'Bridge','Articulation point','Bipartite graph',
+'Complete graph','Planar graph',
+'Tree (graph theory)','Forest','Spanning tree','Minimum spanning tree',
+'DAG (Directed Acyclic Graph)','Topological order',
+'Euler path','Euler circuit','Hamiltonian path','Hamiltonian cycle',
+'Graph isomorphism','Graph density',
+'Adjacency matrix','Adjacency list','Incidence matrix','Edge list']}
+]},
+
+{id:'ds',label:'DS Theory',modules:[
+{title:'Abstract Data Type (ADT)',badge:'must',note:'Study first — the ADT/implementation distinction is the conceptual foundation every other structure rests on.',keywords:[
+'Abstract Data Type (ADT)','Data structure','Interface vs implementation','Concrete data structure',
+'Mutable vs immutable','Static vs dynamic structure',
+'Linear data structure','Non-linear data structure',
+'Homogeneous structure','Heterogeneous structure']},
+{title:'Array theory',badge:'must',note:'Study second — arrays are the implementation substrate for stacks, queues, heaps, and hash tables.',keywords:[
+'Zero-based indexing','One-based indexing',
+'Row-major order','Column-major order','Stride',
+'Contiguous allocation','Static array','Dynamic array',
+'Amortized O(1) append','Resizing factor',
+'Multi-dimensional array','Jagged array','Array slice','Sparse array','Bit array (bitset)']},
+{title:'Linked list theory',badge:'must',note:'Study after arrays — linked lists introduce non-contiguous memory and pointer chasing.',keywords:[
+'Singly linked list','Doubly linked list','Circular linked list','Circular doubly linked list',
+'Head pointer','Tail pointer','Sentinel node','Dummy node','Node allocation',
+'Runner technique','Floyd\'s cycle detection','Tortoise and hare algorithm',
+'XOR linked list','Skip list','Self-organising list']},
+{title:'Stack & queue theory',badge:'must',note:'Study after linked lists — stacks and queues are often implemented on top of arrays or linked lists.',keywords:[
+'Stack (LIFO)','Queue (FIFO)','Deque (double-ended queue)',
+'Priority queue','Circular queue','Monotonic stack','Monotonic queue',
+'Auxiliary stack','Two-stack queue simulation',
+'Call stack','Activation record','Stack frame','Undo / redo stack',
+'Expression stack','Postfix expression','Infix expression','Prefix expression','Shunting-yard algorithm']},
+{title:'Tree theory',badge:'must',note:'Study after stacks/queues — trees are recursive structures and DFS uses a stack internally.',keywords:[
+'Root','Leaf','Internal node','Parent','Child','Sibling','Ancestor','Descendant',
+'Depth','Height','Level','Degree of node','Degree of tree','Subtree',
+'Binary tree','Full binary tree','Complete binary tree','Perfect binary tree',
+'Balanced binary tree','Degenerate (skewed) tree',
+'Binary Search Tree (BST)','AVL tree','Red-Black tree','Splay tree','Treap',
+'B-tree','B+ tree','B* tree','2-3 tree',
+'Heap (tree)','Min-heap','Max-heap',
+'Segment tree','Fenwick tree (BIT)','Trie (prefix tree)',
+'Suffix tree','Suffix array',
+'Euler tour','Heavy-Light Decomposition','Centroid decomposition',
+'DFS tree','BFS tree','Spanning tree',
+'In-order traversal','Pre-order traversal','Post-order traversal',
+'Level-order traversal','Morris traversal','Threaded binary tree']},
+{title:'Hashing theory',badge:'must',note:'Study after trees — hash maps are used in half of all DSA solutions and often combined with tree structures.',keywords:[
+'Hash function','Hash table','Hash map','Hash set','Key-value pair','Load factor',
+'Collision','Collision resolution',
+'Chaining (separate chaining)','Open addressing',
+'Linear probing','Quadratic probing','Double hashing',
+'Robin Hood hashing','Cuckoo hashing','Rehashing',
+'Rolling hash','Polynomial rolling hash','Rabin-Karp hash',
+'Perfect hashing','Universal hashing','Consistent hashing','Bloom filter']},
+{title:'Heap theory',badge:'must',note:'Study after hashing — heaps are specialised trees and build on the tree vocabulary.',keywords:[
+'Binary heap','Min-heap property','Max-heap property',
+'Heapify','Build-heap','Heap sort',
+'Extract-min / Extract-max','Decrease-key','Increase-key','Lazy deletion',
+'Fibonacci heap','Binomial heap','Leftist heap','Skew heap','Pairing heap',
+'D-ary heap','Indexed priority queue']},
+{title:'Graph data structure',badge:'must',note:'Study last in DS theory — graphs depend on every structure before: arrays, linked lists, and queues for BFS.',keywords:[
+'Adjacency matrix representation','Adjacency list representation','Edge list representation',
+'Implicit graph','Sparse graph','Dense graph','Weighted adjacency list',
+'Union-Find (Disjoint Set Union)','Path compression',
+'Union by rank','Union by size','Inverse Ackermann function']}
+]},
+
+{id:'algo',label:'Algo Theory',modules:[
+{title:'Searching',badge:'must',note:'Study first — binary search is the most-used non-trivial algorithm in interviews and appears inside almost every other algorithm.',keywords:[
+'Linear search','Binary search','Binary search on answer','Ternary search',
+'Exponential search','Interpolation search','Jump search','Fibonacci search',
+'Lower bound','Upper bound','Equal range',
+'Predicate binary search','Rotated array binary search']},
+{title:'Sorting',badge:'must',note:'Study after searching — sorting is a prerequisite for two-pointer, greedy, and many graph algorithms.',keywords:[
+'Bubble sort','Selection sort','Insertion sort','Shell sort',
+'Merge sort','Quick sort','Heap sort',
+'Counting sort','Radix sort','Bucket sort',
+'Tim sort','Intro sort','Patience sort','Cycle sort','Pancake sort',
+'Stable sort','Unstable sort','In-place sort','External sort',
+'Comparison sort','Non-comparison sort',
+'Sorting lower bound Ω(n log n)',
+'Lomuto partition','Hoare partition','Median-of-three pivot',
+'Three-way partition (Dutch national flag)']},
+{title:'Recursion & backtracking',badge:'must',note:'Study after sorting — recursion is the engine of divide-and-conquer and the gateway to DP.',keywords:[
+'Recursion','Mutual recursion','Memoization','Top-down DP','Bottom-up DP',
+'Backtracking','State space tree','Pruning',
+'Constraint satisfaction problem',
+'N-Queens problem','Sudoku solver',
+'Subset generation','Permutation generation','Combination generation',
+'Power set generation','Choice-explore-unchoose pattern']},
+{title:'Greedy algorithms',badge:'must',note:'Study after recursion — greedy is the simplest optimisation paradigm and sets up the contrast with DP.',keywords:[
+'Greedy choice property','Optimal substructure','Exchange argument',
+'Activity selection problem','Fractional knapsack','Huffman coding',
+'Interval scheduling maximization','Interval partitioning','Greedy graph colouring',
+'Prim\'s algorithm (greedy view)','Kruskal\'s algorithm (greedy view)',
+'Dijkstra\'s algorithm (greedy view)','Matroid','Greedy stays ahead proof']},
+{title:'Dynamic programming theory',badge:'must',note:'Study after greedy — DP is the harder optimisation paradigm and builds on memoization from the recursion module.',keywords:[
+'Optimal substructure','Overlapping subproblems',
+'Memoization','Tabulation','State','Transition','Base case',
+'DP on sequences','DP on strings','DP on trees','DP on grids',
+'Interval DP','Subset DP','Bitmask DP','Digit DP','Profile DP',
+'DP with divide and conquer optimisation','Knuth-Yao optimisation',
+'Convex hull trick','Monotone queue optimisation',
+'Longest Common Subsequence','Longest Increasing Subsequence',
+'Edit distance','0/1 Knapsack','Unbounded knapsack','Matrix chain multiplication']},
+{title:'Graph algorithms theory',badge:'must',note:'Study after DP — graph algorithms combine every technique: BFS/DFS use queues/stacks, shortest paths use greedy, and some use DP.',keywords:[
+'Depth-First Search (DFS)','Breadth-First Search (BFS)',
+'Multi-source BFS','Bidirectional BFS','Iterative DFS',
+'DFS timestamps','Discovery time','Finish time',
+'DFS tree edges','Back edge','Forward edge','Cross edge',
+'Topological sort (DFS)','Topological sort (Kahn\'s BFS)',
+'Cycle detection (directed)','Cycle detection (undirected)',
+'Connected components','Strongly Connected Components (SCC)',
+'Kosaraju\'s algorithm','Tarjan\'s SCC algorithm',
+'Tarjan\'s bridge algorithm','Tarjan\'s articulation point algorithm',
+'Biconnected components',
+'Dijkstra\'s algorithm','Bellman-Ford algorithm',
+'SPFA (Shortest Path Faster Algorithm)','Floyd-Warshall algorithm',
+'Johnson\'s algorithm','A* search','Bidirectional Dijkstra',
+'Prim\'s algorithm (MST)','Kruskal\'s algorithm (MST)','Borůvka\'s algorithm',
+'Steiner tree','Euler path algorithm (Hierholzer)',
+'Hamiltonian path (backtracking)',
+'Maximum flow (Ford-Fulkerson)','Edmonds-Karp algorithm','Dinic\'s algorithm',
+'Bipartite matching','Hungarian algorithm','Stable matching (Gale-Shapley)']},
+{title:'String algorithms',badge:'core',note:'Study after graph algorithms — string matching borrows DFA/automaton ideas from graph theory.',keywords:[
+'Naive string matching',
+'KMP (Knuth-Morris-Pratt)','Failure function (KMP)',
+'Z-algorithm','Z-array','Rabin-Karp','Boyer-Moore','Aho-Corasick',
+'Suffix array','Suffix array construction (SA-IS)',
+'LCP array','Kasai\'s algorithm','Suffix automaton',
+'Palindrome (Manacher\'s algorithm)','Eertree (palindromic tree)',
+'Lyndon word','Booth\'s algorithm']},
+{title:'Advanced data structures',badge:'deep',note:'Study last — these are built on every concept above and appear only in competitive programming or senior interviews.',keywords:[
+'Segment tree (point update range query)','Segment tree (range update range query)',
+'Lazy propagation','Persistent segment tree','Merge sort tree',
+'Fenwick tree (BIT)','2D BIT',
+'Sparse table (RMQ)','Disjoint Sparse Table','Square root decomposition',
+'Mo\'s algorithm','Heavy-Light Decomposition (HLD)','Centroid decomposition',
+'Link-Cut tree','Euler tour tree','Van Emde Boas tree',
+'Order statistics tree (policy-based)','Skip list','Treap','Splay tree',
+'K-D tree','Interval tree','Segment tree beats','Chtholly tree (ODT)']}
+]}
 ];
 
-const sqlMods=[
-  {num:"01",lv:"beginner",ll:"Beginner",title:"Introduction to Databases & RDBMS",tag:"Understanding the relational model and where SQL fits in modern software",c:["Data vs information — definitions and distinctions","DBMS vs RDBMS — key differences","Types of databases: relational, NoSQL, NewSQL","Database architecture: 1-tier, 2-tier, 3-tier","Client-server model overview"],s:["Real-world use cases for relational databases","Popular RDBMS: SQL Server, PostgreSQL, MySQL, Oracle","ANSI SQL standard and vendor extensions","Database objects overview: tables, views, indexes, procedures"],t:["SQL Server","PostgreSQL","MySQL","Oracle DB"],r:"Every backend system stores data. Understanding the relational model prevents the most common schema anti-patterns from day one."},
-  {num:"02",lv:"beginner",ll:"Beginner",title:"Installation, Tools & Environment Setup",tag:"Setting up a professional SQL development workspace",c:["Installing SQL Server / PostgreSQL / MySQL","GUI tools: SSMS, pgAdmin, MySQL Workbench","Connecting to local and remote database servers","Creating your first database and schemas","Understanding SQL execution environments"],s:["SSMS interface walkthrough","pgAdmin dashboard and query tool","MySQL Workbench schema designer","Using DBeaver as a universal SQL client","VS Code SQL extensions"],t:["SSMS","pgAdmin 4","MySQL Workbench","DBeaver","VS Code SQL Tools"],r:"Tool fluency multiplies productivity. Engineers who master their SQL client discover and fix data issues 3x faster."},
-  {num:"03",lv:"beginner",ll:"Beginner",title:"SQL Language Categories & Data Types",tag:"The five pillars of SQL and how data is stored at the type level",c:["DDL — CREATE, ALTER, DROP","DML — INSERT, UPDATE, DELETE","DQL — SELECT","TCL — COMMIT, ROLLBACK, SAVEPOINT","DCL — GRANT, REVOKE"],s:["Numeric types: INT, BIGINT, DECIMAL, FLOAT","String types: CHAR, VARCHAR, TEXT, NVARCHAR","Date/time types: DATE, TIME, DATETIME, TIMESTAMP","Boolean and binary types","NULL semantics and storage implications"],t:["SQL Server T-SQL","PostgreSQL PL/pgSQL","MySQL SQL"],r:"Choosing the wrong data type causes silent data loss and performance degradation at scale."},
-  {num:"04",lv:"beginner",ll:"Beginner",title:"Tables, Schemas & CRUD Operations",tag:"Creating database objects and performing fundamental data operations",c:["CREATE TABLE syntax and column definitions","Schemas as namespace containers","INSERT — single and multi-row inserts","UPDATE with WHERE clause and safe practices","DELETE vs TRUNCATE vs DROP"],s:["ALTER TABLE — adding, modifying, dropping columns","Table naming conventions and best practices","Bulk INSERT from CSV / external file","Upsert patterns: MERGE / INSERT ON CONFLICT","Soft delete pattern vs hard delete"],t:["CREATE TABLE","ALTER TABLE","INSERT INTO","UPDATE","DELETE","TRUNCATE"],r:"CRUD is the DNA of every application. Safe UPDATE and DELETE practices prevent catastrophic data loss in production."},
-  {num:"05",lv:"beginner",ll:"Beginner",title:"Constraints & Keys",tag:"Enforcing data integrity at the database layer",c:["PRIMARY KEY — single column and composite","FOREIGN KEY and referential integrity","UNIQUE constraint — column and multi-column","CHECK constraint for business rules","DEFAULT constraint and NULL vs NOT NULL"],s:["Composite primary keys — when and why","ON DELETE CASCADE / SET NULL / RESTRICT","Constraint naming conventions","Deferrable constraints in PostgreSQL","Adding constraints to existing tables"],t:["PRIMARY KEY","FOREIGN KEY","UNIQUE","CHECK","DEFAULT","NOT NULL"],r:"Constraints are the last line of defence before corrupt data enters the database."},
-  {num:"06",lv:"intermediate",ll:"Intermediate",title:"Querying Data — SELECT Deep Dive",tag:"Mastering the SELECT statement from basic retrieval to complex filtering",c:["SELECT, FROM, WHERE — the core trio","DISTINCT and duplicate elimination","ORDER BY — ASC/DESC, multi-column sorting","LIMIT / TOP / FETCH NEXT — pagination","Column aliases and expression columns"],s:["LIKE — wildcard patterns: %, _","IN and NOT IN — list filtering","BETWEEN — range filtering","IS NULL / IS NOT NULL","CASE WHEN — inline conditional logic"],t:["SELECT","WHERE","ORDER BY","LIKE","IN","BETWEEN","CASE WHEN"],r:"95% of database work is reading data. A developer who writes efficient SELECT queries reduces application response time measurably."},
-  {num:"07",lv:"intermediate",ll:"Intermediate",title:"Aggregate Functions, GROUP BY & HAVING",tag:"Summarising and analysing data across groups",c:["COUNT, SUM, AVG, MIN, MAX","GROUP BY — grouping rows into sets","HAVING — filtering aggregated groups","Difference between WHERE and HAVING","Aggregate with NULL values — behaviour"],s:["GROUP BY multiple columns","COUNT(*) vs COUNT(column)","Rollup and CUBE for multi-level aggregation","GROUPING SETS","Aggregate expressions in SELECT"],t:["GROUP BY","HAVING","COUNT","SUM","AVG","ROLLUP","CUBE"],r:"Reporting, dashboards, and analytics all run on aggregate queries. These are the most common SQL questions in data engineering interviews."},
-  {num:"08",lv:"intermediate",ll:"Intermediate",title:"Built-in Functions — String, Numeric & Date",tag:"Transforming and manipulating data values inside SQL",c:["String: LEN, UPPER, LOWER, TRIM, REPLACE, CONCAT, SUBSTRING","Numeric: ROUND, FLOOR, CEILING, ABS, POWER","Date/time: GETDATE/NOW, DATEADD, DATEDIFF, FORMAT, EXTRACT","Conversion: CAST, CONVERT, TRY_CAST","NULL handling: ISNULL, COALESCE, NULLIF"],s:["String padding: LPAD, RPAD, REPLICATE","CHARINDEX / POSITION for string search","Date truncation strategies","Working with time zones","FORMAT function for display formatting"],t:["SUBSTRING","COALESCE","DATEADD","DATEDIFF","CAST","CONVERT","FORMAT"],r:"Real-world data is messy. These functions are used in virtually every ETL pipeline and report query."},
-  {num:"09",lv:"intermediate",ll:"Intermediate",title:"Joins & Subqueries",tag:"Combining data across multiple tables — the heart of relational SQL",c:["INNER JOIN — matching rows only","LEFT JOIN / RIGHT JOIN — including unmatched rows","FULL OUTER JOIN — all rows from both sides","CROSS JOIN — cartesian products","SELF JOIN — joining a table to itself"],s:["Multi-table joins (3+ tables)","Subqueries in WHERE, FROM, and SELECT clauses","Correlated subqueries and performance implications","EXISTS vs IN — semantic and performance differences","ANTI JOIN pattern"],t:["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL JOIN","CROSS JOIN","EXISTS","IN"],r:"Joins are the #1 SQL concept tested in backend and data engineering interviews."},
-  {num:"10",lv:"intermediate",ll:"Intermediate",title:"Views & Indexes",tag:"Abstracting queries and accelerating read performance",c:["Creating and querying views","Updatable vs read-only views","Materialised views and refresh strategies","Clustered vs non-clustered indexes","Composite indexes and column order rules"],s:["Covering indexes and included columns","Filtered indexes for partial data","Index selectivity and cardinality","When NOT to add indexes","Rebuilding and reorganising fragmented indexes"],t:["CREATE VIEW","CREATE INDEX","sys.indexes","EXPLAIN / EXECUTION PLAN","pg_stat_user_indexes"],r:"A missing index on a 10M-row table can turn a 10ms query into a 30-second timeout."},
-  {num:"11",lv:"advanced",ll:"Advanced",title:"Stored Procedures & User-Defined Functions",tag:"Encapsulating business logic inside the database engine",c:["Creating and executing stored procedures","INPUT and OUTPUT parameters","Error handling inside procedures","Scalar UDFs — returning a single value","Table-valued functions — returning result sets"],s:["SP vs function — when to use each","Inline vs multi-statement table-valued functions","Dynamic SQL with EXEC / sp_executesql","Recompilation and parameter sniffing","Procedure ownership chaining for security"],t:["CREATE PROCEDURE","CREATE FUNCTION","EXEC","sp_executesql","OUTPUT parameter"],r:"Stored procedures are standard in enterprise systems for performance, security, and code reuse."},
-  {num:"12",lv:"advanced",ll:"Advanced",title:"Triggers",tag:"Automating database actions in response to data events",c:["DML triggers — AFTER INSERT, UPDATE, DELETE","INSTEAD OF triggers — overriding default behaviour","Accessing inserted and deleted virtual tables","DDL triggers — tracking schema changes","Logon triggers — session-level control"],s:["Audit log pattern using triggers","Preventing invalid data changes with INSTEAD OF","Recursive trigger behaviour and prevention","Performance impact of triggers","Disabling and enabling triggers"],t:["CREATE TRIGGER","INSERTED table","DELETED table","AFTER","INSTEAD OF"],r:"Audit trails, data change logging, and enforcing cross-table rules are real enterprise requirements solved cleanly with triggers."},
-  {num:"13",lv:"advanced",ll:"Advanced",title:"Transactions, ACID & Error Handling",tag:"Guaranteeing data consistency under concurrent and failure conditions",c:["ACID properties: Atomicity, Consistency, Isolation, Durability","BEGIN TRANSACTION, COMMIT, ROLLBACK","Implicit vs explicit transactions","SAVEPOINT and nested transactions","TRY-CATCH / EXCEPTION blocks"],s:["Transaction isolation levels: READ UNCOMMITTED → SERIALIZABLE","Dirty reads, phantom reads, non-repeatable reads","Deadlock causes, detection, and prevention","XACT_ABORT and error propagation","Raising custom errors: RAISERROR / THROW"],t:["BEGIN TRAN","COMMIT","ROLLBACK","TRY...CATCH","SET ISOLATION LEVEL","THROW"],r:"Financial systems, order processing, and inventory management require transactions. Incorrect isolation causes real monetary loss."},
-  {num:"14",lv:"advanced",ll:"Advanced",title:"Database Design & Normalization",tag:"Designing schemas that scale, perform, and survive requirement changes",c:["First Normal Form (1NF) — atomicity and uniqueness","Second Normal Form (2NF) — full functional dependency","Third Normal Form (3NF) — transitive dependency removal","Boyce-Codd Normal Form (BCNF)","Denormalization — when and why to break rules"],s:["Entity-Relationship (ER) diagram notation","Identifying entities, attributes, and relationships","One-to-one, one-to-many, many-to-many modelling","Junction/bridge tables for M:N relationships","Real-world schema design walkthrough: e-commerce"],t:["ER diagram tools","draw.io","Lucidchart","dbdiagram.io","MySQL Workbench EER"],r:"Poor schema design is the root cause of the majority of performance and data quality problems in production systems."},
-  {num:"15",lv:"enterprise",ll:"Enterprise",title:"Advanced Query Techniques — CTEs, Window Functions & Temp Tables",tag:"Enterprise-grade querying patterns for complex analytical and hierarchical data",c:["Common Table Expressions (CTEs) — WITH clause","Recursive CTEs for hierarchical data","Window functions: ROW_NUMBER, RANK, DENSE_RANK","Analytic functions: LAG, LEAD, FIRST_VALUE, LAST_VALUE","PARTITION BY and OVER clause deep dive"],s:["Running totals and moving averages","NTILE for data bucketing","Temporary tables: local (#) vs global (##)","Table variables — scope and performance","PIVOT and UNPIVOT for data reshaping"],t:["WITH (CTE)","ROW_NUMBER()","RANK()","LAG()","LEAD()","#TempTable","@TableVar"],r:"CTEs and window functions are standard in data engineering, business intelligence, and senior backend roles."},
-  {num:"16",lv:"enterprise",ll:"Enterprise",title:"Security, Permissions & SQL Injection",tag:"Protecting database assets from both internal misuse and external attack",c:["Authentication: Windows vs SQL Server authentication","Users, logins, and schemas","Roles: fixed server roles, fixed database roles","GRANT, DENY, REVOKE — permission layering","Row-Level Security (RLS)"],s:["Principle of least privilege in practice","SQL injection mechanics — UNION, blind, time-based","Parameterised queries and prepared statements","Dynamic SQL safety with sp_executesql","Auditing with SQL Server Audit / pgAudit"],t:["GRANT","DENY","REVOKE","sp_executesql","RLS","SQL Server Audit","pgAudit"],r:"SQL injection remains in OWASP Top 10. Backend engineers are responsible for parameterising every query."},
-  {num:"17",lv:"enterprise",ll:"Enterprise",title:"Performance Tuning, Backup & Enterprise Operations",tag:"Keeping production databases fast, available, and recoverable",c:["Reading and interpreting execution plans","Index tuning — identifying missing and unused indexes","Statistics and cardinality estimation","Query rewriting for performance","Backup types: full, differential, transaction log"],s:["Restore strategies: point-in-time recovery","SQL Server Agent / pg_cron for scheduled jobs","ETL basics: Extract, Transform, Load","SSIS overview / pgloader / custom ETL scripts","Maintenance plans: index rebuild, stats update, integrity check"],t:["Execution Plan viewer","Query Store","SQL Server Agent","SSIS","pg_cron","pgBadger"],r:"Production DBA and senior backend roles require ownership of performance and uptime. A slow query or failed backup is a business-critical incident."}
-];
+const learned={};
+let globalSeq={};
+let gNum=1;
 
-const dsaMods=[
-  {num:"01",diff:"easy",meta:"Week 1 · Foundation",title:"Java Fundamentals for DSA",topics:["Primitive types, wrappers, autoboxing","Arrays: declaration, initialization, multi-dimensional","Strings: immutability, StringBuilder, String methods","Loops, conditionals, switch expressions","Methods, recursion basics, stack frames","Big-O notation: time & space complexity","Java Collections overview: List, Set, Map, Deque","Comparable vs Comparator, sorting with lambdas"],problems:[{name:"Two Sum",src:"lc",diff:"easy",num:"#1"},{name:"Reverse a String",src:"gfg",diff:"easy"},{name:"Check Palindrome",src:"lc",diff:"easy",num:"#125"},{name:"Factorial using recursion",src:"gfg",diff:"easy"},{name:"Missing Number",src:"lc",diff:"easy",num:"#268"},{name:"Single Number",src:"lc",diff:"easy",num:"#136"}]},
-  {num:"02",diff:"easy",meta:"Week 2 · Core",title:"Arrays & Prefix Sums",topics:["Array traversal patterns: single pass, two pass","Prefix sum arrays and range sum queries","Difference arrays for range updates","Kadane's algorithm for max subarray","Dutch National Flag / 3-way partitioning","Sliding window technique (fixed & variable size)","Frequency counting using arrays and maps"],problems:[{name:"Best Time to Buy and Sell Stock",src:"lc",diff:"easy",num:"#121"},{name:"Maximum Subarray (Kadane's)",src:"lc",diff:"med",num:"#53"},{name:"Product of Array Except Self",src:"lc",diff:"med",num:"#238"},{name:"Trapping Rain Water",src:"lc",diff:"hard",num:"#42"},{name:"Sort Colors (Dutch Flag)",src:"lc",diff:"med",num:"#75"},{name:"Subarray Sum Equals K",src:"lc",diff:"med",num:"#560"}]},
-  {num:"03",diff:"med",meta:"Week 2–3 · Core",title:"Searching & Sorting",topics:["Linear search, binary search on sorted array","Binary search on answer space (parametric)","Merge sort — divide and conquer paradigm","Quick sort — partitioning, pivot strategies","Counting sort, radix sort for bounded integers","Search in rotated array, finding peaks"],problems:[{name:"Binary Search",src:"lc",diff:"easy",num:"#704"},{name:"Search in Rotated Sorted Array",src:"lc",diff:"med",num:"#33"},{name:"Kth Largest Element in Array",src:"lc",diff:"med",num:"#215"},{name:"Merge Intervals",src:"lc",diff:"med",num:"#56"},{name:"Aggressive Cows (Binary on Answer)",src:"gfg",diff:"hard"},{name:"Median of Two Sorted Arrays",src:"lc",diff:"hard",num:"#4"}]},
-  {num:"04",diff:"med",meta:"Week 3 · Pattern",title:"Two Pointers & Sliding Window",topics:["Two pointer technique: opposite ends, same direction","Fast and slow pointers (Floyd's cycle detection)","Fixed-size sliding window problems","Variable-size sliding window with frequency map","At-most K distinct characters pattern","Minimum window substring approach"],problems:[{name:"3Sum",src:"lc",diff:"med",num:"#15"},{name:"Container With Most Water",src:"lc",diff:"med",num:"#11"},{name:"Longest Substring Without Repeating",src:"lc",diff:"med",num:"#3"},{name:"Minimum Window Substring",src:"lc",diff:"hard",num:"#76"},{name:"Fruit Into Baskets",src:"lc",diff:"med",num:"#904"},{name:"Longest Repeating Character Replacement",src:"lc",diff:"med",num:"#424"}]},
-  {num:"05",diff:"med",meta:"Week 3–4 · Core",title:"Hashing & Maps",topics:["HashMap, LinkedHashMap, TreeMap in Java","HashSet, LinkedHashSet, TreeSet","Collision handling: chaining, open addressing","Frequency maps for counting problems","Anagram grouping, character frequency patterns","Sliding window + hashmap composite problems"],problems:[{name:"Group Anagrams",src:"lc",diff:"med",num:"#49"},{name:"Top K Frequent Elements",src:"lc",diff:"med",num:"#347"},{name:"Longest Consecutive Sequence",src:"lc",diff:"med",num:"#128"},{name:"Subarray with 0 sum",src:"gfg",diff:"med"},{name:"Isomorphic Strings",src:"lc",diff:"easy",num:"#205"}]},
-  {num:"06",diff:"med",meta:"Week 4–5 · Core",title:"Linked Lists",topics:["Singly, doubly, circular linked list implementation in Java","Insertion, deletion at head/tail/position","Reversal: iterative and recursive","Floyd's cycle detection and finding cycle entry","Merge two sorted lists","LRU Cache design using LinkedHashMap"],problems:[{name:"Reverse Linked List",src:"lc",diff:"easy",num:"#206"},{name:"Linked List Cycle",src:"lc",diff:"easy",num:"#141"},{name:"Reverse Nodes in k-Group",src:"lc",diff:"hard",num:"#25"},{name:"Merge K Sorted Lists",src:"lc",diff:"hard",num:"#23"},{name:"LRU Cache",src:"lc",diff:"med",num:"#146"},{name:"Clone a Linked List with Random Pointer",src:"lc",diff:"med",num:"#138"}]},
-  {num:"07",diff:"med",meta:"Week 5 · Core",title:"Stacks & Queues",topics:["Stack using array and LinkedList in Java","Queue, Deque, ArrayDeque, PriorityQueue","Monotonic stack: next greater, previous smaller","Min stack, special stack designs","Balanced parentheses and expression evaluation","BFS using queues"],problems:[{name:"Valid Parentheses",src:"lc",diff:"easy",num:"#20"},{name:"Min Stack",src:"lc",diff:"med",num:"#155"},{name:"Daily Temperatures (Monotonic)",src:"lc",diff:"med",num:"#739"},{name:"Largest Rectangle in Histogram",src:"lc",diff:"hard",num:"#84"},{name:"Sliding Window Maximum",src:"lc",diff:"hard",num:"#239"},{name:"Decode String",src:"lc",diff:"med",num:"#394"}]},
-  {num:"08",diff:"med",meta:"Week 6–7 · Core",title:"Trees — Binary Trees",topics:["Tree node structure in Java, tree construction","DFS traversals: inorder, preorder, postorder","BFS level-order traversal using queue","Height, diameter, balanced check","Lowest Common Ancestor (LCA)","Views: left, right, top, bottom view","Serialize and deserialize binary trees"],problems:[{name:"Maximum Depth of Binary Tree",src:"lc",diff:"easy",num:"#104"},{name:"Binary Tree Level Order Traversal",src:"lc",diff:"med",num:"#102"},{name:"Diameter of Binary Tree",src:"lc",diff:"easy",num:"#543"},{name:"Lowest Common Ancestor",src:"lc",diff:"med",num:"#236"},{name:"Binary Tree Maximum Path Sum",src:"lc",diff:"hard",num:"#124"},{name:"Serialize and Deserialize Binary Tree",src:"lc",diff:"hard",num:"#297"}]},
-  {num:"09",diff:"med",meta:"Week 7 · Core",title:"Binary Search Trees",topics:["BST property, insert, delete, search","Inorder of BST gives sorted output","Validate BST, floor and ceil operations","K-th smallest/largest in BST","BST from preorder traversal","Self-balancing trees: AVL, Red-Black (concept)"],problems:[{name:"Validate Binary Search Tree",src:"lc",diff:"med",num:"#98"},{name:"Kth Smallest in BST",src:"lc",diff:"med",num:"#230"},{name:"Convert Sorted Array to BST",src:"lc",diff:"easy",num:"#108"},{name:"Delete Node in BST",src:"lc",diff:"med",num:"#450"},{name:"Floor in BST",src:"gfg",diff:"med"}]},
-  {num:"10",diff:"med",meta:"Week 8 · Core",title:"Heaps & Priority Queues",topics:["Heap property: min-heap, max-heap","PriorityQueue in Java — custom comparators","Heapify, insert, extract-min/max","Kth largest/smallest using heap","Merge K sorted arrays/lists","Running median with two heaps"],problems:[{name:"Kth Largest Element in a Stream",src:"lc",diff:"easy",num:"#703"},{name:"Find Median from Data Stream",src:"lc",diff:"hard",num:"#295"},{name:"Merge K Sorted Lists",src:"lc",diff:"hard",num:"#23"},{name:"Task Scheduler",src:"lc",diff:"med",num:"#621"},{name:"K Closest Points to Origin",src:"lc",diff:"med",num:"#973"}]},
-  {num:"11",diff:"med",meta:"Week 8–9 · Intermediate",title:"Tries & Advanced String Structures",topics:["Trie node structure and Java implementation","Insert, search, startsWith operations","Count of strings with prefix","Longest common prefix using Trie","Word dictionary with wildcard search","KMP pattern matching algorithm","Rabin-Karp rolling hash"],problems:[{name:"Implement Trie (Prefix Tree)",src:"lc",diff:"med",num:"#208"},{name:"Word Search II (Trie + Backtrack)",src:"lc",diff:"hard",num:"#212"},{name:"Design Add and Search Words",src:"lc",diff:"med",num:"#211"},{name:"Maximum XOR of Two Numbers (Trie)",src:"lc",diff:"med",num:"#421"},{name:"Phone Directory",src:"gfg",diff:"hard"}]},
-  {num:"12",diff:"med",meta:"Week 9–10 · Intermediate",title:"Graphs — Traversals & Core Algorithms",topics:["Graph representation: adjacency matrix, list, edge list","BFS — shortest path in unweighted graphs","DFS — connected components, cycle detection","Topological sorting: DFS-based and Kahn's BFS","Bipartite graph check","Flood fill and grid BFS patterns"],problems:[{name:"Number of Islands",src:"lc",diff:"med",num:"#200"},{name:"Course Schedule (Topo Sort)",src:"lc",diff:"med",num:"#207"},{name:"Rotting Oranges (Multi-source BFS)",src:"lc",diff:"med",num:"#994"},{name:"Word Ladder (BFS)",src:"lc",diff:"hard",num:"#127"},{name:"Alien Dictionary (Topo Sort)",src:"lc",diff:"hard",num:"#269"}]},
-  {num:"13",diff:"hard",meta:"Week 10–11 · Intermediate",title:"Shortest Paths & MST",topics:["Dijkstra's algorithm using PriorityQueue","Bellman-Ford for negative weight graphs","Floyd-Warshall all-pairs shortest path","Minimum Spanning Tree: Kruskal's (Union-Find)","Disjoint Set Union (DSU) with path compression","Bridges and articulation points (Tarjan's)"],problems:[{name:"Network Delay Time (Dijkstra)",src:"lc",diff:"med",num:"#743"},{name:"Cheapest Flights Within K Stops",src:"lc",diff:"med",num:"#787"},{name:"Minimum Cost to Connect All Points (MST)",src:"lc",diff:"med",num:"#1584"},{name:"Accounts Merge (DSU)",src:"lc",diff:"med",num:"#721"},{name:"Critical Connections (Bridges)",src:"lc",diff:"hard",num:"#1192"}]},
-  {num:"14",diff:"hard",meta:"Week 11–12 · Intermediate",title:"Recursion & Backtracking",topics:["Recursion tree analysis and base cases","Backtracking template: choose, explore, undo","Permutations and combinations generation","Subsets (power set) with and without duplicates","N-Queens, Sudoku solver patterns","Palindrome partitioning","Pruning strategies to reduce time complexity"],problems:[{name:"Subsets",src:"lc",diff:"med",num:"#78"},{name:"Permutations",src:"lc",diff:"med",num:"#46"},{name:"Combination Sum",src:"lc",diff:"med",num:"#39"},{name:"N-Queens",src:"lc",diff:"hard",num:"#51"},{name:"Sudoku Solver",src:"lc",diff:"hard",num:"#37"},{name:"Palindrome Partitioning",src:"lc",diff:"med",num:"#131"}]},
-  {num:"15",diff:"hard",meta:"Week 12–14 · Advanced",title:"Dynamic Programming — 1D & 2D",topics:["Memoization (top-down) vs tabulation (bottom-up)","Fibonacci, climbing stairs, house robber patterns","0/1 Knapsack and variants","Unbounded knapsack, coin change","Longest Common Subsequence (LCS)","Longest Increasing Subsequence (LIS) — O(n log n)","Edit distance, shortest common supersequence","Matrix DP: unique paths, min path sum"],problems:[{name:"Climbing Stairs",src:"lc",diff:"easy",num:"#70"},{name:"Coin Change",src:"lc",diff:"med",num:"#322"},{name:"Longest Common Subsequence",src:"lc",diff:"med",num:"#1143"},{name:"Longest Increasing Subsequence",src:"lc",diff:"med",num:"#300"},{name:"Edit Distance",src:"lc",diff:"hard",num:"#72"},{name:"Partition Equal Subset Sum",src:"lc",diff:"med",num:"#416"}]},
-  {num:"16",diff:"hard",meta:"Week 14–15 · Advanced",title:"DP — Interval, Tree & Advanced Patterns",topics:["Interval DP: burst balloons, matrix chain multiplication","DP on trees: max path sum, house robber III","Bitmask DP: traveling salesman, assignment","Digit DP: count numbers with property","DP with states: buy-sell stock series","Space optimization in DP (rolling arrays)"],problems:[{name:"Burst Balloons",src:"lc",diff:"hard",num:"#312"},{name:"House Robber III (Tree DP)",src:"lc",diff:"med",num:"#337"},{name:"Best Time to Buy/Sell Stock IV",src:"lc",diff:"hard",num:"#188"},{name:"Maximum Profit in Job Scheduling",src:"lc",diff:"hard",num:"#1235"},{name:"Matrix Chain Multiplication",src:"gfg",diff:"hard"}]},
-  {num:"17",diff:"hard",meta:"Week 15–16 · Advanced",title:"Greedy Algorithms",topics:["Greedy choice property and optimal substructure","Activity selection, interval scheduling","Jump game variants","Gas station circular tour","Fractional knapsack, Huffman encoding","Job sequencing with deadlines"],problems:[{name:"Jump Game",src:"lc",diff:"med",num:"#55"},{name:"Jump Game II",src:"lc",diff:"med",num:"#45"},{name:"Gas Station",src:"lc",diff:"med",num:"#134"},{name:"Non-overlapping Intervals",src:"lc",diff:"med",num:"#435"},{name:"Job Sequencing Problem",src:"gfg",diff:"med"},{name:"Fractional Knapsack",src:"gfg",diff:"med"}]},
-  {num:"18",diff:"med",meta:"Week 16 · Intermediate",title:"Bit Manipulation",topics:["Bitwise operators: AND, OR, XOR, NOT, shifts","Check/set/unset/toggle a bit","Count set bits (Brian Kernighan's algorithm)","XOR tricks: find unique element, missing number","Bit masking for subsets","Integer overflow handling in Java"],problems:[{name:"Single Number",src:"lc",diff:"easy",num:"#136"},{name:"Number of 1 Bits",src:"lc",diff:"easy",num:"#191"},{name:"Counting Bits",src:"lc",diff:"easy",num:"#338"},{name:"Sum of Two Integers (no +)",src:"lc",diff:"med",num:"#371"},{name:"Find Two Non-Repeating Numbers",src:"gfg",diff:"med"}]},
-  {num:"19",diff:"hard",meta:"Week 17 · Advanced",title:"Segment Trees & Advanced Data Structures",topics:["Segment tree build, query, point update","Lazy propagation for range updates","Fenwick tree (BIT) — prefix sum queries","Sparse table for range minimum query (RMQ)","Monotonic deque advanced usage","Sqrt decomposition"],problems:[{name:"Range Sum Query — Mutable",src:"lc",diff:"med",num:"#307"},{name:"Count of Smaller Numbers After Self",src:"lc",diff:"hard",num:"#315"},{name:"The Skyline Problem",src:"lc",diff:"hard",num:"#218"},{name:"BIT / Fenwick Tree implementation",src:"gfg",diff:"hard"}]},
-  {num:"20",diff:"hard",meta:"Week 18–20 · Enterprise",title:"Concurrency, OOP Design & System Design Patterns",topics:["Java OOP: encapsulation, inheritance, polymorphism","SOLID principles with DSA context","Design patterns: Singleton, Factory, Observer, Strategy","Thread-safe data structures: ConcurrentHashMap, BlockingQueue","Common LLD interview problems: parking lot, snake game","Java 8+ streams for DSA-style transformations"],problems:[{name:"LRU Cache (HashMap + DLL)",src:"lc",diff:"med",num:"#146"},{name:"LFU Cache",src:"lc",diff:"hard",num:"#460"},{name:"Design Twitter (OOP)",src:"lc",diff:"med",num:"#355"},{name:"Find Median from Data Stream",src:"lc",diff:"hard",num:"#295"},{name:"Implement Snake Game",src:"lc",diff:"med",num:"#353"}]}
-];
-
-const netMods=[
-  {num:"01",lv:"beginner",ll:"Beginner",title:"Introduction to .NET & C#",tag:"Understanding the .NET platform, runtime, and where C# fits in modern software",c:[".NET ecosystem: CLR, BCL, SDK, runtime","C# vs other .NET languages (VB.NET, F#)","History: .NET Framework → .NET Core → .NET 5–9","Managed code, garbage collection, JIT compilation","Types of .NET apps: console, web, desktop, mobile, cloud"],s:["MSIL / CIL and the compilation pipeline","NuGet package manager overview",".NET Standard vs .NET Core vs .NET 5+","LTS vs current release strategy","Overview of the .NET CLI"],t:["dotnet CLI","NuGet","Visual Studio 2022","VS Code + C# DevKit",".NET SDK"],r:"Understanding the platform prevents dependency hell and runtime targeting mistakes — common pitfalls on the first enterprise project."},
-  {num:"02",lv:"beginner",ll:"Beginner",title:"Environment Setup & Tooling",tag:"Configuring a professional .NET development workspace",c:["Installing .NET SDK and runtime","Visual Studio 2022 IDE tour","VS Code with C# Dev Kit extension","dotnet CLI — new, build, run, publish","Solution and project structure (.sln, .csproj)"],s:["NuGet package management and restore","Global and local tool manifests","launch.json and tasks.json in VS Code","EditorConfig and .gitignore for .NET","Rider IDE as an alternative"],t:["Visual Studio 2022","VS Code","JetBrains Rider","dotnet CLI","NuGet CLI"],r:"Tool mastery is the foundation of daily productivity. Engineers who know the CLI can automate, script, and debug faster than GUI-only developers."},
-  {num:"03",lv:"beginner",ll:"Beginner",title:"C# Language Fundamentals",tag:"Core syntax, types, and control flow — the building blocks of every C# program",c:["Value types vs reference types","Primitive types: int, long, double, bool, char, string","var, const, readonly — declaration choices","Control flow: if/else, switch, switch expressions","Loops: for, foreach, while, do-while"],s:["String interpolation and verbatim strings","Nullable value types and Nullable<T>","Type casting: implicit, explicit, as, is","checked/unchecked arithmetic","Pattern matching: type patterns, constant patterns"],t:["C# 12","System namespace","dotnet-script","LINQPad"],r:"Solid fundamentals prevent the majority of bugs new developers write. Type safety is the primary reason enterprises choose C# over dynamic languages."},
-  {num:"04",lv:"beginner",ll:"Beginner",title:"Collections, Arrays & LINQ",tag:"Storing, querying, and transforming collections of data",c:["Arrays — single, multi-dimensional, jagged","List<T>, Dictionary<K,V>, HashSet<T>, Queue<T>, Stack<T>","IEnumerable<T> and deferred execution","LINQ query syntax vs method syntax","Common LINQ operators: Where, Select, OrderBy, GroupBy, Join"],s:["First, FirstOrDefault, Single, Any, All, Count","Aggregate, Sum, Min, Max, Average","SelectMany for flattening","ToList, ToArray, ToDictionary","Span<T> and Memory<T> for performance"],t:["System.Collections.Generic","System.Linq","LINQPad","BenchmarkDotNet"],r:"LINQ is used in virtually every .NET codebase. Mastering deferred execution prevents silent N+1 style performance traps."},
-  {num:"05",lv:"beginner",ll:"Beginner",title:"Object-Oriented Programming in C#",tag:"The four pillars of OOP applied through C# language features",c:["Classes, objects, constructors, destructors","Encapsulation: access modifiers","Inheritance: base classes, sealed, new vs override","Polymorphism: virtual, override, abstract","Interfaces — defining contracts"],s:["Properties: auto, computed, init-only","Static classes and members","Object initializers and with expressions","Operator overloading","Extension methods"],t:["C# class system","IDisposable pattern","Visual Studio object browser"],r:"OOP mastery is tested in every .NET interview. Clean class design determines how maintainable a codebase becomes at scale."},
-  {num:"06",lv:"intermediate",ll:"Intermediate",title:"Advanced C# — Generics, Delegates & Events",tag:"Type-safe abstractions and the callback mechanism that powers .NET",c:["Generic classes, methods, and constraints","Covariance and contravariance (in/out)","Delegates: Action, Func, Predicate","Lambda expressions and expression trees","Events and the publisher-subscriber pattern"],s:["Multicast delegates","Anonymous methods vs lambdas","EventHandler<TEventArgs> pattern","WeakReference for event memory management","Func composition and currying"],t:["System.Action","System.Func","System.EventHandler","Expression<T>"],r:"Delegates and events are the backbone of .NET UI frameworks and messaging libraries."},
-  {num:"07",lv:"intermediate",ll:"Intermediate",title:"Async Programming — Tasks, async/await & Concurrency",tag:"Writing responsive, non-blocking, thread-safe .NET applications",c:["Thread vs Task — when to use each","async and await — the state machine model","Task.Run, Task.WhenAll, Task.WhenAny","CancellationToken — cooperative cancellation","ConfigureAwait and synchronisation contexts"],s:["ValueTask for hot-path performance","IAsyncEnumerable<T> and async streams","Parallel.ForEachAsync","Channel<T> for producer-consumer","ThreadLocal<T> and AsyncLocal<T>"],t:["System.Threading.Tasks","System.Threading.Channels","PLINQ","CancellationTokenSource"],r:"Async programming is mandatory knowledge for any web API developer. Blocking in an ASP.NET Core request starves the thread pool under load."},
-  {num:"08",lv:"intermediate",ll:"Intermediate",title:"Error Handling, Logging & Diagnostics",tag:"Writing resilient code that fails gracefully and observably",c:["Exception hierarchy in .NET","try/catch/finally — best practices","Custom exception classes","Global exception handling in .NET apps","Structured logging with ILogger<T>"],s:["Exception filters with when keyword","AggregateException and Task faults","Serilog and NLog setup and sinks","Activity and distributed tracing (OpenTelemetry)","Polly for retry, circuit-breaker, timeout policies"],t:["Microsoft.Extensions.Logging","Serilog","NLog","OpenTelemetry","Polly"],r:"Production incidents are resolved in minutes with good logging and diagnostics — or hours without."},
-  {num:"09",lv:"intermediate",ll:"Intermediate",title:"Design Patterns & SOLID Principles",tag:"Writing scalable, maintainable C# through proven engineering patterns",c:["SOLID: Single Responsibility, Open/Closed, Liskov, Interface Segregation, DI","Creational: Factory, Abstract Factory, Builder, Singleton","Structural: Repository, Decorator, Adapter, Facade","Behavioural: Strategy, Observer, Command, Mediator","Anti-patterns and code smells"],s:["Factory Method in .NET DI","Decorator pattern with IEnumerable wrappers","Mediator pattern with MediatR library","Command pattern for CQRS","Specification pattern for query encapsulation"],t:["MediatR","AutoMapper","FluentValidation","Scrutor (decorator DI)"],r:"SOLID and patterns are the vocabulary of senior .NET engineers. Codebases without them become unmaintainable within 18 months of growth."},
-  {num:"10",lv:"intermediate",ll:"Intermediate",title:"ASP.NET Core — Web API Fundamentals",tag:"Building modern HTTP APIs with the industry-standard .NET web framework",c:["ASP.NET Core request pipeline and middleware","Minimal APIs vs Controller-based APIs","Routing — conventional, attribute, route constraints","Model binding and validation with DataAnnotations","Returning IActionResult and typed Results"],s:["Controller base class and action filters","Route groups in Minimal APIs","Problem Details (RFC 7807) for error responses","API versioning strategies","Swagger / OpenAPI with Swashbuckle or NSwag"],t:["Microsoft.AspNetCore.Mvc","Minimal API","Swashbuckle","NSwag","Postman"],r:"ASP.NET Core is the dominant backend framework in the .NET ecosystem. Every backend .NET role requires hands-on API development experience."},
-  {num:"11",lv:"intermediate",ll:"Intermediate",title:"Dependency Injection & Configuration",tag:"Managing application composition and environment-specific settings",c:["Built-in DI container — service lifetimes: Transient, Scoped, Singleton","Registering and resolving services","IConfiguration and appsettings.json","Options pattern: IOptions<T>, IOptionsMonitor<T>","Environment-based configuration"],s:["Keyed services (.NET 8+)","Named HTTP clients with IHttpClientFactory","Scrutor for assembly scanning","User secrets and environment variables","Azure Key Vault / AWS SSM integration"],t:["Microsoft.Extensions.DependencyInjection","Microsoft.Extensions.Configuration","IHttpClientFactory","dotnet user-secrets"],r:"DI is foundational to testable .NET code. Incorrect lifetimes (Captive Dependency) cause concurrency bugs that only appear under production load."},
-  {num:"12",lv:"advanced",ll:"Advanced",title:"Entity Framework Core & Data Access",tag:"Production-grade ORM usage for relational database interaction",c:["DbContext, DbSet<T>, and the EF Core lifecycle","Code-first vs database-first approach","Migrations: Add-Migration, Update-Database","LINQ-to-SQL query translation","Relationships: one-to-one, one-to-many, many-to-many"],s:["Owned entities and value objects","Global query filters for soft delete / multi-tenancy","Compiled queries for hot paths","Raw SQL: FromSqlRaw, ExecuteSqlRaw","Dapper for micro-ORM queries alongside EF Core"],t:["Microsoft.EntityFrameworkCore","EF Core CLI","Dapper","SQL Server / PostgreSQL / SQLite","EF Core Power Tools"],r:"EF Core is in the majority of enterprise .NET backends. Understanding query generation prevents N+1 queries and Cartesian explosion in production."},
-  {num:"13",lv:"advanced",ll:"Advanced",title:"Authentication & Authorization",tag:"Securing .NET APIs with modern identity and access control patterns",c:["ASP.NET Core Identity — users, roles, claims","JWT bearer token authentication","Refresh token rotation pattern","Policy-based and role-based authorization","Resource-based authorization with IAuthorizationHandler"],s:["OAuth2 and OpenID Connect concepts","Integrating IdentityServer / Keycloak / Auth0","Cookie authentication for web apps","API key authentication for machine-to-machine","Data protection API for token encryption"],t:["Microsoft.AspNetCore.Identity","System.IdentityModel.Tokens.Jwt","JwtBearer","IdentityServer / Duende","Auth0 .NET SDK"],r:"Security is non-negotiable. JWT misconfiguration leads to complete authentication bypass in production systems."},
-  {num:"14",lv:"advanced",ll:"Advanced",title:"Caching, Performance & Background Services",tag:"Making .NET APIs fast, scalable, and capable of background processing",c:["In-memory caching with IMemoryCache","Distributed caching with IDistributedCache and Redis","Response caching and output caching","IHostedService and BackgroundService","Hangfire for persistent background jobs"],s:["Cache-aside, write-through, and read-through patterns","Cache invalidation strategies","Rate limiting middleware (.NET 7+)","Response compression and content negotiation","BenchmarkDotNet for micro-benchmarking"],t:["Microsoft.Extensions.Caching.Memory","StackExchange.Redis","Hangfire","Quartz.NET","BenchmarkDotNet"],r:"A Redis cache reduces database load by 90% on read-heavy endpoints. Background services handle email, reports, and cleanup without blocking requests."},
-  {num:"15",lv:"advanced",ll:"Advanced",title:"Clean Architecture & CQRS",tag:"Enterprise-grade application structure for large, long-lived codebases",c:["Layered architecture: Domain, Application, Infrastructure, Presentation","Clean Architecture dependency rule","CQRS pattern: separating Commands and Queries","MediatR pipeline for handlers and behaviours","Domain-driven design (DDD) building blocks"],s:["Aggregate roots, entities, value objects","Domain events and eventual consistency","Repository pattern with EF Core","Unit of Work pattern","Vertical slice architecture as alternative"],t:["MediatR","FluentValidation","AutoMapper","Ardalis.Result","Clean Architecture template"],r:"Clean Architecture is the standard in enterprise .NET teams. It makes large codebases navigable, independently testable, and team-scalable."},
-  {num:"16",lv:"advanced",ll:"Advanced",title:"Testing — Unit, Integration & API",tag:"Building quality into .NET applications through automated test coverage",c:["Unit testing with xUnit and MSTest","Arrange-Act-Assert pattern","Mocking dependencies with Moq / NSubstitute","Integration testing with WebApplicationFactory","Testing EF Core with in-memory / SQLite providers"],s:["FluentAssertions for readable assertions","AutoFixture for test data generation","Test data builders and object mothers","Snapshot testing with Verify","Load testing with k6 / NBomber"],t:["xUnit","Moq","NSubstitute","FluentAssertions","WebApplicationFactory","Testcontainers"],r:"Untested .NET backends accumulate regression debt. WebApplicationFactory enables full request-pipeline tests without deploying to a server."},
-  {num:"17",lv:"enterprise",ll:"Enterprise",title:"Microservices, Messaging & gRPC",tag:"Decomposing monoliths and enabling reliable inter-service communication",c:["Microservices principles and trade-offs","API gateway pattern with Ocelot / YARP","Message brokers: RabbitMQ, Azure Service Bus, Kafka","MassTransit for messaging abstraction","gRPC with Protobuf for high-performance RPC"],s:["Saga pattern for distributed transactions","Outbox pattern for reliable messaging","Service discovery with Consul / Kubernetes DNS","Health checks and readiness probes","Event sourcing overview"],t:["MassTransit","RabbitMQ","Ocelot","YARP","Grpc.AspNetCore","Protobuf"],r:"Most enterprise .NET teams are migrating to or maintaining microservices. Message broker skills are a required line item in senior backend job descriptions."},
-  {num:"18",lv:"enterprise",ll:"Enterprise",title:"Containerisation, CI/CD & Cloud Deployment",tag:"Shipping .NET applications to production reliably at enterprise scale",c:["Dockerising .NET apps — multi-stage Dockerfile","Docker Compose for local multi-service environments","Kubernetes basics — Deployments, Services, Ingress","GitHub Actions / Azure DevOps CI/CD pipelines","Azure App Service, AKS, and AWS ECS deployment"],s:["Environment-specific config with K8s ConfigMaps and Secrets","Health check endpoints for container orchestrators","Application Insights / Prometheus + Grafana monitoring","Blue-green and canary deployment strategies",".NET Aspire for cloud-native .NET development"],t:["Docker","Docker Compose","Kubernetes","GitHub Actions","Azure DevOps","Azure App Service","AWS ECS",".NET Aspire"],r:"Senior .NET engineers own the deployment pipeline. Containerisation knowledge is now expected at mid-level — it is not optional for career growth."}
-];
-
-/* ════════════════ OUTCOMES ════════════════ */
-const outcomes={
-  ang:{dot:'background:var(--c-ang)',items:["Build production-grade Angular SPAs from scratch","Write strongly-typed, maintainable TypeScript at scale","Design scalable component and module architecture","Implement JWT auth, guards, and role-based access","Manage complex state using NgRx or Angular Signals","Write unit, integration, and E2E tests confidently","Optimize performance with OnPush, lazy loading, SSR","Deploy via CI/CD pipelines to production environments","Architect micro-frontend enterprise applications","Confidently pass frontend engineer technical interviews"]},
-  sql:{dot:'background:var(--c-sql)',items:["Design normalized, production-grade relational schemas","Write complex queries: CTEs, window functions, subqueries","Build stored procedures, functions, and trigger-based automation","Implement transactions with ACID-compliant error handling","Tune query performance using execution plans and indexes","Secure databases with roles, permissions, and injection prevention","Plan and execute backup, restore, and maintenance strategies","Architect and deploy ETL pipelines and scheduled jobs","Confidently handle backend data engineering interview questions","Contribute to enterprise database architecture decisions"]},
-  dsa:{dot:'background:var(--c-dsa)',items:["Solve 300+ LeetCode and GFG problems across all difficulty levels","Ace data structure questions in FAANG and product company interviews","Write clean, optimized Java code with proper time/space analysis","Build custom data structures from scratch (Trie, Segment Tree, DSU)","Design low-level systems using OOP principles and design patterns","Confidently approach dynamic programming with multiple patterns","Recognize problem patterns and apply the right algorithm within minutes"]},
-  net:{dot:'background:var(--c-net)',items:["Write idiomatic, strongly-typed C# across all modern language features","Build production-grade REST APIs with ASP.NET Core","Design layered and clean architecture backends","Manage relational data with Entity Framework Core","Implement JWT authentication and role-based authorization","Write async, concurrent, and high-performance C# code","Test with xUnit, Moq, and integration test suites","Architect and communicate via message brokers and event-driven systems","Containerize and deploy .NET apps to cloud platforms","Confidently pass .NET/C# backend engineering interviews"]}
-};
-
-/* ════════════════ RENDER FUNCTIONS ════════════════ */
-const lvlMap={
-  beginner:{mn:'mn-beg',pill:'mlp-beg'},
-  intermediate:{mn:'mn-int',pill:'mlp-int'},
-  advanced:{mn:'mn-adv',pill:'mlp-adv'},
-  enterprise:{mn:'mn-ent',pill:'mlp-ent'}
-};
-
-function buildAngSql(mods,containerId,filter,track){
-  const list=filter==='all'?mods:mods.filter(m=>m.lv===filter);
-  document.getElementById(containerId).innerHTML=list.map(m=>{
-    const lv=lvlMap[m.lv];
-    return `<div class="mc" id="${containerId}-${m.num}">
-      <div class="mh" onclick="togM('${containerId}-${m.num}')">
-        <div class="mn ${lv.mn}">${m.num}</div>
-        <div class="mi">
-          <div class="mtr"><span class="mt">${m.title}</span><span class="mlp ${lv.pill}">${m.ll}</span></div>
-          <div class="mg">${m.tag}</div>
-        </div>
-        <div class="cv" id="cv-${containerId}-${m.num}">›</div>
-      </div>
-      <div class="mb" id="mb-${containerId}-${m.num}">
-        <div class="dg">
-          <div class="db"><div class="dlb">Core concepts</div><ul class="tul">${m.c.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-          <div class="db"><div class="dlb">Subtopics</div><ul class="tul">${m.s.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-          <div class="tb"><span class="tblb">Tools & APIs</span>${m.t.map(x=>`<span class="tc">${x}</span>`).join('')}</div>
-          <div class="relb r-${track}"><p class="relt"><strong>Real-world relevance:</strong> ${m.r}</p></div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function buildDSA(filter){
-  const list=filter==='all'?dsaMods:dsaMods.filter(m=>m.diff===filter);
-  document.getElementById('dsa-mlist').innerHTML=list.map(m=>{
-    const lcC=m.problems.filter(p=>p.src==='lc').length;
-    const gC=m.problems.filter(p=>p.src==='gfg').length;
-    return `<div class="mc" id="dsa-${m.num}">
-      <div class="mh" onclick="togM('dsa-${m.num}')">
-        <div class="mn mn-beg-dsa">${m.num}</div>
-        <div class="mi">
-          <div class="mtr">
-            <span class="mt">${m.title}</span>
-            ${lcC>0?`<span class="mlp-easy" style="font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(245,166,35,.1);color:var(--amber);">LC ×${lcC}</span>`:''}
-            ${gC>0?`<span style="font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(61,217,164,.1);color:var(--c-sql);">GFG ×${gC}</span>`:''}
-            <span class="mlp mlp-${m.diff}">${m.diff}</span>
-          </div>
-          <div class="mg">${m.meta}</div>
-        </div>
-        <div class="cv" id="cv-dsa-${m.num}">›</div>
-      </div>
-      <div class="mb" id="mb-dsa-${m.num}">
-        <div class="dg">
-          <div class="db" style="grid-column:1/-1"><div class="dlb">Core concepts & topics</div><ul class="tul">${m.topics.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-          <div style="grid-column:1/-1">
-            <div class="dlb" style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:8px;">Practice problems</div>
-            <div class="pg">${m.problems.map(p=>`<div class="pc"><span class="pn">${p.name}</span><div class="ptags"><span class="${p.src==='lc'?'tag-lc':'tag-gfg'}">${p.src==='lc'?'LC'+(p.num?' '+p.num:''):'GFG'}</span><span class="tag-${p.diff}">${p.diff}</span></div></div>`).join('')}</div>
-          </div>
-          <div class="relb r-dsa" style="grid-column:1/-1"><p class="relt"><strong>Practice tip:</strong> Start with easy problems to nail the pattern, then layer in medium/hard for interview confidence.</p></div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function buildOutcomes(track){
-  const o=outcomes[track];
-  document.getElementById(track+'-outcomes').innerHTML=o.items.map(item=>`<div class="oi"><div class="od" style="${o.dot}"></div><span class="ot">${item}</span></div>`).join('');
-}
-
-function buildDSATimeline(){
-  const timeline=[
-    {wk:"Wk 1",title:"Java + Complexity"},{wk:"Wk 2",title:"Arrays + Search"},
-    {wk:"Wk 3",title:"Sort + 2-Ptr + Hash"},{wk:"Wk 4",title:"Linked Lists"},
-    {wk:"Wk 5",title:"Stack + Queue"},{wk:"Wk 6–7",title:"Trees + BST"},
-    {wk:"Wk 8",title:"Heaps + Tries"},{wk:"Wk 9–11",title:"Graphs + MST"},
-    {wk:"Wk 11–12",title:"Backtracking"},{wk:"Wk 12–15",title:"Dynamic Programming"},
-    {wk:"Wk 15–16",title:"Greedy + Bits"},{wk:"Wk 17",title:"Segment Trees"},
-    {wk:"Wk 18–20",title:"OOP + System Design"}
-  ];
-  document.getElementById('dsa-timeline').innerHTML=timeline.map(t=>`<div class="wc"><span class="wkn">${t.wk}</span><div class="wkt">${t.title}</div></div>`).join('');
-}
-
-function buildDSAProjects(){
-  const projects=[
-    {icon:"🔍",title:"Mini Search Engine",desc:"Trie-based autocomplete + inverted index + TF-IDF ranking using Java"},
-    {icon:"🗺️",title:"Routing & Navigation System",desc:"Dijkstra + A* pathfinding on a custom weighted graph with CLI or Swing UI"},
-    {icon:"🧩",title:"Competitive Problem Tracker",desc:"Tag problems by pattern, track attempts, generate revision schedule — backed by custom data structures"}
-  ];
-  document.getElementById('dsa-projects').innerHTML=projects.map(p=>`<div class="pjc"><span class="pji">${p.icon}</span><p class="pjt">${p.title}</p><p class="pjd">${p.desc}</p></div>`).join('');
-}
-
-function buildDSATOC(){
-  const toc=document.getElementById('dsa-toc');
-  dsaMods.forEach(m=>{
-    const btn=document.createElement('button');
-    btn.className='toc-btn';
-    btn.textContent=`${m.num}. ${m.title.split('—')[0].split('&')[0].trim()}`;
-    btn.onclick=()=>document.getElementById('dsa-'+m.num)?.scrollIntoView({behavior:'smooth',block:'start'});
-    toc.appendChild(btn);
+function buildSeq(){
+  gNum=1;
+  CATS.forEach(cat=>{
+    cat.modules.forEach((m,mi)=>{
+      m.keywords.forEach((kw,ki)=>{
+        const kid=cat.id+'_'+mi+'_'+ki;
+        globalSeq[kid]=gNum++;
+      });
+    });
   });
 }
 
-/* ════════════════ TOGGLE / FILTER / SWITCH ════════════════ */
-function togM(id){
-  document.getElementById('mb-'+id).classList.toggle('open');
-  document.getElementById('cv-'+id).classList.toggle('open');
+function countAll(){
+  let c=0;CATS.forEach(cat=>cat.modules.forEach(m=>c+=m.keywords.length));return c;
+}
+function countDone(){return Object.values(learned).filter(Boolean).length;}
+function updateProg(){
+  const t=countAll(),d=countDone(),p=t?Math.round(d/t*100):0;
+  document.getElementById('pf').style.width=p+'%';
+  document.getElementById('pt').textContent=d+' / '+t+' studied';
+}
+function updateModDone(mid,cat,mi){
+  const m=cat.modules[mi];
+  let done=0;
+  m.keywords.forEach((_,ki)=>{const kid=cat.id+'_'+mi+'_'+ki;if(learned[kid])done++;});
+  document.getElementById('md-'+mid).textContent=done+'/'+m.keywords.length;
 }
 
-function flt(track,f,btn){
-  document.querySelectorAll(`#curr-${track} .fbar .fb`).forEach(b=>b.classList.remove(`on-${track}`));
-  btn.classList.add(`on-${track}`);
-  if(track==='ang')buildAngSql(angMods,'ang-mlist',f,'ang');
-  else if(track==='sql')buildAngSql(sqlMods,'sql-mlist',f,'sql');
-  else if(track==='net')buildAngSql(netMods,'net-mlist',f,'net');
-  else if(track==='dsa')buildDSA(f);
+function toggleKw(cat,mi,ki){
+  const kid=cat.id+'_'+mi+'_'+ki;
+  learned[kid]=!learned[kid];
+  const mid=cat.id+'_'+mi;
+  const chk=document.getElementById('chk-'+kid);
+  const txt=document.getElementById('txt-'+kid);
+  if(chk){chk.classList.toggle('done',learned[kid]);}
+  if(txt){txt.classList.toggle('done',learned[kid]);}
+  updateModDone(mid,cat,mi);
+  updateProg();
 }
 
-function switchTab(which,btn){
-  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.curr-section').forEach(s=>s.classList.remove('visible'));
-  btn.classList.add('active');
-  document.getElementById('curr-'+which).classList.add('visible');
-  window.scrollTo({top:0,behavior:'smooth'});
+function toggleMod(mid){
+  const body=document.getElementById('mb-'+mid);
+  const chev=document.getElementById('mc-'+mid);
+  const open=body.classList.toggle('open');
+  chev.classList.toggle('open',open);
 }
 
-/* ════════════════ INIT ════════════════ */
-buildAngSql(angMods,'ang-mlist','all','ang');
-buildAngSql(sqlMods,'sql-mlist','all','sql');
-buildAngSql(netMods,'net-mlist','all','net');
-buildDSA('all');
-buildDSATimeline();
-buildDSAProjects();
-buildDSATOC();
-buildOutcomes('ang');
-buildOutcomes('sql');
-buildOutcomes('dsa');
-buildOutcomes('net');
+function switchCat(id){
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.toggle('on',t.dataset.id===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='pan-'+id));
+}
+
+function render(){
+  buildSeq();
+  const tabs=document.getElementById('ctabs');
+  tabs.innerHTML=CATS.map((c,i)=>`<button class="cat-tab${i===0?' on':''}" data-id="${c.id}" onclick="switchCat('${c.id}')">${c.label}</button>`).join('');
+  const panels=document.getElementById('panels');
+  panels.innerHTML=CATS.map((cat,ci)=>`
+<div class="panel${ci===0?' on':''}" id="pan-${cat.id}">
+  ${cat.modules.map((m,mi)=>{
+    const mid=cat.id+'_'+mi;
+    const startNum=globalSeq[cat.id+'_'+mi+'_0'];
+    const endNum=globalSeq[cat.id+'_'+mi+'_'+(m.keywords.length-1)];
+    return`<div class="module">
+      <div class="mod-head" onclick="toggleMod('${mid}')">
+        <span class="mod-title">${m.title}</span>
+        <span style="font-size:11px;color:var(--color-text-tertiary);margin-right:4px">#${startNum}–${endNum}</span>
+        <span class="mod-badge badge-${m.badge}">${m.badge==='must'?'Must know':m.badge==='core'?'Core':'Deep dive'}</span>
+        <span class="mod-done" id="md-${mid}" style="margin-left:4px">0/${m.keywords.length}</span>
+        <i class="ti ti-chevron-down mod-chev" id="mc-${mid}" aria-hidden="true" style="margin-left:6px"></i>
+      </div>
+      <div class="mod-body" id="mb-${mid}">
+        <p class="note">${m.note}</p>
+        <ul class="kw-list">
+          ${m.keywords.map((kw,ki)=>{
+            const kid=cat.id+'_'+mi+'_'+ki;
+            const num=globalSeq[kid];
+            return`<li class="kw-item" onclick="toggleKw(CATS[${ci}],${mi},${ki})">
+              <span class="kw-num">${num}</span>
+              <span class="kw-check" id="chk-${kid}"></span>
+              <span class="kw-text" id="txt-${kid}">${kw}</span>
+            </li>`;
+          }).join('')}
+        </ul>
+      </div>
+    </div>`;
+  }).join('')}
+</div>`).join('');
+}
+
+render();updateProg();
 </script>
-</body>
-</html>
