@@ -1,408 +1,1313 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Mastery Roadmap</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans);background:transparent}
-.wrap{padding:1rem 0}
-.hero{text-align:center;padding:1.5rem 1rem 1.2rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.5rem}
-.hero h1{font-size:24px;font-weight:500;color:var(--color-text-primary)}
-.hero p{font-size:13px;color:var(--color-text-secondary);margin-top:5px}
-.prog-wrap{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px;margin-bottom:1.4rem;display:flex;align-items:center;gap:14px}
-.prog-bar{flex:1;background:var(--color-border-tertiary);border-radius:99px;height:7px;overflow:hidden}
-.prog-fill{height:100%;border-radius:99px;background:#4f46e5;transition:width 0.4s}
-.prog-txt{font-size:13px;font-weight:500;color:var(--color-text-primary);white-space:nowrap}
-.cat-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.2rem}
-.cat-tab{padding:5px 13px;border-radius:99px;border:0.5px solid var(--color-border-secondary);font-size:12px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s}
-.cat-tab.on{background:#4f46e5;color:#fff;border-color:transparent}
-.cat-tab:hover:not(.on){background:var(--color-background-secondary)}
-.panel{display:none}.panel.on{display:block}
-.module{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:1rem;overflow:hidden}
-.mod-head{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--color-background-secondary);user-select:none}
-.mod-title{font-size:14px;font-weight:500;color:var(--color-text-primary);flex:1}
-.mod-badge{font-size:11px;padding:2px 9px;border-radius:99px}
-.badge-must{background:#fee2e2;color:#991b1b}
-.badge-core{background:#dbeafe;color:#1d4ed8}
-.badge-deep{background:#ede9fe;color:#5b21b6}
-@media(prefers-color-scheme:dark){
-.badge-must{background:#450a0a;color:#fca5a5}
-.badge-core{background:#1e3a8a;color:#93c5fd}
-.badge-deep{background:#2e1065;color:#c4b5fd}
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap');
+:root {
+--bg: #0a0a0f;
+--surface: #111118;
+--surface2: #16161f;
+--border: #1e1e2e;
+--accent: #7c6af7;
+--accent2: #a78bfa;
+--accent-glow: rgba(124,106,247,0.18);
+--green: #22d3a4;
+--yellow: #fbbf24;
+--red: #f87171;
+--blue: #60a5fa;
+--orange: #fb923c;
+--pink: #e879f9;
+--text: #e2e2ef;
+--muted: #6b6b8a;
+--muted2: #3a3a55;
+--easy: #22d3a4;
+--medium: #fbbf24;
+--hard: #f87171;
 }
-.mod-chev{font-size:13px;color:var(--color-text-secondary);transition:transform 0.2s}
-.mod-chev.open{transform:rotate(180deg)}
-.mod-done{font-size:11px;color:var(--color-text-secondary);white-space:nowrap}
-.mod-body{padding:0;border-top:0.5px solid var(--color-border-tertiary);display:none}
-.mod-body.open{display:block}
-.note{font-size:12px;color:var(--color-text-secondary);padding:10px 14px 12px;line-height:1.6;border-bottom:0.5px solid var(--color-border-tertiary)}
-.kw-list{list-style:none}
-.kw-item{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:0.5px solid var(--color-border-tertiary);cursor:pointer;transition:background 0.1s}
-.kw-item:last-child{border-bottom:none}
-.kw-item:hover{background:var(--color-background-secondary)}
-.kw-num{font-size:11px;font-weight:500;color:var(--color-text-tertiary);width:24px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
-.kw-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--color-border-secondary);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
-.kw-check.done{background:#16a34a;border-color:#16a34a}
-.kw-check.done::after{content:'✓';color:#fff;font-size:10px;font-weight:700}
-.kw-text{font-size:13px;color:var(--color-text-primary);flex:1;line-height:1.4}
-.kw-text.done{color:var(--color-text-secondary);text-decoration:line-through;text-decoration-color:var(--color-border-secondary)}
-</style>
 
-<div class="wrap">
-<h2 class="sr-only">DSA prerequisites — every keyword sequenced in study order</h2>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(--bg);
+color: var(--text);
+font-family: 'Space Grotesk', sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 3px; }
+
+header {
+position: sticky; top: 0; z-index: 100;
+background: rgba(10,10,15,0.9);
+backdrop-filter: blur(20px);
+border-bottom: 1px solid var(--border);
+padding: 0 2rem;
+display: flex; align-items: center; justify-content: space-between;
+height: 60px;
+}
+
+.logo { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent2); letter-spacing: 0.05em; }
+.logo span { color: var(--muted); }
+
+.header-stats { display: flex; gap: 1.5rem; align-items: center; }
+.stat-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); }
+.stat-pill .num { color: var(--accent2); font-weight: 600; }
+
+.hero { padding: 4rem 2rem 3rem; max-width: 900px; margin: 0 auto; }
+.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+.eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+
+h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; color: var(--text); margin-bottom: 1.2rem; }
+h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent), var(--accent2), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.hero-desc { font-size: 1.05rem; color: var(--muted); line-height: 1.65; max-width: 580px; font-weight: 300; }
+
+.progress-wrap { max-width: 900px; margin: 0 auto 2.5rem; padding: 0 2rem; }
+.progress-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.5rem; font-family: 'JetBrains Mono', monospace; }
+.progress-label .pct { color: var(--accent2); }
+.bar-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; transition: width 0.5s ease; width: 0%; }
+
+.filters { max-width: 900px; margin: 0 auto 1.5rem; padding: 0 2rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+.filter-label { font-size: 0.73rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-right: 0.3rem; }
+.filter-btn { font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 500; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover { border-color: var(--accent); color: var(--accent2); }
+.filter-btn.active { background: var(--accent-glow); border-color: var(--accent); color: var(--accent2); }
+.search-box { margin-left: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 5px 14px; color: var(--text); font-family: 'Space Grotesk', sans-serif; font-size: 0.82rem; outline: none; width: 200px; transition: border-color 0.2s; }
+.search-box:focus { border-color: var(--accent); }
+.search-box::placeholder { color: var(--muted2); }
+
+.quick-nav { position: sticky; top: 60px; z-index: 90; background: rgba(10,10,15,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0.6rem 2rem; display: flex; gap: 0.5rem; align-items: center; overflow-x: auto; scrollbar-width: none; }
+.quick-nav::-webkit-scrollbar { display: none; }
+.quick-nav-item { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500; padding: 4px 11px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); white-space: nowrap; cursor: pointer; text-decoration: none; transition: all 0.15s; flex-shrink: 0; }
+.quick-nav-item:hover { border-color: var(--accent); color: var(--accent2); }
+
+.resume-card { max-width: 900px; margin: 0 auto 2rem; padding: 0 2rem; }
+.resume-inner { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.1rem; border-radius: 12px; border: 1px solid rgba(124,106,247,0.3); background: linear-gradient(135deg, rgba(124,106,247,0.1), rgba(232,121,249,0.05)); cursor: pointer; transition: border-color 0.2s, transform 0.15s; }
+.resume-inner:hover { border-color: var(--accent); transform: translateY(-1px); }
+.resume-icon { width: 38px; height: 38px; border-radius: 9px; background: var(--accent-glow); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.resume-text { flex: 1; min-width: 0; }
+.resume-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 2px; }
+.resume-name { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+.resume-go { font-size: 0.75rem; color: var(--muted); flex-shrink: 0; }
+.resume-card.hidden { display: none; }
+
+/* ─── PROBLEM DETAIL PANEL ─── */
+.prob-panel-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
+}
+.prob-panel-overlay.open { opacity: 1; pointer-events: all; }
+
+.prob-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 100%; max-width: 560px;
+  max-height: 85vh;
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+  transform: translateY(10px);
+  transition: transform 0.2s;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.prob-panel-overlay.open .prob-panel { transform: translateY(0); }
+
+.prob-panel-head {
+  padding: 1.2rem 1.4rem 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  position: sticky; top: 0; background: var(--surface); z-index: 1;
+  border-radius: 16px 16px 0 0;
+}
+.prob-panel-title { flex: 1; }
+.prob-panel-name { font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.3; margin-bottom: 4px; }
+.prob-panel-diff { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; display: inline-block; padding: 2px 8px; border-radius: 4px; }
+.prob-panel-close { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; transition: all 0.15s; }
+.prob-panel-close:hover { border-color: var(--accent); color: var(--text); }
+
+.prob-panel-body { padding: 1.2rem 1.4rem; display: flex; flex-direction: column; gap: 1rem; }
+
+.panel-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+
+.prob-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.65; font-family: 'Inter', sans-serif; }
+.prob-desc.loading { display: flex; align-items: center; gap: 0.5rem; }
+.prob-desc.error { color: var(--red); font-size: 0.8rem; }
+
+.prob-links { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.prob-link-row {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.prob-link-row:hover { border-color: var(--accent); background: var(--accent-glow); }
+.prob-link-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; flex-shrink: 0; }
+.prob-link-logo.lc { background: rgba(251,191,36,0.15); color: var(--yellow); border: 1px solid rgba(251,191,36,0.3); }
+.prob-link-logo.gfg { background: rgba(34,211,164,0.12); color: var(--green); border: 1px solid rgba(34,211,164,0.25); }
+.prob-link-url { font-size: 0.78rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.prob-link-arrow { color: var(--muted); font-size: 0.75rem; flex-shrink: 0; }
+.prob-link-row:hover .prob-link-arrow { color: var(--accent2); }
+
+.prob-link-na { font-size: 0.78rem; color: var(--muted2); font-family: 'JetBrains Mono', monospace; padding: 0.5rem 0.9rem; border-radius: 8px; border: 1px dashed var(--border); text-align: center; }
+
+.mark-done-btn {
+  width: 100%; padding: 0.75rem;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+}
+.mark-done-btn:hover { border-color: var(--green); color: var(--green); background: rgba(34,211,164,0.06); }
+.mark-done-btn.is-done { border-color: rgba(34,211,164,0.4); color: var(--green); background: rgba(34,211,164,0.08); }
+.mark-done-btn.is-done:hover { border-color: var(--red); color: var(--red); background: rgba(248,113,113,0.06); }
+
+/* ─── SPINNER ─── */
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid var(--muted2);
+  border-top-color: var(--accent2);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── CHIP LINKS ─── */
+.chip-links { display: flex; gap: 4px; flex-shrink: 0; }
+.link-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; text-decoration: none; border: 1px solid var(--border); color: var(--muted); background: var(--bg); transition: all 0.15s; line-height: 1.5; cursor: pointer; }
+.link-badge:hover { border-color: var(--accent); color: var(--accent2); }
+
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-size: 0.8rem; padding: 10px 18px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; z-index: 200; }
+.toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.reset-btn { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); background: none; border: none; cursor: pointer; text-decoration: underline; text-decoration-color: var(--muted2); }
+.reset-btn:hover { color: var(--red); }
+
+.roadmap { max-width: 900px; margin: 0 auto; padding: 0 2rem 6rem; display: flex; flex-direction: column; gap: 1.2rem; }
+
+.phase-divider { display: flex; align-items: center; gap: 1rem; margin: 1.2rem 0 0.3rem; scroll-margin-top: 112px; }
+.phase-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 12px; border-radius: 3px; white-space: nowrap; }
+.phase-line { flex: 1; height: 1px; background: var(--border); }
+.phase-1 .phase-label { background: rgba(34,211,164,0.12); color: var(--green); border: 1px solid rgba(34,211,164,0.2); }
+.phase-2 .phase-label { background: rgba(124,106,247,0.12); color: var(--accent2); border: 1px solid rgba(124,106,247,0.2); }
+.phase-3 .phase-label { background: rgba(251,191,36,0.1); color: var(--yellow); border: 1px solid rgba(251,191,36,0.2); }
+.phase-4 .phase-label { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+.phase-5 .phase-label { background: rgba(232,121,249,0.1); color: var(--pink); border: 1px solid rgba(232,121,249,0.2); }
+
+.section-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; position: relative; scroll-margin-top: 112px; }
+.section-card:hover { border-color: var(--muted2); }
+.section-card.open { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow); }
+.section-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0; transition: opacity 0.2s; border-radius: 3px 0 0 3px; }
+.section-card.open::before { opacity: 1; }
+
+.section-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; cursor: pointer; user-select: none; }
+.section-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; flex-shrink: 0; }
+.section-title-wrap { flex: 1; min-width: 0; }
+.section-title { font-size: 0.95rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.section-meta { font-size: 0.72rem; color: var(--muted); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+
+.section-badges { display: flex; gap: 0.4rem; flex-shrink: 0; align-items: center; }
+.badge { font-size: 0.66rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+.badge-easy { background: rgba(34,211,164,0.12); color: var(--easy); border: 1px solid rgba(34,211,164,0.2); }
+.badge-medium { background: rgba(251,191,36,0.1); color: var(--medium); border: 1px solid rgba(251,191,36,0.2); }
+.badge-hard { background: rgba(248,113,113,0.1); color: var(--hard); border: 1px solid rgba(248,113,113,0.2); }
+.badge-count { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+
+.section-progress-ring { flex-shrink: 0; position: relative; width: 34px; height: 34px; }
+.ring-svg { transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: var(--border); stroke-width: 3; }
+.ring-fill { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
+.ring-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 600; color: var(--accent2); }
+.chevron { color: var(--muted); font-size: 0.7rem; transition: transform 0.25s; flex-shrink: 0; }
+.open .chevron { transform: rotate(180deg); }
+
+.section-body { display: none; border-top: 1px solid var(--border); }
+.section-body.visible { display: block; }
+
+.theory-block { padding: 0.9rem 1.2rem; background: rgba(124,106,247,0.05); border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 0.8rem; }
+.content-block-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.55rem; display: flex; align-items: center; gap: 0.5rem; }
+.content-block-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.questions-block { padding: 0.9rem 1.2rem 0.2rem; }
+.theory-icon { font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
+.theory-text { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+.theory-text strong { color: var(--accent2); font-weight: 500; }
+
+.subtopic-group { padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--border); }
+.subtopic-group:last-child { border-bottom: none; }
+.subtopic-group-label { font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.5rem; }
+.subtopic-group-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.problems-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(238px, 1fr)); gap: 0.45rem; }
+
+.problem-chip { display: flex; align-items: center; gap: 0.55rem; padding: 7px 10px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface2); cursor: pointer; transition: all 0.15s; position: relative; overflow: hidden; }
+.problem-chip:hover { border-color: var(--muted2); background: rgba(255,255,255,0.03); }
+.problem-chip.done { border-color: rgba(34,211,164,0.25); background: rgba(34,211,164,0.04); }
+.problem-chip.done .prob-name { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--muted2); }
+
+.check-circle { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--muted2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-size: 0.55rem; color: transparent; }
+.problem-chip.done .check-circle { background: var(--green); border-color: var(--green); color: var(--bg); }
+
+.prob-name { font-size: 0.78rem; color: var(--text); line-height: 1.3; flex: 1; }
+
+.diff-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.diff-easy { background: var(--easy); }
+.diff-medium { background: var(--yellow); }
+.diff-hard { background: var(--red); }
+
+.info-btn { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--muted); font-size: 0.6rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; cursor: pointer; }
+.info-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  70% { box-shadow: 0 0 0 9px rgba(124,106,247,0); }
+  100% { box-shadow: 0 0 0 0 rgba(124,106,247,0); }
+}
+.problem-chip.highlight { animation: pulse-glow 1s ease-out 2; border-color: var(--accent); }
+
+.tip-block { padding: 0.8rem 1.2rem; background: rgba(251,191,36,0.04); border-top: 1px solid var(--border); display: flex; gap: 0.7rem; align-items: flex-start; }
+.tip-icon { font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
+.tip-text { font-size: 0.78rem; color: var(--muted); line-height: 1.55; font-family: 'Inter', sans-serif; }
+.tip-text strong { color: var(--yellow); font-weight: 500; }
+
+.no-results { text-align: center; padding: 4rem 2rem; color: var(--muted); font-size: 0.9rem; display: none; }
+.no-results.visible { display: block; }
+
+@media (max-width: 600px) {
+  .header-stats { display: none; }
+  .hero { padding: 2.5rem 1.2rem 2rem; }
+  .progress-wrap, .filters, .roadmap, .resume-card { padding-left: 1.2rem; padding-right: 1.2rem; }
+  .quick-nav { padding: 0.6rem 1.2rem; }
+  .problems-grid { grid-template-columns: 1fr; }
+  .section-badges { display: none; }
+  .search-box { width: 140px; }
+  .resume-go { display: none; }
+  .prob-panel { max-height: 90vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span>// </span>DSA<span>.</span>roadmap</div>
+  <div class="header-stats">
+    <div class="stat-pill"><span class="num" id="h-done">0</span> / <span id="h-total">0</span> solved</div>
+    <div class="stat-pill"><span class="num" id="h-pct">0%</span> complete</div>
+    <button class="reset-btn" id="reset-btn">Reset progress</button>
+  </div>
+</header>
+
+<div class="quick-nav" id="quick-nav"></div>
+
 <div class="hero">
-  <h1>DSA prerequisites</h1>
-  <p>Every keyword numbered in study order · click to mark done</p>
+  <div class="eyebrow">Complete DSA Roadmap</div>
+  <h1>Master Data Structures<br>& <em>Algorithms</em></h1>
+  <p class="hero-desc">Click any problem to see its LeetCode & GFG links plus an AI-generated description. Click the circle to mark it done — progress saves automatically.</p>
 </div>
-<div class="prog-wrap">
-  <div class="prog-bar"><div class="prog-fill" id="pf" style="width:0%"></div></div>
-  <div class="prog-txt" id="pt">0 / 0 studied</div>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Overall progress</span><span class="pct" id="pct-label">0%</span></div>
+  <div class="bar-track"><div class="bar-fill" id="bar-fill"></div></div>
 </div>
-<div class="cat-tabs" id="ctabs"></div>
-<div id="panels"></div>
+
+<div class="resume-card hidden" id="resume-card"></div>
+
+<div class="filters">
+  <span class="filter-label">Show:</span>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="unsolved">Unsolved</button>
+  <button class="filter-btn" data-filter="done">Done</button>
+  <button class="filter-btn" data-filter="easy">Easy</button>
+  <button class="filter-btn" data-filter="medium">Medium</button>
+  <button class="filter-btn" data-filter="hard">Hard</button>
+  <input class="search-box" type="text" placeholder="🔍  Search problems…" id="search-input">
+</div>
+
+<div class="roadmap" id="roadmap"></div>
+<div class="no-results" id="no-results">No problems match your filter. Try adjusting your search.</div>
+<div class="toast" id="toast"></div>
+
+<!-- PROBLEM DETAIL PANEL -->
+<div class="prob-panel-overlay" id="panel-overlay">
+  <div class="prob-panel" id="prob-panel">
+    <div class="prob-panel-head">
+      <div class="prob-panel-title">
+        <div class="prob-panel-name" id="panel-name">—</div>
+        <span class="prob-panel-diff" id="panel-diff"></span>
+      </div>
+      <button class="prob-panel-close" id="panel-close">✕</button>
+    </div>
+    <div class="prob-panel-body">
+      <div>
+        <div class="panel-section-label">Problem Description</div>
+        <div class="prob-desc loading" id="panel-desc"><div class="spinner"></div> Fetching description…</div>
+      </div>
+      <div>
+        <div class="panel-section-label">Practice Links</div>
+        <div class="prob-links" id="panel-links"></div>
+      </div>
+      <button class="mark-done-btn" id="panel-mark-btn">☐ Mark as done</button>
+    </div>
+  </div>
 </div>
 
 <script>
-const CATS=[
-{id:'math',label:'Maths & Logic',modules:[
-{title:'Number theory essentials',badge:'must',note:'Start here — these are the atomic vocabulary of all algorithm analysis and proofs.',keywords:[
-'Integer','Prime number','Composite number','Divisor','Divisibility',
-'GCD (Greatest Common Divisor)','LCM (Least Common Multiple)','Euclidean algorithm','Extended Euclidean algorithm',
-'Modular arithmetic','Modulo operator','Modular inverse',
-'Fermat\'s little theorem','Chinese Remainder Theorem',
-'Sieve of Eratosthenes','Sieve of Sundaram','Euler\'s totient function',
-'Coprime numbers','Perfect number','Abundant number','Deficient number']},
-{title:'Powers, logs & series',badge:'core',note:'Study after number theory — logs are needed to interpret O(log n) and understand divide-and-conquer.',keywords:[
-'Exponentiation','Fast exponentiation (binary exponentiation)',
-'Logarithm','Log base 2','Natural logarithm',
-'Ceiling function','Floor function','Factorial','Fibonacci sequence',
-'Arithmetic progression (AP)','Geometric progression (GP)','Harmonic series',
-'Stirling\'s approximation','Pascal\'s triangle',
-'Binomial coefficient','Combination (nCr)','Permutation (nPr)']},
-{title:'Bit manipulation',badge:'must',note:'Study after basic integers — build on your number-system knowledge before applying bitwise tricks.',keywords:[
-'Binary number system','Bit','Byte',
-'Bitwise AND','Bitwise OR','Bitwise XOR','Bitwise NOT',
-'Left shift (<<)','Right shift (>>)','Arithmetic right shift','Logical right shift',
-'Set bit','Clear bit','Toggle bit','Check bit',
-'LSB (Least Significant Bit)','MSB (Most Significant Bit)',
-'Population count (popcount)','Brian Kernighan\'s algorithm',
-'Two\'s complement','Ones\' complement',
-'Bitmask','Bitmask DP','Power of two check','Counting set bits']},
-{title:'Combinatorics & probability',badge:'deep',note:'Study after permutations and combinations — these build on those foundations.',keywords:[
-'Pigeonhole principle','Inclusion-exclusion principle','Stars and bars',
-'Catalan numbers','Bell numbers','Derangement','Birthday paradox',
-'Expected value','Random variable','Uniform distribution',
-'Probability of collision (hashing)',
-'Randomised algorithm','Las Vegas algorithm','Monte Carlo algorithm']}
-]},
+// ─────────────────────────────────────────────
+// KNOWN LEETCODE SLUGS (exact matches for common problems)
+// These skip the AI lookup for speed
+// ─────────────────────────────────────────────
+const LC_SLUGS = {
+  "Two Sum": "two-sum",
+  "Reverse Array": "reverse-string",
+  "Palindrome Check": "valid-palindrome",
+  "Group Anagrams": "group-anagrams",
+  "Majority Element": "majority-element",
+  "Majority Element II": "majority-element-ii",
+  "Next Permutation": "next-permutation",
+  "Kadane's Algorithm": "maximum-subarray",
+  "Max Product Subarray": "maximum-product-subarray",
+  "Merge Intervals": "merge-intervals",
+  "Longest Consecutive Sequence": "longest-consecutive-sequence",
+  "Smallest Positive Missing": "first-missing-positive",
+  "Minimum Jumps to End": "jump-game-ii",
+  "Count and Say": "count-and-say",
+  "Set Matrix Zeros": "set-matrix-zeroes",
+  "Rotate Matrix by 90°": "rotate-image",
+  "Text Justification": "text-justification",
+  "Reverse Singly Linked List": "reverse-linked-list",
+  "Reverse in K-Groups": "reverse-nodes-in-k-group",
+  "Reorder List (L0→Ln→L1→Ln-1)": "reorder-list",
+  "Find Middle Node": "middle-of-the-linked-list",
+  "Remove Nth from End": "remove-nth-node-from-end-of-list",
+  "Check Palindrome LL": "palindrome-linked-list",
+  "Detect Cycle (Floyd's)": "linked-list-cycle",
+  "Intersection of Y-Shaped LL": "intersection-of-two-linked-lists",
+  "Add Two Numbers": "add-two-numbers",
+  "Merge K Sorted Lists": "merge-k-sorted-lists",
+  "LRU Cache (HashMap + DLL)": "lru-cache",
+  "LFU Cache": "lfu-cache",
+  "Flatten Multi-Level LL": "flatten-a-multilevel-doubly-linked-list",
+  "Clone with Random Pointer": "copy-list-with-random-pointer",
+  "Check Balanced Brackets": "valid-parentheses",
+  "Longest Valid Parentheses": "longest-valid-parentheses",
+  "Decode String": "decode-string",
+  "Largest Rectangle in Histogram": "largest-rectangle-in-histogram",
+  "Trapping Rain Water": "trapping-rain-water",
+  "Remove K Digits (Lexicographically Smallest)": "remove-k-digits",
+  "Score of Balanced String": "score-of-parentheses",
+  "Sliding Window Maximum": "sliding-window-maximum",
+  "First Non-Repeating in Stream": "first-unique-character-in-a-string",
+  "Insertion Position": "search-insert-position",
+  "Single Element in Sorted Array": "single-element-in-a-sorted-array",
+  "Find Peak Element": "find-peak-element",
+  "K Closest Elements": "find-k-closest-elements",
+  "Median of Two Sorted Arrays": "median-of-two-sorted-arrays",
+  "Koko Eating Bananas": "koko-eating-bananas",
+  "Form Largest Number": "largest-number",
+  "Non-Overlapping Intervals": "non-overlapping-intervals",
+  "Insert into Merge Intervals": "insert-interval",
+  "Meeting Rooms": "meeting-rooms",
+  "Isomorphic Strings": "isomorphic-strings",
+  "Roman to Integer": "roman-to-integer",
+  "Stock: 1 Transaction": "best-time-to-buy-and-sell-stock",
+  "Stock: Multiple Transactions": "best-time-to-buy-and-sell-stock-ii",
+  "3 Sum (All Unique Triplets)": "3sum",
+  "Container with Most Water": "container-with-most-water",
+  "4 Sum": "4sum",
+  "Reverse Words in String": "reverse-words-in-a-string",
+  "Max Sum Subarray of Size K": "maximum-average-subarray-i",
+  "Minimum Window Substring": "minimum-window-substring",
+  "Character Replacement": "longest-repeating-character-replacement",
+  "Longest Substring with All Distinct": "longest-substring-without-repeating-characters",
+  "Count Subarrays with Sum K": "subarray-sum-equals-k",
+  "Product of Array Except Self": "product-of-array-except-self",
+  "Max Path Sum": "binary-tree-maximum-path-sum",
+  "Serialize and Deserialize": "serialize-and-deserialize-binary-tree",
+  "Diameter of Tree": "diameter-of-binary-tree",
+  "Boundary Traversal": "boundary-of-binary-tree",
+  "Lowest Common Ancestor": "lowest-common-ancestor-of-a-binary-tree",
+  "Distance K from Node": "all-nodes-distance-k-in-binary-tree",
+  "Subtree of Another Tree": "subtree-of-another-tree",
+  "Flatten Tree to Linked List": "flatten-binary-tree-to-linked-list",
+  "Invert Tree": "invert-binary-tree",
+  "Connect Nodes at Same Level": "populating-next-right-pointers-in-each-node",
+  "Morris Inorder (O(1) space)": "binary-tree-inorder-traversal",
+  "Build Tree from Pre+Inorder": "construct-binary-tree-from-preorder-and-inorder-traversal",
+  "Max Diff between Node & Ancestor": "maximum-difference-between-node-and-ancestor",
+  "Search in BST": "search-in-a-binary-search-tree",
+  "Insert in BST": "insert-into-a-binary-search-tree",
+  "Delete from BST": "delete-node-in-a-bst",
+  "Kth Smallest Element": "kth-smallest-element-in-a-bst",
+  "2 Sum in BST": "two-sum-iv-input-is-a-bst",
+  "Sorted Array to BST (Height-Balanced)": "convert-sorted-array-to-binary-search-tree",
+  "Validate BST": "validate-binary-search-tree",
+  "LCA in BST": "lowest-common-ancestor-of-a-binary-search-tree",
+  "Recover BST (Two Swapped Nodes)": "recover-binary-search-tree",
+  "Kth Largest Element": "kth-largest-element-in-an-array",
+  "Sort Elements by Frequency": "sort-characters-by-frequency",
+  "Median in a Stream": "find-median-from-data-stream",
+  "Kth Largest in a Stream": "kth-largest-element-in-a-stream",
+  "The Skyline Problem": "the-skyline-problem",
+  "BFS Traversal": "binary-tree-level-order-traversal",
+  "Flood Fill": "flood-fill",
+  "Count Islands": "number-of-islands",
+  "Bipartite Check": "is-graph-bipartite",
+  "Rotten Oranges (BFS)": "rotting-oranges",
+  "Course Schedule I": "course-schedule",
+  "Course Schedule II": "course-schedule-ii",
+  "Alien Dictionary": "alien-dictionary",
+  "Word Ladder": "word-ladder",
+  "All Permutations": "permutations",
+  "Word Search in Grid": "word-search",
+  "N-Queens Problem": "n-queens",
+  "Sudoku Solver": "sudoku-solver",
+  "Word Break (all solutions)": "word-break-ii",
+  "Palindromic Partitioning": "palindrome-partitioning",
+  "M-Coloring Problem": "graph-coloring",
+  "Jump Game": "jump-game",
+  "Gas Station Problem": "gas-station",
+  "Climbing Stairs": "climbing-stairs",
+  "House Robber": "house-robber",
+  "Coin Change (Min Coins)": "coin-change",
+  "Word Break": "word-break",
+  "Unique Paths": "unique-paths",
+  "Longest Common Subsequence": "longest-common-subsequence",
+  "Edit Distance": "edit-distance",
+  "Distinct Subsequences": "distinct-subsequences",
+  "Largest Square Submatrix of 1s": "maximal-square",
+  "Partition into Equal Subsets": "partition-equal-subset-sum",
+  "Subset Sum": "partition-equal-subset-sum",
+  "Target Sum (±)": "target-sum",
+  "0/1 Knapsack": "partition-equal-subset-sum",
+  "Coin Change II (Count Ways)": "coin-change-ii",
+  "Unique Paths in Grid with Obstacles": "unique-paths-ii",
+  "Longest Increasing Path": "longest-increasing-path-in-a-matrix",
+  "Longest Common Substring": "maximum-length-of-repeated-subarray",
+  "Shortest Common Supersequence": "shortest-common-supersequence",
+  "Interleaving String": "interleaving-string",
+  "Wildcard Matching": "wildcard-matching",
+  "Longest Palindromic Substring": "longest-palindromic-substring",
+  "Best Time to Buy with Cooldown": "best-time-to-buy-and-sell-stock-with-cooldown",
+  "Max 2 Transactions": "best-time-to-buy-and-sell-stock-iii",
+  "Max K Transactions": "best-time-to-buy-and-sell-stock-iv",
+  "With Transaction Fee": "best-time-to-buy-and-sell-stock-with-transaction-fee",
+  "Longest Increasing Subsequence": "longest-increasing-subsequence",
+  "Number of LIS": "number-of-longest-increasing-subsequence",
+  "Largest Divisible Subset": "largest-divisible-subset",
+  "Longest String Chain": "longest-string-chain",
+  "Maximum Envelopes (Russian Dolls)": "russian-doll-envelopes",
+  "Matrix Chain Multiplication": "minimum-score-triangulation-of-polygon",
+  "Palindrome Partitioning": "palindrome-partitioning-ii",
+  "Boolean Parenthesization": "strange-printer",
+  "Egg Dropping": "super-egg-drop",
+  "Implement Trie (Insert, Search, StartsWith)": "implement-trie-prefix-tree",
+  "Longest Word with All Prefixes": "longest-word-in-dictionary",
+  "Maximum XOR of Two Numbers": "maximum-xor-of-two-numbers-in-an-array",
+  "Search Suggestions System (Autocomplete)": "search-suggestions-system",
+  "Palindrome Pairs": "palindrome-pairs",
+  "Minimum Window Subsequence": "minimum-window-subsequence",
+  "Power of Two": "power-of-two",
+  "Count Set Bits": "number-of-1-bits",
+  "Total Hamming Distance": "total-hamming-distance",
+  "Valid Sudoku": "valid-sudoku",
+  "N-bit Gray Codes": "gray-code",
+  "2 Sum in Sorted Array": "two-sum-ii-input-array-is-sorted",
+  "Implement atoi": "string-to-integer-atoi",
+  "Multiply Large Numbers": "multiply-strings",
+  "Pascal's Triangle": "pascals-triangle",
+  "Conway's Game of Life": "game-of-life",
+  "Spiral Level Order": "binary-tree-zigzag-level-order-traversal",
+  "Remove Invalid Parentheses": "remove-invalid-parentheses",
+  "Shortest Cycle in Undirected Graph": "shortest-cycle-in-a-graph",
+  "Min Cost to Cut a Stick": "minimum-cost-to-cut-a-stick",
+  "Partition Array for Max Sum": "partition-array-for-maximum-sum",
+  "Optimal Strategy for Game": "stone-game"
+};
 
-{id:'complexity',label:'Complexity',modules:[
-{title:'Asymptotic notation',badge:'must',note:'Study this before writing any code — you need notation to describe what you are about to build.',keywords:[
-'Time complexity','Space complexity','Asymptotic analysis',
-'Big-O notation','Big-Omega notation','Big-Theta notation','Little-o notation',
-'Worst case','Best case','Average case',
-'Amortized analysis','Tight bound','Upper bound','Lower bound']},
-{title:'Complexity classes & recurrences',badge:'must',note:'Study after notation — you now need classes to label algorithms and recurrences to analyse recursive ones.',keywords:[
-'O(1) constant','O(log n) logarithmic','O(n) linear',
-'O(n log n) linearithmic','O(n²) quadratic','O(n³) cubic',
-'O(2^n) exponential','O(n!) factorial',
-'Recurrence relation','Substitution method','Recursion tree method',
-'Master theorem','Akra-Bazzi method',
-'Auxiliary space','In-place algorithm','Space-time tradeoff']},
-{title:'Algorithm design paradigms',badge:'must',note:'Study last in this tab — every paradigm here is a category label you will apply once you start solving problems.',keywords:[
-'Brute force','Greedy algorithm','Divide and conquer',
-'Dynamic programming (DP)','Backtracking','Branch and bound',
-'Randomised algorithm','Approximation algorithm',
-'Two pointer technique','Sliding window technique',
-'Prefix sum technique','Difference array technique',
-'Offline algorithm','Online algorithm','Amortized complexity','Reduction']}
-]},
+// Known GFG slugs
+const GFG_SLUGS = {
+  "Kadane's Algorithm": "kadanes-algorithm-maximum-subarray-sum",
+  "Floyd's Triangle": "floyds-triangle",
+  "Tower of Hanoi": "tower-of-hanoi-using-recursion",
+  "Next Permutation": "next-permutation",
+  "Detect Cycle (Floyd's)": "detect-loop-in-linked-list",
+  "Sort 0s, 1s, 2s (Dutch Flag)": "sort-an-array-of-0s-1s-and-2s",
+  "Largest Rectangle in Histogram": "largest-rectangle-in-histogram",
+  "Stock Span Problem": "the-stock-span-problem",
+  "Trapping Rain Water": "trapping-rain-water",
+  "LRU Cache (HashMap + DLL)": "lru-cache",
+  "Count Islands": "find-the-number-of-islands",
+  "Topological Sort (Kahn's + DFS)": "topological-sort",
+  "Dijkstra's Algorithm": "dijkstras-shortest-path-algorithm",
+  "Floyd-Warshall (All Pairs)": "floyd-warshall",
+  "Bellman-Ford (Negative Edges)": "bellman-ford",
+  "Prim's MST": "prims-minimum-spanning-tree",
+  "Kruskal's MST": "kruskals-minimum-spanning-tree-algorithm",
+  "Fractional Knapsack": "fractional-knapsack-problem",
+  "Activity Selection": "activity-selection-problem",
+  "Huffman Coding": "huffman-decoding",
+  "N-Queens Problem": "n-queen-problem",
+  "Sudoku Solver": "solve-the-sudoku",
+  "Rat in a Maze": "rat-in-a-maze-problem",
+  "Book Allocation Problem": "allocate-minimum-number-of-pages0937",
+  "Aggressive Cows (Max Min Distance)": "aggressive-cows",
+  "Inversion Count": "inversion-of-array",
+  "Merge Sort": "merge-sort",
+  "Quick Sort": "quick-sort",
+  "Heap Sort": "heap-sort",
+  "Cycle Sort": "minimum-number-of-swaps-required-to-sort-an-array",
+  "Sieve of Eratosthenes": "sieve-of-eratosthenes",
+  "Modular Exponentiation (Fast Power)": "modular-exponentiation-for-large-numbers",
+  "Longest Common Subsequence": "longest-common-subsequence",
+  "Edit Distance": "edit-distance3702",
+  "0/1 Knapsack": "0-1-knapsack-problem",
+  "Subset Sum": "subset-sum-problem",
+  "Rod Cutting": "rod-cutting",
+  "Coin Change (Min Coins)": "coin-change",
+  "Matrix Chain Multiplication": "matrix-chain-multiplication0201",
+  "Egg Dropping": "egg-dropping-puzzle",
+  "Word Break": "word-break",
+  "Longest Increasing Subsequence": "longest-increasing-subsequence",
+  "Longest Palindromic Substring": "longest-palindrome-in-a-string",
+  "KMP Algorithm": "kmp-algorithm-for-pattern-searching",
+  "Rabin-Karp Algorithm": "rabin-karp-algorithm-for-pattern-searching",
+  "Z Algorithm": "z-algorithm",
+  "Manacher's Algorithm (All Palindromes)": "manacher-algorithm",
+  "Implement Trie (Insert, Search, StartsWith)": "trie-insert-and-search",
+  "Vertical Traversal": "print-a-binary-tree-in-vertical-order",
+  "Bottom View": "bottom-view-of-binary-tree",
+  "Top View": "top-view-of-binary-tree",
+  "Boundary Traversal": "boundary-traversal-of-binary-tree",
+  "Diameter of Tree": "diameter-of-binary-tree",
+  "Serialize and Deserialize": "serialize-and-deserialize-a-binary-tree",
+  "Lowest Common Ancestor": "lowest-common-ancestor-in-a-binary-tree",
+  "Median in a Stream": "find-median-in-a-stream",
+  "Merge K Sorted Lists": "merge-k-sorted-linked-lists",
+  "Connect Ropes with Min Cost": "connect-n-ropes-with-minimum-cost",
+  "Josephus Problem": "josephus-problem",
+  "Celebrity Problem": "the-celebrity-problem",
+  "Maximum XOR of Two Numbers": "maximum-xor-of-two-numbers-in-an-array",
+  "Bipartite Check": "bipartite-graph"
+};
 
-{id:'prog',label:'Programming',modules:[
-{title:'Programming language fundamentals',badge:'must',note:'Step 1 of programming — types and memory before anything else.',keywords:[
-'Variable','Data type','Primitive type','Reference type',
-'Integer overflow','Integer underflow','Signed integer','Unsigned integer',
-'Floating point','Double precision','Type casting','Type conversion',
-'Scope','Lifetime',
-'Stack memory','Heap memory','Static memory','Memory layout',
-'Pointer','Pointer arithmetic','Null pointer','Dangling pointer',
-'Pass by value','Pass by reference','Pass by pointer']},
-{title:'Control flow & functions',badge:'must',note:'Study after language fundamentals — control flow is what turns types into logic.',keywords:[
-'Conditional statement','Ternary operator',
-'Loop (for / while / do-while)','Break','Continue','Nested loop',
-'Function','Return value',
-'Recursion','Base case','Recursive case',
-'Call stack','Stack overflow (recursion)',
-'Tail recursion','Tail call optimization',
-'Higher-order function','Lambda function','Closure','Inline function']},
-{title:'Object-oriented concepts',badge:'core',note:'Study after control flow — OOP lets you package data structures cleanly.',keywords:[
-'Class','Object','Encapsulation','Abstraction',
-'Inheritance','Polymorphism','Interface','Abstract class',
-'Constructor','Destructor','Static method','Instance method',
-'Overloading','Overriding','Access modifiers',
-'Generic (template)','Comparable interface','Comparator interface','Iterator pattern']},
-{title:'Memory & pointers',badge:'must',note:'Study after OOP — this deepens your understanding of what happens under the hood when data structures allocate nodes.',keywords:[
-'Stack allocation','Heap allocation','Dynamic memory allocation',
-'malloc / free (C)','new / delete (C++)','Garbage collection','Reference counting',
-'Smart pointer','Unique pointer','Shared pointer',
-'Memory leak','Shallow copy','Deep copy',
-'Contiguous memory','Non-contiguous memory','Virtual memory',
-'Cache locality','Cache hit','Cache miss','Spatial locality','Temporal locality']}
-]},
-
-{id:'discrete',label:'Discrete Math',modules:[
-{title:'Logic & proofs',badge:'core',note:'Start here — logic is the language of correctness proofs and loop invariants.',keywords:[
-'Proposition','Predicate','Boolean logic','Truth table',
-'Logical AND / OR / NOT','Implication','Biconditional',
-'Contrapositive','Converse','Inverse','De Morgan\'s laws',
-'Proof by induction','Strong induction',
-'Proof by contradiction','Proof by contrapositive','Direct proof','Loop invariant']},
-{title:'Set theory',badge:'core',note:'Study after logic — sets give you the vocabulary for union-find, hash sets, and graph partitions.',keywords:[
-'Set','Subset','Superset','Intersection','Union','Difference','Complement',
-'Cartesian product','Power set','Disjoint sets','Multiset (bag)',
-'Partition','Equivalence relation','Equivalence class',
-'Partial order','Total order','Lattice']},
-{title:'Graph theory basics',badge:'must',note:'Study after sets — graphs are sets of vertices and edges, so set vocabulary comes first.',keywords:[
-'Vertex (node)','Edge (arc)',
-'Directed graph (digraph)','Undirected graph','Weighted graph','Unweighted graph',
-'Simple graph','Multigraph','Pseudograph',
-'Adjacent vertices','Degree','In-degree','Out-degree',
-'Path','Simple path','Cycle','Simple cycle','Walk','Trail',
-'Connected graph','Strongly connected','Weakly connected',
-'Bridge','Articulation point','Bipartite graph',
-'Complete graph','Planar graph',
-'Tree (graph theory)','Forest','Spanning tree','Minimum spanning tree',
-'DAG (Directed Acyclic Graph)','Topological order',
-'Euler path','Euler circuit','Hamiltonian path','Hamiltonian cycle',
-'Graph isomorphism','Graph density',
-'Adjacency matrix','Adjacency list','Incidence matrix','Edge list']}
-]},
-
-{id:'ds',label:'DS Theory',modules:[
-{title:'Abstract Data Type (ADT)',badge:'must',note:'Study first — the ADT/implementation distinction is the conceptual foundation every other structure rests on.',keywords:[
-'Abstract Data Type (ADT)','Data structure','Interface vs implementation','Concrete data structure',
-'Mutable vs immutable','Static vs dynamic structure',
-'Linear data structure','Non-linear data structure',
-'Homogeneous structure','Heterogeneous structure']},
-{title:'Array theory',badge:'must',note:'Study second — arrays are the implementation substrate for stacks, queues, heaps, and hash tables.',keywords:[
-'Zero-based indexing','One-based indexing',
-'Row-major order','Column-major order','Stride',
-'Contiguous allocation','Static array','Dynamic array',
-'Amortized O(1) append','Resizing factor',
-'Multi-dimensional array','Jagged array','Array slice','Sparse array','Bit array (bitset)']},
-{title:'Linked list theory',badge:'must',note:'Study after arrays — linked lists introduce non-contiguous memory and pointer chasing.',keywords:[
-'Singly linked list','Doubly linked list','Circular linked list','Circular doubly linked list',
-'Head pointer','Tail pointer','Sentinel node','Dummy node','Node allocation',
-'Runner technique','Floyd\'s cycle detection','Tortoise and hare algorithm',
-'XOR linked list','Skip list','Self-organising list']},
-{title:'Stack & queue theory',badge:'must',note:'Study after linked lists — stacks and queues are often implemented on top of arrays or linked lists.',keywords:[
-'Stack (LIFO)','Queue (FIFO)','Deque (double-ended queue)',
-'Priority queue','Circular queue','Monotonic stack','Monotonic queue',
-'Auxiliary stack','Two-stack queue simulation',
-'Call stack','Activation record','Stack frame','Undo / redo stack',
-'Expression stack','Postfix expression','Infix expression','Prefix expression','Shunting-yard algorithm']},
-{title:'Tree theory',badge:'must',note:'Study after stacks/queues — trees are recursive structures and DFS uses a stack internally.',keywords:[
-'Root','Leaf','Internal node','Parent','Child','Sibling','Ancestor','Descendant',
-'Depth','Height','Level','Degree of node','Degree of tree','Subtree',
-'Binary tree','Full binary tree','Complete binary tree','Perfect binary tree',
-'Balanced binary tree','Degenerate (skewed) tree',
-'Binary Search Tree (BST)','AVL tree','Red-Black tree','Splay tree','Treap',
-'B-tree','B+ tree','B* tree','2-3 tree',
-'Heap (tree)','Min-heap','Max-heap',
-'Segment tree','Fenwick tree (BIT)','Trie (prefix tree)',
-'Suffix tree','Suffix array',
-'Euler tour','Heavy-Light Decomposition','Centroid decomposition',
-'DFS tree','BFS tree','Spanning tree',
-'In-order traversal','Pre-order traversal','Post-order traversal',
-'Level-order traversal','Morris traversal','Threaded binary tree']},
-{title:'Hashing theory',badge:'must',note:'Study after trees — hash maps are used in half of all DSA solutions and often combined with tree structures.',keywords:[
-'Hash function','Hash table','Hash map','Hash set','Key-value pair','Load factor',
-'Collision','Collision resolution',
-'Chaining (separate chaining)','Open addressing',
-'Linear probing','Quadratic probing','Double hashing',
-'Robin Hood hashing','Cuckoo hashing','Rehashing',
-'Rolling hash','Polynomial rolling hash','Rabin-Karp hash',
-'Perfect hashing','Universal hashing','Consistent hashing','Bloom filter']},
-{title:'Heap theory',badge:'must',note:'Study after hashing — heaps are specialised trees and build on the tree vocabulary.',keywords:[
-'Binary heap','Min-heap property','Max-heap property',
-'Heapify','Build-heap','Heap sort',
-'Extract-min / Extract-max','Decrease-key','Increase-key','Lazy deletion',
-'Fibonacci heap','Binomial heap','Leftist heap','Skew heap','Pairing heap',
-'D-ary heap','Indexed priority queue']},
-{title:'Graph data structure',badge:'must',note:'Study last in DS theory — graphs depend on every structure before: arrays, linked lists, and queues for BFS.',keywords:[
-'Adjacency matrix representation','Adjacency list representation','Edge list representation',
-'Implicit graph','Sparse graph','Dense graph','Weighted adjacency list',
-'Union-Find (Disjoint Set Union)','Path compression',
-'Union by rank','Union by size','Inverse Ackermann function']}
-]},
-
-{id:'algo',label:'Algo Theory',modules:[
-{title:'Searching',badge:'must',note:'Study first — binary search is the most-used non-trivial algorithm in interviews and appears inside almost every other algorithm.',keywords:[
-'Linear search','Binary search','Binary search on answer','Ternary search',
-'Exponential search','Interpolation search','Jump search','Fibonacci search',
-'Lower bound','Upper bound','Equal range',
-'Predicate binary search','Rotated array binary search']},
-{title:'Sorting',badge:'must',note:'Study after searching — sorting is a prerequisite for two-pointer, greedy, and many graph algorithms.',keywords:[
-'Bubble sort','Selection sort','Insertion sort','Shell sort',
-'Merge sort','Quick sort','Heap sort',
-'Counting sort','Radix sort','Bucket sort',
-'Tim sort','Intro sort','Patience sort','Cycle sort','Pancake sort',
-'Stable sort','Unstable sort','In-place sort','External sort',
-'Comparison sort','Non-comparison sort',
-'Sorting lower bound Ω(n log n)',
-'Lomuto partition','Hoare partition','Median-of-three pivot',
-'Three-way partition (Dutch national flag)']},
-{title:'Recursion & backtracking',badge:'must',note:'Study after sorting — recursion is the engine of divide-and-conquer and the gateway to DP.',keywords:[
-'Recursion','Mutual recursion','Memoization','Top-down DP','Bottom-up DP',
-'Backtracking','State space tree','Pruning',
-'Constraint satisfaction problem',
-'N-Queens problem','Sudoku solver',
-'Subset generation','Permutation generation','Combination generation',
-'Power set generation','Choice-explore-unchoose pattern']},
-{title:'Greedy algorithms',badge:'must',note:'Study after recursion — greedy is the simplest optimisation paradigm and sets up the contrast with DP.',keywords:[
-'Greedy choice property','Optimal substructure','Exchange argument',
-'Activity selection problem','Fractional knapsack','Huffman coding',
-'Interval scheduling maximization','Interval partitioning','Greedy graph colouring',
-'Prim\'s algorithm (greedy view)','Kruskal\'s algorithm (greedy view)',
-'Dijkstra\'s algorithm (greedy view)','Matroid','Greedy stays ahead proof']},
-{title:'Dynamic programming theory',badge:'must',note:'Study after greedy — DP is the harder optimisation paradigm and builds on memoization from the recursion module.',keywords:[
-'Optimal substructure','Overlapping subproblems',
-'Memoization','Tabulation','State','Transition','Base case',
-'DP on sequences','DP on strings','DP on trees','DP on grids',
-'Interval DP','Subset DP','Bitmask DP','Digit DP','Profile DP',
-'DP with divide and conquer optimisation','Knuth-Yao optimisation',
-'Convex hull trick','Monotone queue optimisation',
-'Longest Common Subsequence','Longest Increasing Subsequence',
-'Edit distance','0/1 Knapsack','Unbounded knapsack','Matrix chain multiplication']},
-{title:'Graph algorithms theory',badge:'must',note:'Study after DP — graph algorithms combine every technique: BFS/DFS use queues/stacks, shortest paths use greedy, and some use DP.',keywords:[
-'Depth-First Search (DFS)','Breadth-First Search (BFS)',
-'Multi-source BFS','Bidirectional BFS','Iterative DFS',
-'DFS timestamps','Discovery time','Finish time',
-'DFS tree edges','Back edge','Forward edge','Cross edge',
-'Topological sort (DFS)','Topological sort (Kahn\'s BFS)',
-'Cycle detection (directed)','Cycle detection (undirected)',
-'Connected components','Strongly Connected Components (SCC)',
-'Kosaraju\'s algorithm','Tarjan\'s SCC algorithm',
-'Tarjan\'s bridge algorithm','Tarjan\'s articulation point algorithm',
-'Biconnected components',
-'Dijkstra\'s algorithm','Bellman-Ford algorithm',
-'SPFA (Shortest Path Faster Algorithm)','Floyd-Warshall algorithm',
-'Johnson\'s algorithm','A* search','Bidirectional Dijkstra',
-'Prim\'s algorithm (MST)','Kruskal\'s algorithm (MST)','Borůvka\'s algorithm',
-'Steiner tree','Euler path algorithm (Hierholzer)',
-'Hamiltonian path (backtracking)',
-'Maximum flow (Ford-Fulkerson)','Edmonds-Karp algorithm','Dinic\'s algorithm',
-'Bipartite matching','Hungarian algorithm','Stable matching (Gale-Shapley)']},
-{title:'String algorithms',badge:'core',note:'Study after graph algorithms — string matching borrows DFA/automaton ideas from graph theory.',keywords:[
-'Naive string matching',
-'KMP (Knuth-Morris-Pratt)','Failure function (KMP)',
-'Z-algorithm','Z-array','Rabin-Karp','Boyer-Moore','Aho-Corasick',
-'Suffix array','Suffix array construction (SA-IS)',
-'LCP array','Kasai\'s algorithm','Suffix automaton',
-'Palindrome (Manacher\'s algorithm)','Eertree (palindromic tree)',
-'Lyndon word','Booth\'s algorithm']},
-{title:'Advanced data structures',badge:'deep',note:'Study last — these are built on every concept above and appear only in competitive programming or senior interviews.',keywords:[
-'Segment tree (point update range query)','Segment tree (range update range query)',
-'Lazy propagation','Persistent segment tree','Merge sort tree',
-'Fenwick tree (BIT)','2D BIT',
-'Sparse table (RMQ)','Disjoint Sparse Table','Square root decomposition',
-'Mo\'s algorithm','Heavy-Light Decomposition (HLD)','Centroid decomposition',
-'Link-Cut tree','Euler tour tree','Van Emde Boas tree',
-'Order statistics tree (policy-based)','Skip list','Treap','Splay tree',
-'K-D tree','Interval tree','Segment tree beats','Chtholly tree (ODT)']}
-]}
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const ROADMAP = [
+  { phase:1, phaseName:"Phase 1 — Foundations", sections:[
+    { id:"fundamentals", icon:"⚙️", title:"Programming Fundamentals", color:"#22d3a4", meta:"Start here · Language-agnostic concepts",
+      theory:"Master I/O, control flow, loops, functions, and OOP before touching any DS&A. Understand how your language handles memory (stack vs heap).",
+      tip:"<strong>Do first:</strong> Solve 5 problems using only arrays + loops. Don't touch built-in sort/search. This reveals your real baseline.",
+      groups:[
+        { label:"Core Programming", diff:"easy", problems:["Input and Output","Variables and Data Types","Input Parsing","Conditional Statements","For loop","While loop","Functions","Classes and Objects","Debugging Basics"]},
+        { label:"Complexity Analysis", diff:"medium", problems:["Order of Growth","Asymptotic Analysis","Big-O notation","Theta notation","Big-Ω notation","Time Complexity","Space Complexity","Amortized Analysis"]},
+      ]},
+    { id:"maths-patterns", icon:"🔢", title:"Maths, Patterns & Recursion", color:"#60a5fa", meta:"Logical thinking · Foundation for recursion",
+      theory:"Build pattern recognition by hand before coding. Recursion = function calls itself. Always define: base case, recursive case, what gets smaller each step.",
+      tip:"<strong>Key insight:</strong> Every loop can be written as recursion and vice versa. Practicing both wires your brain to see problems both ways.",
+      groups:[
+        { label:"Easy Maths", diff:"easy", problems:["Even or Odd","Sum of Naturals","Closest Number","Sum of Consecutive","Digit Sum","Reverse a Number"]},
+        { label:"Easy Patterns", diff:"easy", problems:["Solid Rectangle","Floyd's Triangle","Hollow Rectangle","Right Triangle","Inverted Triangle"]},
+        { label:"Medium Maths", diff:"medium", problems:["Count Digits","Prime Testing","Armstrong Number","Trailing Zeros in Factorial","Prime Factors","All Divisors","LCM and GCD"]},
+        { label:"Easy Recursion", diff:"easy", problems:["Print 1 to N","Print N to 1","Factorial","GCD via Recursion","Power (xⁿ)","Fibonacci"]},
+        { label:"Medium Patterns", diff:"medium", problems:["Pyramid","Hollow Diamond","Pascal's Triangle Pattern","Number Spiral"]},
+        { label:"Hard Recursion", diff:"hard", problems:["Butterfly Pattern","Palindrome Number Check","Tower of Hanoi","Non-Attacking Knights","Josephus Problem","Water Jug Problem"]},
+      ]},
+  ]},
+  { phase:2, phaseName:"Phase 2 — Linear Data Structures", sections:[
+    { id:"arrays", icon:"📦", title:"Arrays & Strings", color:"#7c6af7", meta:"Most important topic · Appears in 80%+ of interviews",
+      theory:"Arrays are contiguous memory blocks. Strings are character arrays. Master in-place manipulation, two-pointer on sorted arrays, and prefix sums before moving on.",
+      tip:"<strong>Interview pattern:</strong> 'Find subarray with property X' → try sliding window. 'Find pair/triplet' → try sorting + two pointers or hashing.",
+      groups:[
+        { label:"Array — Easy", diff:"easy", problems:["Is Sorted","Multiply with Adjacent","Reverse Array","Reverse in Groups","Rotate Array","Move Zeroes","Find Missing Number","Two Sum","Generate All Subarrays","Arrange by Sign","Leaders in Array","Stock: 1 Transaction","Stock: Multiple Transactions"]},
+        { label:"Array — Medium", diff:"medium", problems:["Majority Element","Majority Element II","Sorted Subsequence of 3","Count Strictly Increasing Subarrays","Next Permutation","Kadane's Algorithm","Sum of All Subarrays","Max Product Subarray","Merge Intervals"]},
+        { label:"Array — Hard", diff:"hard", problems:["Max Circular Subarray Sum","Next Smallest Palindrome","Lexicographic Rank","Text Justification","Smallest Positive Missing","Minimum Jumps to End","Longest Consecutive Sequence"]},
+        { label:"String — Easy", diff:"easy", problems:["Same Strings Check","Palindrome Check","Toggle Case","Remove Occurrences","Remove Spaces","Check Subsequence","Anagram Check","Count Vowels","Longest Common Prefix","First Non-Repeating Character","Pangram Check"]},
+        { label:"String — Medium", diff:"medium", problems:["Implement atoi","URLify String","Multiply Large Numbers","Count and Say","Group Anagrams"]},
+        { label:"2D Arrays / Matrix", diff:"medium", problems:["Diagonal Traversal","Magic Square","Boundary Traversal","Matrix Spiral","Toeplitz Matrix","Matrix Zig-Zag","Transpose of Matrix","Rotate Matrix by 90°","Conway's Game of Life","Queries in Matrix","Set Matrix Zeros"]},
+      ]},
+    { id:"linked-list", icon:"🔗", title:"Linked List", color:"#fb923c", meta:"Pointer mastery · Must-know for system design",
+      theory:"Nodes connected via pointers. No random access (O(n) lookup). Three types: Singly, Doubly, Circular. Most problems use Fast & Slow pointer or in-place manipulation.",
+      tip:"<strong>Golden rule:</strong> Always handle edge cases first — empty list, single node, two nodes. Draw the pointer manipulation before coding.",
+      groups:[
+        { label:"Reversal Pattern", diff:"medium", problems:["Reverse Singly Linked List","Reverse Doubly Linked List","Reverse in K-Groups","Reorder List (L0→Ln→L1→Ln-1)","Delete a Node with Given Value"]},
+        { label:"Fast & Slow Pointer", diff:"medium", problems:["Find Middle Node","Remove Nth from End","Check Palindrome LL","Detect Cycle (Floyd's)","Length of Loop","Intersection of Y-Shaped LL","Remove Duplicates from Sorted List"]},
+        { label:"Sorting & Merging", diff:"medium", problems:["Sort 0s, 1s, 2s (Dutch Flag)","Add Two Numbers","Rotate Linked List","Merge K Sorted Lists"]},
+        { label:"Design", diff:"hard", problems:["Browser History (Doubly LL)","LRU Cache (HashMap + DLL)","LFU Cache","Twitter Feed (Priority Queue)"]},
+        { label:"Hard", diff:"hard", problems:["Flatten Multi-Level LL","Clone with Random Pointer"]},
+      ]},
+    { id:"stack", icon:"🥞", title:"Stack", color:"#e879f9", meta:"LIFO · Essential for expression parsing & backtracking",
+      theory:"Stack = LIFO. Push/pop in O(1). Key applications: balanced brackets, expression evaluation, backtracking, monotonic sequences, function call simulation.",
+      tip:"<strong>Monotonic Stack trick:</strong> 'Next Greater/Smaller Element' → always use a monotonic stack. It converts O(n²) brute force to O(n).",
+      groups:[
+        { label:"Basic Operations", diff:"easy", problems:["Reverse using Stack","Sort using Stack","Stack using Queues","Two Stacks in Array","K Stacks in Array","Stack with getMin() O(1)","Min Stack","Next Greater Element"]},
+        { label:"Expression Problems", diff:"medium", problems:["Check Balanced Brackets","Evaluate Postfix","Infix Evaluation","Infix to Postfix","Redundant Brackets","Longest Valid Parentheses","Score of Balanced String","Decode String"]},
+        { label:"Monotonic Stack", diff:"hard", problems:["Next Greater Element","Previous Smaller Element","Stock Span Problem","Buildings Facing Sun","Largest Rectangle in Histogram","Max of 1s After Flipping","Max of Minimums of Window Sizes","Trapping Rain Water","Subarray Range Sum","Remove K Digits (Lexicographically Smallest)"]},
+      ]},
+    { id:"queue", icon:"🎯", title:"Queue & Deque", color:"#34d399", meta:"FIFO · BFS backbone · Sliding window",
+      theory:"Queue = FIFO. Deque = double-ended queue (push/pop from both ends). Deque is the key data structure behind sliding window maximum problems.",
+      tip:"<strong>When to use Deque:</strong> Any 'max/min in sliding window' problem. Maintain a decreasing monotonic deque for maximum queries in O(n) total.",
+      groups:[
+        { label:"Queue — Easy", diff:"easy", problems:["Circular Queue Implementation","Queue using Stacks","Reverse a Queue","Reverse First K Elements","FIFO Page Replacement"]},
+        { label:"Queue — Medium", diff:"medium", problems:["Interleave Queue (First Half + Second Half)","K Queues in Array","First Non-Repeating in Stream","Min Knight Steps to Target"]},
+        { label:"Deque", diff:"hard", problems:["Circular Array via Deque","Lexicographically Largest Permutation","Nth Term of Recurrence Relation","Generate Bitonic Sequence","Sliding Window Maximum","Longest Subarray with Difference ≤ X","Max Subarray Length with K Increments","Min Deques to Sort Array"]},
+      ]},
+  ]},
+  { phase:3, phaseName:"Phase 3 — Searching, Sorting & Techniques", sections:[
+    { id:"searching", icon:"🔍", title:"Searching", color:"#60a5fa", meta:"Binary Search is everywhere · Must master",
+      theory:"Linear Search = O(n). Binary Search = O(log n) but requires sorted data. Key insight: Binary search works on any monotonic function, not just sorted arrays.",
+      tip:"<strong>Template:</strong> lo=0, hi=n-1. while(lo<=hi): mid = lo+(hi-lo)/2. Choosing lo=mid+1 or hi=mid-1 correctly is the crux — work through on paper.",
+      groups:[
+        { label:"Linear Search", diff:"easy", problems:["Find Largest","Find Second Largest","Local Min & Max"]},
+        { label:"Binary Search — Classic", diff:"medium", problems:["Insertion Position","Lower Bound","Upper Bound","Single Element in Sorted Array","First Missing Natural","Count Occurrences","2D Search","Sorted & Rotated Array","Sorted & Rotated Array II","K Closest Elements","Search in Almost Sorted","Find Peak Element","Peak in 2D Matrix","First and Last Position","Square Root"]},
+        { label:"Binary Search — Advanced", diff:"medium", problems:["Range-Based Counts","Kth Missing Positive","Search in Row-Column Sorted Matrix"]},
+        { label:"Search on Answer", diff:"hard", problems:["Integer Square Root","Nth Root of M","Check if Power","Pick K Largest Sum Subarrays","N Trailing Zeroes in Factorial","Book Allocation Problem","Koko Eating Bananas","Aggressive Cows (Max Min Distance)","Binary Search on Answer","Median in Row-Sorted Matrix","Kth Smallest in Row-Column Sorted","M Bouquets from K Flowers","Kth in Multiplication Table","Maximize Minimum (Median)","Min Time for Orders","Equalize Tower Heights"]},
+        { label:"Two Array Search", diff:"hard", problems:["Median of Two Sorted Arrays","Kth Element of Two Sorted Arrays"]},
+      ]},
+    { id:"sorting", icon:"📊", title:"Sorting", color:"#a78bfa", meta:"Know the internals · Not just Array.sort()",
+      theory:"Comparison sorts: O(n log n) lower bound. Distribution sorts (Counting, Radix) can achieve O(n). Know stable vs unstable, in-place vs extra space.",
+      tip:"<strong>Interview trap:</strong> 'Sort in O(n)' often means Counting/Radix sort or the input has special structure (e.g., 0-1 values, small range).",
+      groups:[
+        { label:"Easy", diff:"easy", problems:["Wave Form Array","Sort by Length","Minimum Difference Pair"]},
+        { label:"Medium (Greedy + Sort)", diff:"medium", problems:["Merge Overlapping Intervals","Form Largest Number","Tywin's War Strategy","Candy Cost","Meeting Rooms","Insert into Merge Intervals","Minimize Moves","Max Sum of i×arr[i]"]},
+        { label:"Partition & Quick Sort", diff:"medium", problems:["Quick Sort","Sort Binary Array","Zeroes to End","Sort Ternary Array (Dutch Flag)"]},
+        { label:"Merge Sort & Merge-Based", diff:"medium", problems:["Merge Sort","Union of 2 Sorted Arrays","Intersection of 2 Sorted Arrays","Merge Without Extra Space","Minimum Platforms","Inversion Count","Surpasser Count"]},
+        { label:"Cycle Sort", diff:"hard", problems:["Cycle Sort","Minimum Missing Positive","Min Swaps to Sort"]},
+      ]},
+    { id:"hashing", icon:"🗂️", title:"Hashing", color:"#fb923c", meta:"O(1) lookup · Frequency counting",
+      theory:"HashMap/HashSet provide O(1) average lookup. Collision handling: Linear Probing, Quadratic Probing, Separate Chaining. Use prefix sum + hashmap for subarray-sum problems.",
+      tip:"<strong>Pattern:</strong> Whenever you think 'I need to check if something exists' or 'count occurrences', reach for a HashMap. Turns O(n²) → O(n).",
+      groups:[
+        { label:"Basic Hashing", diff:"easy", problems:["Linear Probing","Separate Chaining","Quadratic Probing","Distinct Count in Array","Is Subset","Union via Hashing","Intersection via Hashing","2 Sum","Fizz Buzz","Pair Sums Divisible by K","Roman to Integer","Isomorphic Strings"]},
+        { label:"Frequency-Based", diff:"medium", problems:["Count Frequencies","Most Frequent Element","Max Subsets with Sum = K","Group Anagrams"]},
+        { label:"Subsequence + Hash", diff:"medium", problems:["Longest Consecutive Subsequence","Count Consecutive Subsequences"]},
+      ]},
+    { id:"two-pointer", icon:"👆", title:"Two Pointer", color:"#22d3a4", meta:"Reduces O(n²) → O(n) on sorted arrays",
+      theory:"Two pointers move toward each other (opposite ends) or in the same direction. Works when the array is sorted or has monotonic properties.",
+      tip:"<strong>Checklist:</strong> Is the array sorted? → Two pointer. Need all pairs/triplets? → Sort first, then two pointer. Need subarrays? → Sliding window instead.",
+      groups:[
+        { label:"Easy", diff:"easy", problems:["2 Sum in Sorted Array","Smallest Window Containing All Chars","Unique Elements","Sentence Palindrome"]},
+        { label:"Medium", diff:"medium", problems:["3 Sum (All Unique Triplets)","Celebrity Problem","Closest Pair from Two Arrays","Container with Most Water","Common Elements in 3 Arrays","Reverse Words in String","Policemen Catch Thieves"]},
+        { label:"Hard", diff:"hard", problems:["4 Sum","Closest Triplet to Target","Count Triplets with Sum Less Than X"]},
+      ]},
+    { id:"sliding-window", icon:"🪟", title:"Sliding Window", color:"#fbbf24", meta:"Subarray problems · O(n) magic",
+      theory:"Maintain a window [l, r] over the array. Expand right to include, shrink left when a condition is violated. Fixed window = always same size.",
+      tip:"<strong>Template:</strong> l=0, for r in range(n): add arr[r]; while(condition violated): remove arr[l], l++. Answer updates at each r.",
+      groups:[
+        { label:"Fixed Length Window", diff:"easy", problems:["Max Sum Subarray of Size K","Max XOR of Size K","Distinct Elements in Every Window","MEX of Subarrays","Min Swaps to Group 1s","First Negative in Every Window","Chocolate Distribution"]},
+        { label:"Variable Length Window", diff:"medium", problems:["Maximize Count of Ones","Equal Substring with Cost ≤ K","Fruit Into Baskets","Subarray with Given Sum"]},
+        { label:"Minimum Window", diff:"hard", problems:["Smallest Subarray Sum > X","Minimum Window Subsequence","Minimum Window Substring","Smallest Containing 0, 1 and 2"]},
+        { label:"Count Subarrays", diff:"hard", problems:["Subarrays with K Odd Numbers","Subarrays Less Than K","Substrings with All Vowels","Subarrays with Sum < K","Count Subarrays with K Equal Value Pairs"]},
+        { label:"Window + Hashing", diff:"hard", problems:["Longest Substring with All Distinct","Character Replacement","Longest Substring with K Uniques","Substrings with K Distinct","Smallest with All Characters","Count Anagram Substrings","Full Distinct Subarrays"]},
+      ]},
+    { id:"prefix-sum", icon:"∑", title:"Prefix Sum & Difference Array", color:"#34d399", meta:"Range queries in O(1) after O(n) preprocessing",
+      theory:"Prefix sum pre-computes cumulative totals so any range [l,r] query = O(1). Difference array enables range updates in O(1).",
+      tip:"<strong>Pattern:</strong> 'Sum of subarray [l..r]' → prefix[r] - prefix[l-1]. 'Number of subarrays with sum K' → store prefix sums in a map.",
+      groups:[
+        { label:"Prefix Sum", diff:"medium", problems:["Prefix Sum Array","2D Prefix Sum","Range Queries","Equilibrium Index","Mean of Range","Split Array","Largest Sum Submatrix","Max Sum Rectangle in Matrix"]},
+        { label:"Prefix/Suffix Transforms", diff:"medium", problems:["Product of Array Except Self","Reconstruct Original Array","Longest Span with Same Sum"]},
+        { label:"Difference Array", diff:"medium", problems:["Difference Array (Range Add)","2D Difference Array","Max Occurring in Ranges","Compute Result Before Matrix","Point Counts from Intervals"]},
+        { label:"Prefix Sum + Hashing", diff:"hard", problems:["Subarray with 0 Sum","Largest Subarray with 0 Sum","Largest with Equal 0s and 1s","Largest with Sum Divisible by K","Longest Subarray with Sum K","Count with Sum Divisible by K","Count Subarrays with Sum K","Count with Given XOR"]},
+      ]},
+    { id:"bit-manipulation", icon:"⚡", title:"Bit Manipulation", color:"#60a5fa", meta:"Blazing fast · Space efficient",
+      theory:"Bitwise ops on integers: AND(&), OR(|), XOR(^), NOT(~), Left shift(<<), Right shift(>>). XOR: x^x=0, x^0=x. Use masks to isolate/set/clear/toggle specific bits.",
+      tip:"<strong>Checklist:</strong> 'Find odd one out' → XOR all. 'Check if power of 2' → n & (n-1) == 0. 'Get kth bit' → (n >> k) & 1.",
+      groups:[
+        { label:"Easy", diff:"easy", problems:["Swap Without Third Variable","Kth Set Bit","Only Set Bit Position","Power of Two","Sort by Set Bits Count"]},
+        { label:"Medium", diff:"medium", problems:["Power of 4","Binary Palindrome Check","Rotate Bits","Swap Odd-Even Bits","Count Set Bits","Count Total Set Bits 1 to N","Iterative Power (Fast Exponentiation)"]},
+        { label:"Bit with Arrays", diff:"hard", problems:["Max Consecutive 1s","Find Missing Number (XOR)","One Odd Occurrence","Two Odd Occurrences","Palindrome Permutation","Missing & Repeating","Unique Numbers II","N-bit Gray Codes","Total Hamming Distance","Sum of Pair XORs","Sum of Subset XORs","Subarray XOR Queries","Valid Sudoku"]},
+        { label:"Subsets via Bits", diff:"medium", problems:["All Subsets of Array","All Subsequences of String"]},
+      ]},
+  ]},
+  { phase:4, phaseName:"Phase 4 — Trees & Advanced Structures", sections:[
+    { id:"binary-tree", icon:"🌳", title:"Binary Tree", color:"#22d3a4", meta:"Foundation for BST, Heap, Trie, Segment Tree",
+      theory:"Tree with at most 2 children per node. Traversal modes: Preorder (root,L,R), Inorder (L,root,R), Postorder (L,R,root), Level Order (BFS).",
+      tip:"<strong>Recursion template:</strong> Think about what info you need from left subtree and right subtree, combine at current node, and return. This solves 80% of tree problems.",
+      groups:[
+        { label:"Easy", diff:"easy", problems:["Size of Tree","Height/Depth of Tree","Maximum Width","Balance Check","Identical Trees","Mirror Tree","Sum Tree Check","Left View","Right View","Level Order Traversal","Zigzag Traversal","Path Sum","Max Path Sum","Serialize and Deserialize"]},
+        { label:"Iterative Traversals", diff:"medium", problems:["Iterative Inorder","Iterative Preorder","Iterative Postorder","Morris Inorder (O(1) space)"]},
+        { label:"Medium", diff:"medium", problems:["Longest Sum Path","Diameter of Tree","Boundary Traversal","Build Tree from Pre+Inorder","Leaf Nodes at Same Level","Connect Nodes at Same Level","Nodes without Siblings","Invert Tree","Flatten Tree to Linked List","Max Diff between Node & Ancestor"]},
+        { label:"Horizontal Distance Based", diff:"medium", problems:["Vertical Traversal","Bottom View","Top View","Diagonal Traversal"]},
+        { label:"Hard", diff:"hard", problems:["Spiral Level Order","Lowest Common Ancestor","Distance K from Node","Distribute Candies in Tree","Subtree of Another Tree"]},
+      ]},
+    { id:"bst", icon:"🔮", title:"Binary Search Tree", color:"#a78bfa", meta:"Ordered tree · O(log n) ops (average)",
+      theory:"BST property: left < root < right (for all subtrees). Inorder traversal of BST yields sorted sequence. Self-balancing BSTs guarantee O(log n) worst case.",
+      tip:"<strong>Common mistake:</strong> BST validity isn't just 'left < root < right' locally. Use min/max bounds to check all nodes.",
+      groups:[
+        { label:"Operations", diff:"medium", problems:["Search in BST","Insert in BST","Delete from BST","Find Ceil","Find Floor","Predecessor and Successor"]},
+        { label:"Traversal", diff:"medium", problems:["Kth Smallest Element","2 Sum in BST"]},
+        { label:"Construction", diff:"medium", problems:["Sorted Array to BST (Height-Balanced)","Merge Two BSTs"]},
+        { label:"Properties", diff:"hard", problems:["Validate BST","LCA in BST","Recover BST (Two Swapped Nodes)","Largest BST Subtree"]},
+      ]},
+    { id:"heap", icon:"⛰️", title:"Heap / Priority Queue", color:"#f87171", meta:"Top K problems · Greedy decisions",
+      theory:"Complete binary tree where parent > children (max-heap) or parent < children (min-heap). Insert/delete = O(log n). Find min/max = O(1).",
+      tip:"<strong>Top-K trick:</strong> To find K largest elements, use a Min-Heap of size K. Push elements; if size > K, pop min. Final heap contains K largest.",
+      groups:[
+        { label:"Easy", diff:"easy", problems:["Check for Heap Property","Heap Sort","Kth Largest Element","K Largest Elements","Height of a Heap"]},
+        { label:"Medium", diff:"medium", problems:["Connect N Ropes with Min Cost","Sort a Nearly Sorted Array","Convert BST to Min-Heap","K Max Sum Combinations"]},
+        { label:"Hard", diff:"hard", problems:["Median in a Stream","Kth Largest in a Stream","Merge K Sorted Lists/Arrays","Range Covering K Sorted Lists","The Skyline Problem","Sort Elements by Frequency"]},
+      ]},
+  ]},
+  { phase:5, phaseName:"Phase 5 — Graphs, DP & Advanced", sections:[
+    { id:"graph", icon:"🕸️", title:"Graph", color:"#60a5fa", meta:"Most versatile DS · Models real-world networks",
+      theory:"Graphs = nodes + edges. Directed/Undirected. Weighted/Unweighted. Representations: Adjacency List (preferred) or Matrix. Two traversals: BFS and DFS.",
+      tip:"<strong>Decision tree:</strong> Shortest path unweighted → BFS. Weighted → Dijkstra. Negative edges → Bellman-Ford. Cycle undirected → Union-Find. Ordering → Topological Sort.",
+      groups:[
+        { label:"BFS / DFS", diff:"medium", problems:["BFS Traversal","DFS Traversal","Flood Fill","Count Islands","Number of Provinces","Connected Components (Undirected)","Cycle in Undirected Graph","Cycle in Directed Graph","Bipartite Check","Rotten Oranges (BFS)","Shortest Path in Unweighted Graph","Remove Invalid Parentheses"]},
+        { label:"Topological Sort", diff:"medium", problems:["Topological Sort (Kahn's + DFS)","Course Schedule I","Course Schedule II","Alien Dictionary"]},
+        { label:"Shortest Paths", diff:"hard", problems:["Dijkstra's Algorithm","Floyd-Warshall (All Pairs)","Bellman-Ford (Negative Edges)","Minimize Infection Time (Directed)","Shortest Path with One Curved Edge","Minimum Cost Path","Shortest Cycle in Undirected Graph"]},
+        { label:"Multi-Source BFS", diff:"hard", problems:["Distance of Nearest 1","Unlock the Lock (BFS)","Word Ladder"]},
+        { label:"MST & DSU", diff:"hard", problems:["Prim's MST","Disjoint Set Union (DSU)","Kruskal's MST","Detect Cycle via DSU","Total Spanning Trees Count","Job Sequencing","Count Connected Components"]},
+      ]},
+    { id:"backtracking", icon:"↩️", title:"Backtracking", color:"#fbbf24", meta:"Exhaustive search with pruning",
+      theory:"Systematically explore all possibilities, undo choices when they don't work. Template: Choose → Explore → Unchoose. Pruning avoids exploring invalid branches early.",
+      tip:"<strong>Common mistake:</strong> Forgetting to unchoose (restore state). Always ensure your undo exactly mirrors your choose step.",
+      groups:[
+        { label:"Medium", diff:"medium", problems:["All Permutations","Rat in a Maze","Word Search in Grid"]},
+        { label:"Hard", diff:"hard", problems:["N-Queens Problem","Sudoku Solver","Word Break (all solutions)","Knight's Tour","Palindromic Partitioning","M-Coloring Problem"]},
+      ]},
+    { id:"greedy", icon:"💰", title:"Greedy Algorithms", color:"#34d399", meta:"Local optimal → Global optimal",
+      theory:"Make the locally best choice at each step. Only works when the problem has 'greedy choice property' and 'optimal substructure'.",
+      tip:"<strong>Greedy vs DP:</strong> If making the local best choice never harms the global optimum, use greedy. If you need to compare multiple sub-choices, use DP.",
+      groups:[
+        { label:"Easy", diff:"easy", problems:["Fractional Knapsack","Assign Cookies","Min and Max Costs to Buy All","Smallest Subset Greater Sum","Min Notes with Given Sum"]},
+        { label:"Medium", diff:"medium", problems:["Activity Selection","Huffman Coding","Jump Game","Job Sequencing","Non-Overlapping Intervals","Gas Station Problem"]},
+        { label:"Hard", diff:"hard", problems:["Stable Marriage (Gale-Shapley)","Minimize Max Height Difference","No Two Adjacent Same","Minimize Cash Flow","Min Time to Finish Jobs","Min Cost to Cut into Squares"]},
+      ]},
+    { id:"dp", icon:"🧩", title:"Dynamic Programming", color:"#e879f9", meta:"The hardest topic · High interview weight",
+      theory:"DP = Recursion + Memoization (Top-Down) or Tabulation (Bottom-Up). Two conditions: overlapping subproblems + optimal substructure.",
+      tip:"<strong>Framework:</strong> 1) Define dp[i][j] clearly in English. 2) Write the recurrence. 3) Handle base cases. 4) Determine evaluation order. 5) Optimize space if needed.",
+      groups:[
+        { label:"1D DP", diff:"medium", problems:["Climbing Stairs","Count without Consecutive 1s","Weighted Climbing Stairs","Fibonacci","Tribonacci","Min Cost Climbing Stairs","Frog Jump","House Robber","Max Segments","Coin Change (Min Coins)","Possible Decodings","Word Break","Derangements"]},
+        { label:"2D DP", diff:"medium", problems:["Unique Paths","Minimum Cost Path","Longest Common Subsequence","Edit Distance","Distinct Subsequences","Largest Square Submatrix of 1s"]},
+        { label:"Subsequence DP", diff:"hard", problems:["Partition into Equal Subsets","Subset Sum","Count Subsets with Sum K","Target Sum (±)","0/1 Knapsack","Coin Change II (Count Ways)","Rod Cutting"]},
+        { label:"Grid DP", diff:"medium", problems:["Unique Paths in Grid with Obstacles","Maximum Path Sum in Matrix","Longest Increasing Path"]},
+        { label:"String DP", diff:"hard", problems:["Longest Common Substring","Shortest Common Supersequence","Interleaving String","Wildcard Matching","Longest Palindromic Substring"]},
+        { label:"Stock Problems", diff:"hard", problems:["Best Time to Buy with Cooldown","Max 2 Transactions","Max K Transactions","With Transaction Fee"]},
+        { label:"LIS (Patience Sort)", diff:"hard", problems:["Longest Increasing Subsequence","Number of LIS","Longest Bitonic Subsequence","Largest Divisible Subset","Longest String Chain","Maximum Envelopes (Russian Dolls)"]},
+        { label:"Partition / Interval DP", diff:"hard", problems:["Matrix Chain Multiplication","Min Cost to Cut a Stick","Palindrome Partitioning","Boolean Parenthesization","Partition Array for Max Sum","Egg Dropping","Optimal Strategy for Game"]},
+      ]},
+    { id:"trie", icon:"🌐", title:"Trie", color:"#fb923c", meta:"Prefix tree · String autocomplete & XOR tricks",
+      theory:"Trie = prefix tree where each edge represents a character. Insert/Search/Delete in O(length of key). Bit-Trie stores binary representations for XOR operations.",
+      tip:"<strong>When to use Trie:</strong> Autocomplete, spell checking, IP routing, 'words with prefix X', maximum XOR.",
+      groups:[
+        { label:"Implementation", diff:"medium", problems:["Implement Trie (Insert, Search, StartsWith)","Longest Word with All Prefixes","Count Distinct Substrings","Prefix Count","Replace Words"]},
+        { label:"Bit Manipulation Trie", diff:"hard", problems:["Duplicates in Binary Matrix","Maximum XOR of Two Numbers","Maximum XOR Queries","Count Pairs with XOR less than K"]},
+        { label:"Advanced Applications", diff:"hard", problems:["Search Suggestions System (Autocomplete)","Palindrome Pairs"]},
+      ]},
+    { id:"string-matching", icon:"🔡", title:"String Matching", color:"#34d399", meta:"Pattern search · O(n+m) algorithms",
+      theory:"Naive matching = O(nm). KMP and Z-algorithm achieve O(n+m) by pre-processing the pattern. Manacher's finds all palindromes in O(n).",
+      tip:"<strong>KMP insight:</strong> The failure function (LPS array) tells us: when a mismatch occurs, how far back should we move in the pattern.",
+      groups:[
+        { label:"Standard Algorithms", diff:"hard", problems:["Rabin-Karp Algorithm","KMP Algorithm","Z Algorithm","Longest Prefix Suffix (KMP table)","Manacher's Algorithm (All Palindromes)","Subarray / Substring Search"]},
+        { label:"Hard Problems", diff:"hard", problems:["Longest Palindromic Substring (Manacher)","Palindrome Substring Queries","Min Repeats for Substring Match"]},
+      ]},
+    { id:"number-theory", icon:"🔢", title:"Number Theory", color:"#60a5fa", meta:"Competitive programming foundation",
+      theory:"Modular arithmetic avoids integer overflow. Euler's theorem enables fast modular inverse. Sieve of Eratosthenes finds all primes ≤ n in O(n log log n).",
+      tip:"<strong>MOD trick:</strong> Whenever result can overflow, apply modulo at each step. (a*b) % MOD = ((a%MOD) * (b%MOD)) % MOD.",
+      groups:[
+        { label:"Easy", diff:"easy", problems:["nCr (Combinations)","Euler's Totient Function"]},
+        { label:"Medium", diff:"medium", problems:["Sieve of Eratosthenes","Pascal's Triangle","Modular Exponentiation (Fast Power)"]},
+        { label:"Hard", diff:"hard", problems:["Segmented Sieve","Modular Inverse","Chinese Remainder Theorem"]},
+      ]},
+    { id:"range-query", icon:"🗺️", title:"Range Queries (Segment Tree & Fenwick)", color:"#a78bfa", meta:"O(log n) range queries with updates",
+      theory:"Segment Tree: each node stores aggregate for a range. Build O(n), Query O(log n), Update O(log n). Lazy Propagation defers range updates.",
+      tip:"<strong>When to use:</strong> Static queries → Prefix Sum. Point updates → Fenwick Tree. Range updates → Segment Tree with Lazy Propagation.",
+      groups:[
+        { label:"Segment Tree — Basic", diff:"hard", problems:["Build Segment Tree","Min-Max Range Queries","Range LCM Queries","XOR of Given Range"]},
+        { label:"Segment Tree — Updates", diff:"hard", problems:["Lazy Propagation (Range Update, Range Query)","Flipping Sign on Range"]},
+        { label:"Segment Tree — Applications", diff:"hard", problems:["Segment Tree for N-ary Rooted Tree","Maximum of All Subarrays of Size K"]},
+        { label:"Fenwick Tree (BIT)", diff:"hard", problems:["Fenwick Tree (Point Update, Prefix Sum)","Sum and Update Queries on 3D Matrix"]},
+      ]},
+  ]},
 ];
 
-const learned={};
-let globalSeq={};
-let gNum=1;
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let done = {};
+let currentFilter = 'all';
+let searchQuery = '';
+let panelProbId = null;
+let panelProbName = null;
+let panelProbDiff = null;
+const STORAGE_KEY = 'dsa_done_v2';
+const descCache = {};
 
-function buildSeq(){
-  gNum=1;
-  CATS.forEach(cat=>{
-    cat.modules.forEach((m,mi)=>{
-      m.keywords.forEach((kw,ki)=>{
-        const kid=cat.id+'_'+mi+'_'+ki;
-        globalSeq[kid]=gNum++;
-      });
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+function problemId(sectionId, groupLabel, name) { return `${sectionId}::${groupLabel}::${name}`; }
+
+function lcUrl(name) {
+  const slug = LC_SLUGS[name];
+  return slug
+    ? `https://leetcode.com/problems/${slug}/`
+    : `https://leetcode.com/problemset/?search=${encodeURIComponent(name)}`;
+}
+function lcIsExact(name) { return !!LC_SLUGS[name]; }
+
+function gfgUrl(name) {
+  const slug = GFG_SLUGS[name];
+  return slug
+    ? `https://www.geeksforgeeks.org/problems/${slug}/`
+    : `https://www.geeksforgeeks.org/?s=${encodeURIComponent(name)}`;
+}
+function gfgIsExact(name) { return !!GFG_SLUGS[name]; }
+
+function allProblems() {
+  const probs = [];
+  for (const phase of ROADMAP) for (const sec of phase.sections) for (const grp of sec.groups) for (const p of grp.problems)
+    probs.push({ id: problemId(sec.id, grp.label, p), diff: grp.diff, name: p, sectionId: sec.id });
+  return probs;
+}
+
+function findFirstUnsolved() {
+  for (const phase of ROADMAP) for (const sec of phase.sections) for (const grp of sec.groups) for (const p of grp.problems) {
+    const id = problemId(sec.id, grp.label, p);
+    if (!done[id]) return { id, name: p, sectionId: sec.id, sectionTitle: sec.title, sectionIcon: sec.icon };
+  }
+  return null;
+}
+
+function updateGlobalProgress() {
+  const all = allProblems();
+  const total = all.length;
+  const doneCount = all.filter(p => done[p.id]).length;
+  const pct = total ? Math.round((doneCount / total) * 100) : 0;
+  document.getElementById('bar-fill').style.width = pct + '%';
+  document.getElementById('pct-label').textContent = pct + '%';
+  document.getElementById('h-done').textContent = doneCount;
+  document.getElementById('h-total').textContent = total;
+  document.getElementById('h-pct').textContent = pct + '%';
+}
+
+let toastTimeout;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('visible');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => toast.classList.remove('visible'), 2800);
+}
+
+async function loadProgress() {
+  try {
+    const result = await window.storage.get(STORAGE_KEY, false);
+    if (result && result.value) done = JSON.parse(result.value);
+  } catch { done = done || {}; }
+}
+
+async function saveProgress() {
+  try {
+    const result = await window.storage.set(STORAGE_KEY, JSON.stringify(done), false);
+    if (!result) showToast('Could not save progress — check your connection');
+  } catch (err) { showToast('Could not save progress'); }
+}
+
+// ─────────────────────────────────────────────
+// AI DESCRIPTION LOOKUP
+// ─────────────────────────────────────────────
+async function fetchDescription(name, diff) {
+  if (descCache[name]) return descCache[name];
+  const prompt = `You are a DSA tutor. For the coding problem named "${name}" (difficulty: ${diff}):
+Give a concise 2-3 sentence problem description explaining what it asks for, the key constraint or insight, and which technique typically solves it.
+Also on a new line starting with "TAGS:", list 3-5 relevant algorithm tags (e.g., Array, Two Pointer, Dynamic Programming).
+Be direct — no preamble. If the problem name is ambiguous, describe the most common DS&A interpretation.`;
+
+  const resp = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-6",
+      max_tokens: 1000,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+  const data = await resp.json();
+  const text = data.content?.map(c => c.text || '').join('') || 'Description unavailable.';
+  descCache[name] = text;
+  return text;
+}
+
+// ─────────────────────────────────────────────
+// PANEL
+// ─────────────────────────────────────────────
+const overlay = document.getElementById('panel-overlay');
+const panel = document.getElementById('prob-panel');
+
+async function openPanel(probId, name, diff) {
+  panelProbId = probId;
+  panelProbName = name;
+  panelProbDiff = diff;
+
+  document.getElementById('panel-name').textContent = name;
+
+  const diffEl = document.getElementById('panel-diff');
+  const diffColors = { easy: ['rgba(34,211,164,0.12)','#22d3a4','rgba(34,211,164,0.25)'], medium: ['rgba(251,191,36,0.1)','#fbbf24','rgba(251,191,36,0.25)'], hard: ['rgba(248,113,113,0.1)','#f87171','rgba(248,113,113,0.25)'] };
+  const dc = diffColors[diff] || diffColors.medium;
+  diffEl.textContent = diff.charAt(0).toUpperCase() + diff.slice(1);
+  diffEl.style.cssText = `background:${dc[0]};color:${dc[1]};border:1px solid ${dc[2]};`;
+
+  // Mark button
+  const btn = document.getElementById('panel-mark-btn');
+  updateMarkBtn(btn);
+
+  // Links
+  const lcExact = lcIsExact(name);
+  const gfgExact = gfgIsExact(name);
+  document.getElementById('panel-links').innerHTML = `
+    <a class="prob-link-row" href="${lcUrl(name)}" target="_blank" rel="noopener">
+      <span class="prob-link-logo lc">LC</span>
+      <span class="prob-link-url">${lcExact ? lcUrl(name).replace('https://','') : 'Search on LeetCode →'}</span>
+      <span class="prob-link-arrow">${lcExact ? '↗' : '🔍'}</span>
+    </a>
+    <a class="prob-link-row" href="${gfgUrl(name)}" target="_blank" rel="noopener">
+      <span class="prob-link-logo gfg">GfG</span>
+      <span class="prob-link-url">${gfgExact ? gfgUrl(name).replace('https://','') : 'Search on GeeksforGeeks →'}</span>
+      <span class="prob-link-arrow">${gfgExact ? '↗' : '🔍'}</span>
+    </a>
+  `;
+
+  // Description
+  const descEl = document.getElementById('panel-desc');
+  descEl.className = 'prob-desc loading';
+  descEl.innerHTML = '<div class="spinner"></div> Fetching description…';
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  try {
+    const desc = await fetchDescription(name, diff);
+    const parts = desc.split(/\nTAGS:/i);
+    const mainDesc = parts[0].trim();
+    const tags = parts[1] ? parts[1].trim().split(',').map(t => t.trim()).filter(Boolean) : [];
+    descEl.className = 'prob-desc';
+    descEl.innerHTML = mainDesc + (tags.length ? `<div style="margin-top:0.7rem;display:flex;gap:0.35rem;flex-wrap:wrap;">${tags.map(t=>`<span style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:2px 8px;border-radius:4px;border:1px solid var(--border);color:var(--accent2);background:var(--accent-glow)">${t}</span>`).join('')}</div>` : '');
+  } catch (e) {
+    descEl.className = 'prob-desc error';
+    descEl.textContent = 'Could not load description. Check your connection.';
+  }
+}
+
+function updateMarkBtn(btn) {
+  const isDone = !!done[panelProbId];
+  btn.className = 'mark-done-btn' + (isDone ? ' is-done' : '');
+  btn.textContent = isDone ? '✓ Marked as done — click to unmark' : '☐ Mark as done';
+}
+
+function closePanel() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  panelProbId = null;
+}
+
+document.getElementById('panel-close').addEventListener('click', closePanel);
+overlay.addEventListener('click', e => { if (e.target === overlay) closePanel(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+document.getElementById('panel-mark-btn').addEventListener('click', () => {
+  if (!panelProbId) return;
+  done[panelProbId] = !done[panelProbId];
+  saveProgress();
+  updateMarkBtn(document.getElementById('panel-mark-btn'));
+  // Update chip in background
+  const chip = document.querySelector(`.problem-chip[data-prob-id="${panelProbId}"]`);
+  if (chip) {
+    chip.classList.toggle('done', done[panelProbId]);
+    const circle = chip.querySelector('.check-circle');
+    if (circle) circle.textContent = done[panelProbId] ? '✓' : '';
+  }
+  updateGlobalProgress();
+  updateRings();
+  renderResumeCard();
+  showToast(done[panelProbId] ? `✓ "${panelProbName}" marked done` : `○ "${panelProbName}" unmarked`);
+});
+
+// ─────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────
+function render() {
+  const container = document.getElementById('roadmap');
+  container.innerHTML = '';
+  let anyVisible = false;
+  let lastPhase = -1;
+
+  for (const phase of ROADMAP) {
+    if (phase.phase !== lastPhase) {
+      lastPhase = phase.phase;
+      const div = document.createElement('div');
+      div.className = `phase-divider phase-${phase.phase}`;
+      div.id = `phase-${phase.phase}`;
+      div.innerHTML = `<div class="phase-label">${phase.phaseName}</div><div class="phase-line"></div>`;
+      container.appendChild(div);
+    }
+    for (const sec of phase.sections) {
+      const card = renderSection(sec);
+      if (card) { container.appendChild(card); anyVisible = true; }
+    }
+  }
+
+  document.getElementById('no-results').classList.toggle('visible', !anyVisible);
+  updateGlobalProgress();
+  updateRings();
+  renderResumeCard();
+}
+
+function renderSection(sec) {
+  const allProbs = [];
+  for (const grp of sec.groups) for (const p of grp.problems)
+    allProbs.push({ id: problemId(sec.id, grp.label, p), diff: grp.diff, name: p, group: grp.label });
+
+  let visibleProbs = allProbs;
+  if (searchQuery) visibleProbs = allProbs.filter(p => p.name.toLowerCase().includes(searchQuery));
+  if (currentFilter === 'done') visibleProbs = visibleProbs.filter(p => done[p.id]);
+  if (currentFilter === 'unsolved') visibleProbs = visibleProbs.filter(p => !done[p.id]);
+  if (['easy','medium','hard'].includes(currentFilter)) visibleProbs = visibleProbs.filter(p => p.diff === currentFilter);
+  if (searchQuery && visibleProbs.length === 0) return null;
+
+  const doneCount = allProbs.filter(p => done[p.id]).length;
+  const easyCount = allProbs.filter(p => p.diff === 'easy').length;
+  const medCount = allProbs.filter(p => p.diff === 'medium').length;
+  const hardCount = allProbs.filter(p => p.diff === 'hard').length;
+
+  const card = document.createElement('div');
+  card.className = 'section-card';
+  card.dataset.id = sec.id;
+
+  const filteredGroups = sec.groups.map(grp => {
+    const probs = (searchQuery || ['done','unsolved','easy','medium','hard'].includes(currentFilter))
+      ? grp.problems.filter(p => visibleProbs.some(vp => vp.name === p && vp.group === grp.label))
+      : grp.problems;
+    return { ...grp, filteredProblems: probs };
+  }).filter(g => g.filteredProblems.length > 0);
+
+  const circumference = 2 * Math.PI * 13;
+  const offset = circumference - (doneCount / allProbs.length) * circumference;
+
+  card.innerHTML = `
+    <div class="section-header" role="button" tabindex="0" aria-expanded="false">
+      <div class="section-icon" style="background:${sec.color}18;color:${sec.color};">${sec.icon}</div>
+      <div class="section-title-wrap">
+        <div class="section-title">${sec.title}</div>
+        <div class="section-meta">${sec.meta}</div>
+      </div>
+      <div class="section-badges">
+        ${easyCount ? `<div class="badge badge-easy">${easyCount}E</div>` : ''}
+        ${medCount ? `<div class="badge badge-medium">${medCount}M</div>` : ''}
+        ${hardCount ? `<div class="badge badge-hard">${hardCount}H</div>` : ''}
+        <div class="badge badge-count">${allProbs.length} total</div>
+      </div>
+      <div class="section-progress-ring" data-section="${sec.id}" data-total="${allProbs.length}" data-done="${doneCount}">
+        <svg class="ring-svg" width="34" height="34" viewBox="0 0 34 34">
+          <circle class="ring-bg" cx="17" cy="17" r="13"/>
+          <circle class="ring-fill" cx="17" cy="17" r="13" stroke="${sec.color}" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"/>
+        </svg>
+        <div class="ring-text">${doneCount}/${allProbs.length}</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="section-body">
+      ${sec.theory ? `<div class="questions-block"><div class="content-block-label">Read</div><div class="theory-block"><span class="theory-icon">📖</span><div class="theory-text"><strong>Theory:</strong> ${sec.theory}</div></div></div>` : ''}
+      <div class="questions-block">
+        <div class="content-block-label">Questions</div>
+        ${renderGroups(filteredGroups, sec)}
+      </div>
+      ${sec.tip ? `<div class="tip-block"><span class="tip-icon">💡</span><div class="tip-text">${sec.tip}</div></div>` : ''}
+    </div>
+  `;
+
+  const header = card.querySelector('.section-header');
+  const body = card.querySelector('.section-body');
+  header.addEventListener('click', () => toggleSection(card, header, body));
+  header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSection(card, header, body); }});
+  if (searchQuery || currentFilter !== 'all') { card.classList.add('open'); body.classList.add('visible'); header.setAttribute('aria-expanded','true'); }
+  return card;
+}
+
+function renderGroups(groups, sec) {
+  return groups.map(grp => `
+    <div class="subtopic-group">
+      <div class="subtopic-group-label">${grp.label}</div>
+      <div class="problems-grid">
+        ${grp.filteredProblems.map(p => {
+          const id = problemId(sec.id, grp.label, p);
+          const isDone = !!done[id];
+          return `
+            <div class="problem-chip ${isDone?'done':''}" data-prob-id="${id}" data-prob-name="${p.replace(/"/g,'&quot;')}" data-diff="${grp.diff}">
+              <div class="check-circle">${isDone?'✓':''}</div>
+              <span class="prob-name">${p}</span>
+              <div class="diff-dot diff-${grp.diff}"></div>
+              <div class="info-btn" title="View links & description">↗</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleSection(card, header, body) {
+  const isOpen = card.classList.contains('open');
+  card.classList.toggle('open');
+  body.classList.toggle('visible');
+  header.setAttribute('aria-expanded', !isOpen);
+}
+
+function updateRings() {
+  document.querySelectorAll('.section-progress-ring').forEach(ring => {
+    const total = parseInt(ring.dataset.total);
+    const secId = ring.dataset.section;
+    let doneCount = 0;
+    for (const phase of ROADMAP) for (const sec of phase.sections) {
+      if (sec.id !== secId) continue;
+      for (const grp of sec.groups) for (const p of grp.problems)
+        if (done[problemId(sec.id, grp.label, p)]) doneCount++;
+    }
+    ring.dataset.done = doneCount;
+    const circumference = 2 * Math.PI * 13;
+    const fill = ring.querySelector('.ring-fill');
+    if (fill) fill.style.strokeDashoffset = circumference - (doneCount/total)*circumference;
+    const text = ring.querySelector('.ring-text');
+    if (text) text.textContent = `${doneCount}/${total}`;
+  });
+}
+
+function renderQuickNav() {
+  const nav = document.getElementById('quick-nav');
+  const seen = new Set();
+  let html = '';
+  for (const phase of ROADMAP) {
+    if (seen.has(phase.phase)) continue;
+    seen.add(phase.phase);
+    const shortName = phase.phaseName.includes('—') ? phase.phaseName.split('—')[1].trim() : phase.phaseName;
+    html += `<a class="quick-nav-item" data-phase="${phase.phase}">${phase.phase}. ${shortName}</a>`;
+  }
+  nav.innerHTML = html;
+  nav.querySelectorAll('.quick-nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const target = document.getElementById('phase-' + item.dataset.phase);
+      if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
     });
   });
 }
 
-function countAll(){
-  let c=0;CATS.forEach(cat=>cat.modules.forEach(m=>c+=m.keywords.length));return c;
-}
-function countDone(){return Object.values(learned).filter(Boolean).length;}
-function updateProg(){
-  const t=countAll(),d=countDone(),p=t?Math.round(d/t*100):0;
-  document.getElementById('pf').style.width=p+'%';
-  document.getElementById('pt').textContent=d+' / '+t+' studied';
-}
-function updateModDone(mid,cat,mi){
-  const m=cat.modules[mi];
-  let done=0;
-  m.keywords.forEach((_,ki)=>{const kid=cat.id+'_'+mi+'_'+ki;if(learned[kid])done++;});
-  document.getElementById('md-'+mid).textContent=done+'/'+m.keywords.length;
-}
-
-function toggleKw(cat,mi,ki){
-  const kid=cat.id+'_'+mi+'_'+ki;
-  learned[kid]=!learned[kid];
-  const mid=cat.id+'_'+mi;
-  const chk=document.getElementById('chk-'+kid);
-  const txt=document.getElementById('txt-'+kid);
-  if(chk){chk.classList.toggle('done',learned[kid]);}
-  if(txt){txt.classList.toggle('done',learned[kid]);}
-  updateModDone(mid,cat,mi);
-  updateProg();
+function renderResumeCard() {
+  const card = document.getElementById('resume-card');
+  const next = findFirstUnsolved();
+  if (!next) { card.classList.add('hidden'); card.innerHTML = ''; return; }
+  card.classList.remove('hidden');
+  card.innerHTML = `<div class="resume-inner" id="resume-inner">
+    <div class="resume-icon">${next.sectionIcon}</div>
+    <div class="resume-text">
+      <div class="resume-label">Continue where you left off</div>
+      <div class="resume-name">${next.name} <span style="color:var(--muted);font-weight:400;">— ${next.sectionTitle}</span></div>
+    </div>
+    <div class="resume-go">Jump to it →</div>
+  </div>`;
+  document.getElementById('resume-inner')?.addEventListener('click', () => jumpToProblem(next));
 }
 
-function toggleMod(mid){
-  const body=document.getElementById('mb-'+mid);
-  const chev=document.getElementById('mc-'+mid);
-  const open=body.classList.toggle('open');
-  chev.classList.toggle('open',open);
+function jumpToProblem(next) {
+  let needsRerender = false;
+  if (currentFilter !== 'all' && currentFilter !== 'unsolved') { currentFilter = 'all'; document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all')); needsRerender = true; }
+  if (searchQuery) { searchQuery = ''; const input = document.getElementById('search-input'); if (input) input.value = ''; needsRerender = true; }
+  if (needsRerender) render();
+  const cardEl = document.querySelector(`.section-card[data-id="${next.sectionId}"]`);
+  if (!cardEl) return;
+  const header = cardEl.querySelector('.section-header');
+  const body = cardEl.querySelector('.section-body');
+  if (!cardEl.classList.contains('open')) toggleSection(cardEl, header, body);
+  requestAnimationFrame(() => {
+    const chip = Array.from(cardEl.querySelectorAll('.problem-chip')).find(c => c.dataset.probId === next.id);
+    if (chip) { chip.scrollIntoView({ behavior:'smooth', block:'center' }); chip.classList.add('highlight'); setTimeout(() => chip.classList.remove('highlight'), 2200); }
+    else cardEl.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
 }
 
-function switchCat(id){
-  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.toggle('on',t.dataset.id===id));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='pan-'+id));
-}
+// ─────────────────────────────────────────────
+// EVENTS
+// ─────────────────────────────────────────────
+document.getElementById('roadmap').addEventListener('click', e => {
+  const chip = e.target.closest('.problem-chip');
+  if (!chip) return;
+  const infoBtn = e.target.closest('.info-btn');
+  if (infoBtn) {
+    // Open panel
+    const id = chip.dataset.probId;
+    const name = chip.dataset.probName;
+    const diff = chip.dataset.diff;
+    openPanel(id, name, diff);
+    return;
+  }
+  // Toggle done on chip click
+  const id = chip.dataset.probId;
+  done[id] = !done[id];
+  saveProgress();
+  chip.classList.toggle('done', done[id]);
+  const circle = chip.querySelector('.check-circle');
+  if (circle) circle.textContent = done[id] ? '✓' : '';
+  updateGlobalProgress();
+  updateRings();
+  renderResumeCard();
+  showToast(done[id] ? `✓ Marked done` : `○ Unmarked`);
+});
 
-function render(){
-  buildSeq();
-  const tabs=document.getElementById('ctabs');
-  tabs.innerHTML=CATS.map((c,i)=>`<button class="cat-tab${i===0?' on':''}" data-id="${c.id}" onclick="switchCat('${c.id}')">${c.label}</button>`).join('');
-  const panels=document.getElementById('panels');
-  panels.innerHTML=CATS.map((cat,ci)=>`
-<div class="panel${ci===0?' on':''}" id="pan-${cat.id}">
-  ${cat.modules.map((m,mi)=>{
-    const mid=cat.id+'_'+mi;
-    const startNum=globalSeq[cat.id+'_'+mi+'_0'];
-    const endNum=globalSeq[cat.id+'_'+mi+'_'+(m.keywords.length-1)];
-    return`<div class="module">
-      <div class="mod-head" onclick="toggleMod('${mid}')">
-        <span class="mod-title">${m.title}</span>
-        <span style="font-size:11px;color:var(--color-text-tertiary);margin-right:4px">#${startNum}–${endNum}</span>
-        <span class="mod-badge badge-${m.badge}">${m.badge==='must'?'Must know':m.badge==='core'?'Core':'Deep dive'}</span>
-        <span class="mod-done" id="md-${mid}" style="margin-left:4px">0/${m.keywords.length}</span>
-        <i class="ti ti-chevron-down mod-chev" id="mc-${mid}" aria-hidden="true" style="margin-left:6px"></i>
-      </div>
-      <div class="mod-body" id="mb-${mid}">
-        <p class="note">${m.note}</p>
-        <ul class="kw-list">
-          ${m.keywords.map((kw,ki)=>{
-            const kid=cat.id+'_'+mi+'_'+ki;
-            const num=globalSeq[kid];
-            return`<li class="kw-item" onclick="toggleKw(CATS[${ci}],${mi},${ki})">
-              <span class="kw-num">${num}</span>
-              <span class="kw-check" id="chk-${kid}"></span>
-              <span class="kw-text" id="txt-${kid}">${kw}</span>
-            </li>`;
-          }).join('')}
-        </ul>
-      </div>
-    </div>`;
-  }).join('')}
-</div>`).join('');
-}
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFilter = btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
 
-render();updateProg();
+document.getElementById('search-input').addEventListener('input', e => {
+  searchQuery = e.target.value.trim().toLowerCase();
+  render();
+});
+
+document.getElementById('reset-btn').addEventListener('click', async () => {
+  if (!confirm('Reset all progress? This clears every checkmark and cannot be undone.')) return;
+  done = {};
+  await saveProgress();
+  render();
+  showToast('Progress reset');
+});
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+async function init() {
+  renderQuickNav();
+  render();
+  await loadProgress();
+  render();
+}
+init();
 </script>
+</body>
+</html>
